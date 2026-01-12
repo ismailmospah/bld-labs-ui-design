@@ -33,31 +33,26 @@ const ProjectsSection = () => {
             >
               <Link 
                 to={`/project/${project.id}`}
-                className="group block p-8 rounded-lg bg-card border border-border hover:border-primary/30 transition-all duration-300 card-shadow relative overflow-hidden"
+                className="group block p-8 rounded-lg bg-card border border-border hover:border-primary/30 transition-all duration-300 card-shadow"
               >
-                {/* Gradient overlay on hover */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
-                
-                <div className="relative z-10">
-                  <div className="flex items-start justify-between mb-6">
-                    <div className="w-16 h-16 rounded-lg bg-secondary flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                      <span className="text-2xl font-semibold text-muted-foreground group-hover:text-primary transition-colors">
-                        {String(index + 1).padStart(2, '0')}
-                      </span>
-                    </div>
-                    <ArrowUpRight className="w-5 h-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" />
+                <div className="flex items-start justify-between mb-6">
+                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 group-hover:scale-110 transition-all duration-300">
+                    <span className="text-lg font-semibold text-primary">
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
                   </div>
-                  
-                  <h3 className="heading-card mb-3 group-hover:text-primary transition-colors">
-                    {project.title}
-                  </h3>
-                  <p className="body-base mb-4">
-                    {project.shortDescription}
-                  </p>
-                  <p className="text-sm text-primary font-medium">
-                    {project.category}
-                  </p>
+                  <ArrowUpRight className="w-5 h-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300" />
                 </div>
+                
+                <h3 className="heading-card mb-4 group-hover:text-primary transition-colors">
+                  {project.title}
+                </h3>
+                <p className="body-base mb-4">
+                  {project.shortDescription}
+                </p>
+                <p className="text-sm text-primary font-medium">
+                  {project.category}
+                </p>
               </Link>
             </motion.div>
           ))}
