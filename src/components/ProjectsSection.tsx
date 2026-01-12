@@ -1,67 +1,65 @@
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
-
-const projects = [
-  {
-    title: "Fintech Wallet Platform",
-    description: "A comprehensive mobile banking solution designed to simplify personal finance management for everyday users.",
-    category: "Product Design / UX / UI",
-  },
-  {
-    title: "Healthcare Management System",
-    description: "End-to-end patient management platform improving healthcare delivery and administrative efficiency.",
-    category: "Product Design / UX",
-  },
-  {
-    title: "E-commerce Experience Redesign",
-    description: "Complete shopping experience overhaul resulting in improved conversion rates and customer satisfaction.",
-    category: "UX Research / UI Design",
-  },
-  {
-    title: "SaaS Dashboard for Operations",
-    description: "Data-driven operations dashboard helping teams make faster, more informed business decisions.",
-    category: "Product Design / Product Strategy",
-  },
-];
+import { projects } from "@/data/projects";
 
 const ProjectsSection = () => {
   return (
     <section id="work" className="section-padding border-t border-border">
       <div className="container-narrow">
-        <div className="mb-16">
+        <motion.div 
+          className="mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+        >
           <p className="text-sm font-medium text-primary mb-4 tracking-wide uppercase">
             Portfolio
           </p>
           <h2 className="heading-section">
             Selected Work
           </h2>
-        </div>
+        </motion.div>
 
         <div className="grid md:grid-cols-2 gap-6">
           {projects.map((project, index) => (
-            <a 
-              key={project.title}
-              href="#"
-              className="group block p-8 rounded-lg bg-card border border-border hover:border-primary/30 transition-all duration-300 card-shadow"
+            <motion.div
+              key={project.id}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              viewport={{ once: true }}
             >
-              <div className="flex items-start justify-between mb-6">
-                <div className="w-16 h-16 rounded-lg bg-secondary flex items-center justify-center">
-                  <span className="text-2xl font-semibold text-muted-foreground">
-                    {String(index + 1).padStart(2, '0')}
-                  </span>
+              <Link 
+                to={`/project/${project.id}`}
+                className="group block p-8 rounded-lg bg-card border border-border hover:border-primary/30 transition-all duration-300 card-shadow relative overflow-hidden"
+              >
+                {/* Gradient overlay on hover */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+                
+                <div className="relative z-10">
+                  <div className="flex items-start justify-between mb-6">
+                    <div className="w-16 h-16 rounded-lg bg-secondary flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                      <span className="text-2xl font-semibold text-muted-foreground group-hover:text-primary transition-colors">
+                        {String(index + 1).padStart(2, '0')}
+                      </span>
+                    </div>
+                    <ArrowUpRight className="w-5 h-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" />
+                  </div>
+                  
+                  <h3 className="heading-card mb-3 group-hover:text-primary transition-colors">
+                    {project.title}
+                  </h3>
+                  <p className="body-base mb-4">
+                    {project.shortDescription}
+                  </p>
+                  <p className="text-sm text-primary font-medium">
+                    {project.category}
+                  </p>
                 </div>
-                <ArrowUpRight className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
-              </div>
-              
-              <h3 className="heading-card mb-3 group-hover:text-primary transition-colors">
-                {project.title}
-              </h3>
-              <p className="body-base mb-4">
-                {project.description}
-              </p>
-              <p className="text-sm text-primary font-medium">
-                {project.category}
-              </p>
-            </a>
+              </Link>
+            </motion.div>
           ))}
         </div>
       </div>
