@@ -65,6 +65,25 @@ const ProjectDetail = () => {
         </div>
       </section>
 
+      {/* Project Mockup Image */}
+      <section className="section-padding !pt-0">
+        <div className="container-narrow">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="relative rounded-2xl overflow-hidden border border-border shadow-2xl"
+          >
+            <img 
+              src={project.mockupImage} 
+              alt={`${project.title} mockup`}
+              className="w-full h-auto"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-background/20 to-transparent pointer-events-none" />
+          </motion.div>
+        </div>
+      </section>
+
       {/* Challenge & Solution */}
       <section className="section-padding border-t border-border">
         <div className="container-narrow">

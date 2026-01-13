@@ -8,7 +8,13 @@ export interface Project {
   solution: string;
   results: string[];
   color: string;
+  mockupImage: string;
 }
+
+import fintechMockup from "@/assets/projects/fintech-wallet-mockup.jpg";
+import healthcareMockup from "@/assets/projects/healthcare-mockup.jpg";
+import ecommerceMockup from "@/assets/projects/ecommerce-mockup.jpg";
+import saasMockup from "@/assets/projects/saas-dashboard-mockup.jpg";
 
 export const projects: Project[] = [
   {
@@ -25,7 +31,8 @@ export const projects: Project[] = [
       "60% reduction in support tickets",
       "$2M+ in new deposits within first quarter"
     ],
-    color: "from-emerald-500/20 to-teal-500/20"
+    color: "from-emerald-500/20 to-teal-500/20",
+    mockupImage: fintechMockup
   },
   {
     id: "healthcare-management",
@@ -41,7 +48,8 @@ export const projects: Project[] = [
       "92% patient satisfaction score",
       "Zero data security incidents post-launch"
     ],
-    color: "from-blue-500/20 to-cyan-500/20"
+    color: "from-blue-500/20 to-cyan-500/20",
+    mockupImage: healthcareMockup
   },
   {
     id: "ecommerce-redesign",
@@ -57,7 +65,8 @@ export const projects: Project[] = [
       "3x increase in average session duration",
       "Featured in Awwwards Site of the Day"
     ],
-    color: "from-purple-500/20 to-pink-500/20"
+    color: "from-purple-500/20 to-pink-500/20",
+    mockupImage: ecommerceMockup
   },
   {
     id: "saas-dashboard",
@@ -73,7 +82,8 @@ export const projects: Project[] = [
       "80% reduction in manual reporting time",
       "Adopted by 15 enterprise clients in year one"
     ],
-    color: "from-orange-500/20 to-amber-500/20"
+    color: "from-orange-500/20 to-amber-500/20",
+    mockupImage: saasMockup
   }
 ];
 
