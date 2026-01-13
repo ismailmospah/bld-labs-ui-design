@@ -1,11 +1,12 @@
 import { Button } from "@/components/ui/button";
+import logo from "@/assets/logo.svg";
 
 const Header = () => {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/50">
       <div className="container-narrow section-padding !py-4 flex items-center justify-between">
-        <a href="#" className="text-xl font-semibold tracking-tight">
-          BLD<span className="text-primary">.</span>Labs
+        <a href="#" className="flex items-center">
+          <img src={logo} alt="BLD Labs" className="h-8" />
         </a>
         
         <nav className="hidden md:flex items-center gap-8">

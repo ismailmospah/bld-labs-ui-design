@@ -1,12 +1,12 @@
+import logo from "@/assets/logo.svg";
+
 const Footer = () => {
   return (
     <footer className="section-padding !py-12 border-t border-border">
       <div className="container-narrow">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-2">
-            <span className="text-lg font-semibold">
-              BLD<span className="text-primary">.</span>Labs
-            </span>
+          <div className="flex items-center gap-4">
+            <img src={logo} alt="BLD Labs" className="h-7" />
             <span className="text-muted-foreground">
               — Product & Design Studio
             </span>
