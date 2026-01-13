@@ -33,26 +33,38 @@ const ProjectsSection = () => {
             >
               <Link 
                 to={`/project/${project.id}`}
-                className="group block p-8 rounded-lg bg-card border border-border hover:border-primary/30 transition-all duration-300 card-shadow"
+                className="group block rounded-lg bg-card border border-border hover:border-primary/30 transition-all duration-300 card-shadow overflow-hidden"
               >
-                <div className="flex items-start justify-between mb-6">
-                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 group-hover:scale-110 transition-all duration-300">
-                    <span className="text-lg font-semibold text-primary">
-                      {String(index + 1).padStart(2, '0')}
-                    </span>
+                {/* Thumbnail Image */}
+                <div className="relative h-48 overflow-hidden">
+                  <img 
+                    src={project.mockupImage} 
+                    alt={`${project.title} preview`}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-card via-card/20 to-transparent" />
+                  <div className="absolute top-4 left-4">
+                    <div className="w-10 h-10 rounded-lg bg-background/90 backdrop-blur-sm flex items-center justify-center">
+                      <span className="text-sm font-semibold text-primary">
+                        {String(index + 1).padStart(2, '0')}
+                      </span>
+                    </div>
                   </div>
-                  <ArrowUpRight className="w-5 h-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300" />
+                  <ArrowUpRight className="absolute top-4 right-4 w-5 h-5 text-foreground/80 group-hover:text-primary group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300" />
                 </div>
                 
-                <h3 className="heading-card mb-4 group-hover:text-primary transition-colors">
-                  {project.title}
-                </h3>
-                <p className="body-base mb-4">
-                  {project.shortDescription}
-                </p>
-                <p className="text-sm text-primary font-medium">
-                  {project.category}
-                </p>
+                {/* Content */}
+                <div className="p-6">
+                  <h3 className="heading-card mb-3 group-hover:text-primary transition-colors">
+                    {project.title}
+                  </h3>
+                  <p className="body-base mb-3 line-clamp-2">
+                    {project.shortDescription}
+                  </p>
+                  <p className="text-sm text-primary font-medium">
+                    {project.category}
+                  </p>
+                </div>
               </Link>
             </motion.div>
           ))}
