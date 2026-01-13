@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import logo from "@/assets/logo.svg";
 
 const AboutSection = () => {
   return (
@@ -14,9 +15,12 @@ const AboutSection = () => {
             <p className="text-sm font-medium text-primary mb-4 tracking-wide uppercase">
               About Us
             </p>
-            <h2 className="heading-section">
+            <h2 className="heading-section mb-8">
               About BLD Labs
             </h2>
+            <div className="p-6 rounded-xl bg-card border border-border inline-block">
+              <img src={logo} alt="BLD Labs" className="h-12 md:h-16" />
+            </div>
           </motion.div>
           
           <motion.div 

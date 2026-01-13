@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
+import logo from "@/assets/logo.svg";
 
 const HeroSection = () => {
   return (
@@ -39,11 +40,21 @@ const HeroSection = () => {
 
       <div className="container-narrow relative z-10">
         <div className="max-w-4xl">
+          {/* Logo */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
+            className="mb-8"
+          >
+            <img src={logo} alt="BLD Labs" className="h-16 md:h-20" />
+          </motion.div>
+
           {/* Badge */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-8"
           >
             <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
@@ -54,7 +65,7 @@ const HeroSection = () => {
             className="heading-display mb-8"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
           >
             Building digital products that actually{" "}
             <span className="text-gradient relative">
@@ -63,7 +74,7 @@ const HeroSection = () => {
                 className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-primary to-primary/50 rounded-full"
                 initial={{ scaleX: 0 }}
                 animate={{ scaleX: 1 }}
-                transition={{ duration: 0.8, delay: 0.7 }}
+                transition={{ duration: 0.8, delay: 0.8 }}
               />
             </span>
           </motion.h1>
