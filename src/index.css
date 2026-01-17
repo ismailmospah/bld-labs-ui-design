@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-
 @layer base {
   :root {
     --background: 240 6% 4%;
@@ -15,7 +13,7 @@
     --popover: 240 5% 7%;
     --popover-foreground: 0 0% 95%;
 
-    --primary: 142 71% 45%;
+    --primary: 130 56% 54%;
     --primary-foreground: 240 6% 4%;
 
     --secondary: 240 4% 12%;
@@ -24,7 +22,7 @@
     --muted: 240 4% 16%;
     --muted-foreground: 240 5% 55%;
 
-    --accent: 142 71% 45%;
+    --accent: 130 56% 54%;
     --accent-foreground: 240 6% 4%;
 
     --destructive: 0 84.2% 60.2%;
@@ -32,14 +30,14 @@
 
     --border: 240 4% 16%;
     --input: 240 4% 16%;
-    --ring: 142 71% 45%;
+    --ring: 130 56% 54%;
 
     --radius: 0.5rem;
 
     /* Custom design tokens */
-    --gradient-accent: linear-gradient(135deg, hsl(142 71% 45%), hsl(160 70% 40%));
+    --gradient-accent: linear-gradient(135deg, #53ba5f, #195a2d);
     --gradient-dark: linear-gradient(180deg, hsl(240 6% 4%), hsl(240 5% 7%));
-    --shadow-glow: 0 0 40px hsl(142 71% 45% / 0.15);
+    --shadow-glow: 0 0 40px hsl(130 56% 54% / 0.15);
     --shadow-card: 0 4px 24px hsl(0 0% 0% / 0.4);
   }
 
@@ -60,7 +58,7 @@
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: 'Inter';
   }
 }
 
@@ -101,7 +99,7 @@
   }
 
   .body-large {
-    @apply text-lg md:text-xl text-muted-foreground leading-relaxed;
+    @apply text-xl md:text-2xl text-muted-foreground leading-relaxed;
   }
 
   .body-base {

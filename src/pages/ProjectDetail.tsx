@@ -66,7 +66,7 @@ const ProjectDetail = () => {
       </section>
 
       {/* Project Mockup Image */}
-      <section className="section-padding !pt-0">
+      <section className="section-padding !pt-32">
         <div className="container-narrow">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
@@ -121,7 +121,7 @@ const ProjectDetail = () => {
         </div>
       </section>
 
-      {/* Results */}
+      {/* Results
       <section className="section-padding border-t border-border">
         <div className="container-narrow">
           <motion.div
@@ -149,7 +149,7 @@ const ProjectDetail = () => {
             </div>
           </motion.div>
         </div>
-      </section>
+      </section> */}
 
       {/* Navigation */}
       <section className="section-padding border-t border-border">

@@ -8,7 +8,7 @@ const Footer = () => {
           <div className="flex items-center gap-4">
             <img src={logo} alt="BLD Labs" className="h-7" />
             <span className="text-muted-foreground">
-              — Product & Design Studio
+              — Product Studio
             </span>
           </div>
 
@@ -20,7 +20,16 @@ const Footer = () => {
               Twitter
             </a>
             <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-              Dribbble
+              Facebook
+            </a>
+                        <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+              Instgram
+            </a>
+                                    <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+              Behance
+            </a>
+                                                <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+              Mail
             </a>
           </div>
 

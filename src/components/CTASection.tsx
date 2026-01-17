@@ -1,8 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
-
+import { useState } from "react";
 const CTASection = () => {
+    const [isOpen, setIsOpen] = useState(false);
+  const closeMenu = () => setIsOpen(false);
   return (
     <section className="section-padding border-t border-border relative overflow-hidden">
       {/* Background elements */}
@@ -31,7 +33,7 @@ const CTASection = () => {
           viewport={{ once: true }}
         >
           <h2 className="heading-section mb-6">
-            Let's build something that works —{" "}
+            Let's build something that works {" "} <br/>
             <span className="text-gradient">not just looks good.</span>
           </h2>
           
@@ -40,7 +42,9 @@ const CTASection = () => {
           </p>
 
           <Button variant="hero" size="xl" className="group">
-            Start a Project
+            <a href="mailto:bldlabscompany@gmail.com" onClick={closeMenu}>
+                      Start a Project
+                </a>
             <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
           </Button>
         </motion.div>

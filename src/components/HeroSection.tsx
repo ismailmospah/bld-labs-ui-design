@@ -39,29 +39,19 @@ const HeroSection = () => {
       />
 
       <div className="container-narrow relative z-10">
-        <div className="max-w-4xl">
-          {/* Logo */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
-            className="mb-8"
-          >
-            <img src={logo} alt="BLD Labs" className="h-16 md:h-20" />
-          </motion.div>
-
+        <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
           {/* Badge */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-8"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary text-primary-foreground mb-8 shadow-lg"
           >
-            <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-            <span className="text-sm text-primary font-medium">Product & Design Studio</span>
+            <span className="w-2 h-2 rounded-full bg-primary-foreground animate-pulse" />
+            <span className="text-sm font-semibold">Product Studio</span>
           </motion.div>
 
-          <motion.h1 
+          <motion.h1
             className="heading-display mb-8"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -70,7 +60,7 @@ const HeroSection = () => {
             Building digital products that actually{" "}
             <span className="text-gradient relative">
               make sense.
-              <motion.span 
+              <motion.span
                 className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-primary to-primary/50 rounded-full"
                 initial={{ scaleX: 0 }}
                 animate={{ scaleX: 1 }}
@@ -78,33 +68,34 @@ const HeroSection = () => {
               />
             </span>
           </motion.h1>
-          
-          <motion.div 
+
+          <motion.div
             className="space-y-4 mb-12"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
           >
-            <p className="body-large max-w-2xl">
-              We don't start with pixels.
-            </p>
-            <p className="body-large max-w-2xl">
-              We start by understanding the problem, the user, and the business — then we design products that last.
+            <p className="body-large">
+              We don't start with pixels. We start by understanding the problem, the user, and the business — then we design products that last.
             </p>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             className="flex flex-col sm:flex-row gap-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.5 }}
           >
             <Button variant="hero" size="xl" className="group">
+              <a href="#work">
               View Our Work
+              </a>
               <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
             </Button>
             <Button variant="heroOutline" size="xl">
+               <a href="mailto:bldlabscompany@gmail.com">
               Let's Build Something
+               </a>
             </Button>
           </motion.div>
         </div>

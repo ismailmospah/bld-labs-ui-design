@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
-import { Layers, Search, Palette, Target } from "lucide-react";
-
+import { Layers, Search, Palette, Code } from "lucide-react";
 const services = [
   {
     icon: Layers,
@@ -18,9 +17,9 @@ const services = [
     description: "Creating clean, accessible, and consistent interfaces that feel professional and intentional.",
   },
   {
-    icon: Target,
-    title: "Product Strategy",
-    description: "Defining product direction, priorities, and structure to ensure long-term clarity and growth.",
+    icon: Code,
+    title: "Development",
+    description: "Full-stack web & mobile development — Frontend, Backend, and Flutter solutions",
   },
 ];
 

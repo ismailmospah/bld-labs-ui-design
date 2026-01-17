@@ -11,15 +11,15 @@ export interface Project {
   mockupImage: string;
 }
 
-import fintechMockup from "@/assets/projects/fintech-wallet-mockup.jpg";
-import healthcareMockup from "@/assets/projects/healthcare-mockup.jpg";
-import ecommerceMockup from "@/assets/projects/ecommerce-mockup.jpg";
-import saasMockup from "@/assets/projects/saas-dashboard-mockup.jpg";
+import wagbaProduct from "@/assets/projects/wagba-product.jpg";
+import carMax from "@/assets/projects/car-max.jpg";
+import ghym from "@/assets/projects/ghym.jpg";
+import otlobApp from "@/assets/projects/otlb-app.jpg";
 
 export const projects: Project[] = [
   {
     id: "fintech-wallet",
-    title: "Fintech Wallet Platform",
+    title: "Wajba Product",
     shortDescription: "A comprehensive mobile banking solution designed to simplify personal finance management for everyday users.",
     fullDescription: "We partnered with a leading fintech startup to reimagine how people interact with their money. The goal was to create an intuitive, secure, and delightful mobile banking experience that would appeal to both tech-savvy millennials and traditional banking customers.",
     category: "Product Design / UX / UI",
@@ -31,12 +31,12 @@ export const projects: Project[] = [
       "60% reduction in support tickets",
       "$2M+ in new deposits within first quarter"
     ],
-    color: "from-emerald-500/20 to-teal-500/20",
-    mockupImage: fintechMockup
+    color: "from-[#53Ba5f]/40 to-[#000]/10",
+    mockupImage: wagbaProduct
   },
   {
     id: "healthcare-management",
-    title: "Healthcare Management System",
+    title: "CarMax Product",
     shortDescription: "End-to-end patient management platform improving healthcare delivery and administrative efficiency.",
     fullDescription: "A regional healthcare network needed to modernize their patient management system. We designed a comprehensive platform that connects patients, providers, and administrators in a seamless digital experience.",
     category: "Product Design / UX",
@@ -48,12 +48,12 @@ export const projects: Project[] = [
       "92% patient satisfaction score",
       "Zero data security incidents post-launch"
     ],
-    color: "from-blue-500/20 to-cyan-500/20",
-    mockupImage: healthcareMockup
+     color: "from-[#53Ba5f]/40 to-[#000]/10",
+    mockupImage: carMax
   },
   {
     id: "ecommerce-redesign",
-    title: "E-commerce Experience Redesign",
+    title: "System Ghym",
     shortDescription: "Complete shopping experience overhaul resulting in improved conversion rates and customer satisfaction.",
     fullDescription: "A premium lifestyle brand approached us to reimagine their online shopping experience. They needed a platform that would reflect their brand values while driving conversions and building customer loyalty.",
     category: "UX Research / UI Design",
@@ -65,12 +65,12 @@ export const projects: Project[] = [
       "3x increase in average session duration",
       "Featured in Awwwards Site of the Day"
     ],
-    color: "from-purple-500/20 to-pink-500/20",
-    mockupImage: ecommerceMockup
+      color: "from-[#53Ba5f]/40 to-[#000]/10",
+    mockupImage: ghym
   },
   {
     id: "saas-dashboard",
-    title: "SaaS Dashboard for Operations",
+    title: "Otlob Product",
     shortDescription: "Data-driven operations dashboard helping teams make faster, more informed business decisions.",
     fullDescription: "A fast-growing logistics company needed a command center for their operations team. We designed a real-time dashboard that transforms complex operational data into actionable insights.",
     category: "Product Design / Product Strategy",
@@ -82,8 +82,8 @@ export const projects: Project[] = [
       "80% reduction in manual reporting time",
       "Adopted by 15 enterprise clients in year one"
     ],
-    color: "from-orange-500/20 to-amber-500/20",
-    mockupImage: saasMockup
+      color: "from-[#53Ba5f]/40 to-[#000]/10",
+    mockupImage: otlobApp
   }
 ];
 

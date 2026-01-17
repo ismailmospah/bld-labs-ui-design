@@ -52,10 +52,10 @@ const ProcessSection = () => {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
             >
-              {/* Connector line */}
+              {/* Connector line
               {index < steps.length - 1 && (
                 <div className="hidden lg:block absolute top-8 left-full w-full h-px bg-gradient-to-r from-border to-transparent" />
-              )}
+              )} */}
               
               <div className="mb-4">
                 <span className="text-5xl font-bold text-gradient group-hover:opacity-100 opacity-80 transition-opacity">

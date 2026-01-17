@@ -18,42 +18,51 @@ const Header = () => {
   const closeMenu = () => setIsOpen(false);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/50">
-      <div className="container-narrow section-padding !py-4 flex items-center justify-between">
-        <a href="#" className="flex items-center">
-          <img src={logo} alt="BLD Labs" className="h-8" />
-        </a>
-        
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+    <>
+      <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/50">
+        <div className="container-narrow section-padding !py-4 flex items-center justify-between">
+          <a href="#" className="flex items-center">
+            <img src={logo} alt="BLD Labs" className="h-8" />
+          </a>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center gap-8">
+            {navLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+              >
+                {link.label}
+              </a>
+            ))}
+          </nav>
+
+          <div className="flex items-center gap-4">
+            <Button
+              variant="heroOutline"
+              size="sm"
+              className="hidden md:inline-flex"
+              asChild
             >
-              {link.label}
-            </a>
-          ))}
-        </nav>
+              <a href="mailto:bldlabscompany@gmail.com">
+                Start a Project
+              </a>
+            </Button>
 
-        <div className="flex items-center gap-4">
-          <Button variant="heroOutline" size="sm" className="hidden md:inline-flex">
-            Start a Project
-          </Button>
-
-          {/* Mobile Menu Button */}
-          <button
-            onClick={toggleMenu}
-            className="md:hidden p-2 text-foreground hover:text-primary transition-colors"
-            aria-label={isOpen ? "Close menu" : "Open menu"}
-          >
-            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
+            {/* Mobile Menu Button */}
+            <button
+              onClick={toggleMenu}
+              className="md:hidden p-2 text-foreground hover:text-primary transition-colors relative z-[70]"
+              aria-label={isOpen ? "Close menu" : "Open menu"}
+            >
+              {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
         </div>
-      </div>
+      </header>
 
-      {/* Mobile Menu Overlay */}
+      {/* Mobile Menu Overlay - Outside header for proper z-index */}
       <AnimatePresence>
         {isOpen && (
           <>
@@ -63,7 +72,7 @@ const Header = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="fixed inset-0 bg-background/80 backdrop-blur-sm md:hidden"
+              className="fixed inset-0 bg-background/95 backdrop-blur-sm md:hidden z-[60]"
               onClick={closeMenu}
             />
 
@@ -73,7 +82,7 @@ const Header = () => {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed top-[65px] right-0 bottom-0 w-[280px] bg-card border-l border-border md:hidden overflow-hidden"
+              className="fixed top-[65px] right-0 bottom-0 w-[280px] bg-card border-l border-border md:hidden overflow-hidden z-[65]"
             >
               <div className="flex flex-col h-full p-6">
                 <div className="flex flex-col gap-2">
@@ -98,8 +107,10 @@ const Header = () => {
                   transition={{ delay: 0.4 }}
                   className="mt-auto pt-6 border-t border-border"
                 >
-                  <Button variant="hero" className="w-full" onClick={closeMenu}>
-                    Start a Project
+                  <Button variant="hero" className="w-full" asChild>
+                    <a href="mailto:bldlabscompany@gmail.com" onClick={closeMenu}>
+                      Start a Project
+                    </a>
                   </Button>
                 </motion.div>
               </div>
@@ -107,7 +118,7 @@ const Header = () => {
           </>
         )}
       </AnimatePresence>
-    </header>
+    </>
   );
 };
 
