@@ -20,10 +20,8 @@ export const projects: Project[] = [
   {
     id: "fintech-wallet",
     title: "Wajba Product",
-    shortDescription: "Wajba is a smart food ordering app that makes your dining experience easier and faster than ever.
-From the moment you open the app, you’ll find a wide variety of restaurants — Eastern and Western cuisines, fast food, and healthy meals — all in one place..",
-    fullDescription: "Wajba is a smart food ordering app that makes your dining experience easier and faster than ever.
-From the moment you open the app, you’ll find a wide variety of restaurants — Eastern and Western cuisines, fast food, and healthy meals — all in one place..",
+    shortDescription: "Wajba is a smart food ordering app that makes your dining experience easier and faster than ever.From the moment you open the app, you\’ll find a wide variety of restaurants — Eastern and Western cuisines, fast food, and healthy meals — all in one place..",
+    fullDescription: "Wajba is a smart food ordering app that makes your dining experience easier and faster than ever. From the moment you open the app, you’ll find a wide variety of restaurants — Eastern and Western cuisines, fast food, and healthy meals — all in one place..",
     category: "Product Design / UX / UI",
     challenge: "Users often struggle with choosing the right meal due to too many options, unclear menus, and slow ordering experiences. This leads to frustration, longer decision time, and abandoned orders.",
     solution: "Wajba provides a smart, user-friendly food ordering experience with clear restaurant listings, well-structured menus, and a smooth ordering flow. Users can easily explore different cuisines, find what fits their mood, and place an order in just a few steps..",
