@@ -9,12 +9,24 @@ export interface Project {
   results: string[];
   color: string;
   mockupImage: string;
+  images?: string[];
 }
 
 import wagbaProduct from "@/assets/projects/wagba-product.jpg";
 import carMax from "@/assets/projects/car-max.jpg";
 import ghym from "@/assets/projects/ghym.jpg";
 import otlobApp from "@/assets/projects/otlb-app.jpg";
+
+import carMax1 from "@/assets/projects/CAR Max Project/Artboard 1.png";
+import carMax2 from "@/assets/projects/CAR Max Project/Artboard 1 copy.png";
+import carMax3 from "@/assets/projects/CAR Max Project/Artboard 1 copy 2.png";
+import carMax4 from "@/assets/projects/CAR Max Project/Artboard 1 copy 3.png";
+import carMax5 from "@/assets/projects/CAR Max Project/Artboard 1 copy 4.png";
+import carMax6 from "@/assets/projects/CAR Max Project/Artboard 1 copy 5.png";
+import carMax7 from "@/assets/projects/CAR Max Project/Artboard 1 copy 6.png";
+import carMax8 from "@/assets/projects/CAR Max Project/Artboard 1 copy 7.png";
+import carMax9 from "@/assets/projects/CAR Max Project/Artboard 1 copy 8.png";
+import carMax10 from "@/assets/projects/CAR Max Project/Artboard 1 copy 9.png";
 
 export const projects: Project[] = [
   {
@@ -49,7 +61,8 @@ export const projects: Project[] = [
       "Higher customer satisfaction and repeat rentals"
     ],
      color: "from-[#53Ba5f]/40 to-[#000]/10",
-    mockupImage: carMax
+    mockupImage: carMax,
+    images: [carMax1, carMax2, carMax3, carMax4, carMax5, carMax6, carMax7, carMax8, carMax9, carMax10]
   },
   {
     id: "ecommerce-redesign",

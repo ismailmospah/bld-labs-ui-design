@@ -121,6 +121,32 @@ const ProjectDetail = () => {
         </div>
       </section>
 
+      {/* Project Images */}
+      {project.images && project.images.length > 0 && (
+        <section className="section-padding border-t border-border">
+          <div className="container-narrow">
+            <div className="flex flex-col gap-8">
+              {project.images.map((image, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                  viewport={{ once: true }}
+                  className="relative rounded-2xl overflow-hidden border border-border shadow-2xl"
+                >
+                  <img
+                    src={image}
+                    alt={`${project.title} - ${index + 1}`}
+                    className="w-full h-auto"
+                  />
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Results
       <section className="section-padding border-t border-border">
         <div className="container-narrow">
