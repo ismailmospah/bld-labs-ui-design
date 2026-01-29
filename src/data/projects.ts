@@ -27,7 +27,7 @@ import carMax7 from "@/assets/projects/CAR Max Project/Artboard 1 copy 6.png";
 import carMax8 from "@/assets/projects/CAR Max Project/Artboard 1 copy 7.png";
 import carMax9 from "@/assets/projects/CAR Max Project/Artboard 1 copy 8.png";
 import carMax10 from "@/assets/projects/CAR Max Project/Artboard 1 copy 9.png";
-
+import endImage from "@/assets/projects/CAR Max Project/end.png";
 export const projects: Project[] = [
   {
     id: "fintech-wallet",
@@ -61,8 +61,8 @@ export const projects: Project[] = [
       "Higher customer satisfaction and repeat rentals"
     ],
      color: "from-[#53Ba5f]/40 to-[#000]/10",
-    mockupImage: carMax,
-    images: [carMax1, carMax2, carMax3, carMax4, carMax5, carMax6, carMax7, carMax8, carMax9, carMax10]
+    mockupImage: carMax1,
+    images: [carMax1,carMax10, carMax6,carMax8,carMax9,carMax5, carMax2,carMax7, carMax4, carMax3,endImage]
   },
   {
     id: "ecommerce-redesign",
