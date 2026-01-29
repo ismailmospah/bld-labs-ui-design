@@ -5,10 +5,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import logo from "@/assets/logo.svg";
 
 const navLinks = [
-  { href: "#about", label: "About" },
-  { href: "#services", label: "Services" },
-  { href: "#work", label: "Work" },
-  { href: "#process", label: "Process" },
+  { href: "/#about", label: "About" },
+  { href: "/#services", label: "Services" },
+  { href: "/#work", label: "Work" },
+  { href: "/#process", label: "Process" },
 ];
 
 const Header = () => {
@@ -21,7 +21,7 @@ const Header = () => {
     <>
       <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/50">
         <div className="container-narrow section-padding !py-4 flex items-center justify-between">
-          <a href="#" className="flex items-center">
+          <a href="/" className="flex items-center">
             <img src={logo} alt="BLD Labs" className="h-8" />
           </a>
 
