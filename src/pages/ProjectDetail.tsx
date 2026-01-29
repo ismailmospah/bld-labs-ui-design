@@ -74,8 +74,8 @@ const ProjectDetail = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="relative rounded-2xl overflow-hidden border border-border shadow-2xl"
           >
-            <img 
-              src={project.mockupImage} 
+            <img
+              src={project.mockupImage}
               alt={`${project.title} mockup`}
               className="w-full h-auto"
             />
@@ -102,7 +102,7 @@ const ProjectDetail = () => {
                 {project.challenge}
               </p>
             </motion.div>
-            
+
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
