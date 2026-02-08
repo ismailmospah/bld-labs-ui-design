@@ -2,6 +2,7 @@ import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel";
 import { getProjectById, projects } from "@/data/projects";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -138,7 +139,7 @@ const ProjectDetail = () => {
                   <img
                     src={image}
                     alt={`${project.title} - ${index + 1}`}
-                    className="w-full h-auto"
+                    className="w-full h-auto max-h-[350px] md:max-h-[450px] object-contain"
                   />
                 </motion.div>
               ))}
