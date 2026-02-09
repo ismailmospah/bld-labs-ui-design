@@ -28,6 +28,9 @@ const Footer = () => {
             <a href="https://www.tiktok.com/@bld.labs?_r=1&_t=ZS-93QfRJeNITV" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
               TikTok
             </a>
+            <a href="https://www.behance.net/bld_labscompany" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+              Behance
+            </a>
             <a href="mailto:bldlabscompany@gmail.com" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
               Mail
             </a>
