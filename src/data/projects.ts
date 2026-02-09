@@ -66,6 +66,14 @@ import otlob5 from "@/assets/projects/Otlop/otlob_05.png";
 import otlob6 from "@/assets/projects/Otlop/otlob_06.png";
 import otlob7 from "@/assets/projects/Otlop/otlob_07.png";
 import otlob8 from "@/assets/projects/Otlop/otlob_08.png";
+
+// Prince el-lamma images
+import princeCover from "@/assets/projects/Prince el-lamma/Thumbnail behance برنس اللمة.png";
+import prince1 from "@/assets/projects/Prince el-lamma/برنس-اللمة_01.png";
+import prince2 from "@/assets/projects/Prince el-lamma/برنس-اللمة_02.png";
+import prince3 from "@/assets/projects/Prince el-lamma/برنس-اللمة_03.png";
+import prince4 from "@/assets/projects/Prince el-lamma/برنس-اللمة_04.png";
+import prince5 from "@/assets/projects/Prince el-lamma/برنس-اللمة_05.png";
 export const projects: Project[] = [
   {
     id: "fintech-wallet",
@@ -82,7 +90,7 @@ export const projects: Project[] = [
       "A more enjoyable and stress-free food ordering experience"
     ],
     color: "from-[#53Ba5f]/40 to-[#000]/10",
-    mockupImage: wajba10,
+    mockupImage: wajba1,
     images: [wajba1, wajba2, wajba3, wajba4, wajba5, wajba6, wajba7, wajba8, wajba9]
   },
   {
@@ -138,6 +146,24 @@ export const projects: Project[] = [
     color: "from-[#53Ba5f]/40 to-[#000]/10",
     mockupImage: otlob1,
     images: [otlob1, otlob2, otlob3, otlob4, otlob5, otlob6, otlob7, otlob8]
+  },
+  {
+    id: "prince-el-lamma",
+    title: "Prince of Gatherings",
+    shortDescription: "Prince of Gatherings is specially designed for fun get-togethers: coffee shops, homes, outings, vacations… anywhere there's a gathering and laughter, this game is a must-have!",
+    fullDescription: "Prince of Gatherings is specially designed for fun get-togethers: coffee shops, homes, outings, vacations… anywhere there's a gathering and laughter, this game is a must-have! The game will instantly change the mood of any gathering, adding a competitive edge that will light up the day from the very first minute.",
+    category: "Product Design / Game Design",
+    challenge: "Creating an engaging party game that works for all ages and settings, requiring no setup time while still delivering exciting competitive moments that bring people together.",
+    solution: "We designed quick, easy-to-start challenges that spark laughter and competition instantly. Each game is crafted to be enjoyed immediately without any setup or waiting—just choose your game, take on the challenge, and experience the fun.",
+    results: [
+      "Instant mood changer for any gathering",
+      "Suitable for all ages",
+      "No setup or waiting required",
+      "Creates memorable competitive moments"
+    ],
+    color: "from-[#53Ba5f]/40 to-[#000]/10",
+    mockupImage: princeCover,
+    images: [prince1, prince2, prince3, prince4, prince5]
   }
 ];
 

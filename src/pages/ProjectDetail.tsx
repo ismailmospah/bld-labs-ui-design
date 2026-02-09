@@ -139,7 +139,7 @@ const ProjectDetail = () => {
                   <img
                     src={image}
                     alt={`${project.title} - ${index + 1}`}
-                    className="w-full h-auto max-h-[350px] md:max-h-[450px] object-contain"
+                    className="w-full h-auto"
                   />
                 </motion.div>
               ))}
