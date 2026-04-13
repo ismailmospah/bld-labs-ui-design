@@ -7,6 +7,9 @@ import { useEffect } from "react";
 import Index from "./pages/Index";
 import ProjectDetail from "./pages/ProjectDetail";
 import NotFound from "./pages/NotFound";
+import ContactPage from "./components/Contactpage";
+import RoadMapPage from "./components/RoadMapPage";
+import BlogsPage from "./components/BlogsPage";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -32,6 +35,9 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/project/:id" element={<ProjectDetail />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/roadmap" element={<RoadMapPage />} />
+          <Route path="/blogs" element={<BlogsPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

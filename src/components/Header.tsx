@@ -45,7 +45,7 @@ const Header = () => {
               className="hidden md:inline-flex"
               asChild
             >
-              <a href="mailto:bldlabscompany@gmail.com">
+              <a href="/contact">
                 Start a Project
               </a>
             </Button>

@@ -42,7 +42,7 @@ const CTASection = () => {
           </p>
 
           <Button variant="hero" size="xl" className="group">
-            <a href="mailto:bldlabscompany@gmail.com" onClick={closeMenu}>
+            <a href="/contact" onClick={closeMenu}>
                       Start a Project
                 </a>
             <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
