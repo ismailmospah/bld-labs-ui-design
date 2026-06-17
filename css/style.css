@@ -565,13 +565,13 @@ section{position:relative;padding:clamp(90px,14vh,160px) clamp(20px,5vw,72px)}
 .rm__cta p{font-family:var(--px);font-size:clamp(20px,3vw,34px);margin-bottom:24px;letter-spacing:1px}
 
 /* learning paths */
-.paths{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:clamp(40px,6vh,70px)}
-.path{border:1px solid var(--line);background:var(--ink);overflow:hidden;display:flex;flex-direction:column;transition:border-color .3s,transform .4s}
+.paths{display:flex;flex-direction:column;gap:26px;margin-top:clamp(40px,6vh,70px);max-width:980px}
+.path{border:1px solid var(--line);background:var(--ink);overflow:hidden;display:grid;grid-template-columns:300px 1fr;transition:border-color .3s,transform .4s}
 .path:hover{border-color:var(--green);transform:translateY(-6px)}
-.path__img{height:220px;overflow:hidden;position:relative}
-.path__img img{width:100%;height:100%;object-fit:cover;object-position:top;filter:grayscale(.7);transition:filter .5s,transform .8s}
-.path:hover .path__img img{filter:grayscale(0);transform:scale(1.05)}
-.path__body{padding:clamp(22px,3vw,34px);display:flex;flex-direction:column;gap:14px;flex:1}
+.path__img{aspect-ratio:4/5;overflow:hidden;position:relative;background:#000}
+.path__img img{width:100%;height:100%;object-fit:cover;object-position:center;transition:transform .8s}
+.path:hover .path__img img{transform:scale(1.04)}
+.path__body{padding:clamp(24px,3vw,38px);display:flex;flex-direction:column;gap:14px;justify-content:center}
 .path__tag{font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--green)}
 .path__body h2{font-family:var(--sans);font-weight:800;font-size:clamp(22px,2.6vw,32px);letter-spacing:-0.01em}
 .path__body p{color:var(--grey);font-weight:300;font-size:14px;line-height:1.6}
@@ -591,7 +591,8 @@ section{position:relative;padding:clamp(90px,14vh,160px) clamp(20px,5vw,72px)}
 .soon__bar i{display:block;height:100%;width:20%;background:var(--green);box-shadow:0 0 12px rgba(82,186,95,.6)}
 
 @media (max-width:760px){
-  .paths{grid-template-columns:1fr}
+  .path{grid-template-columns:1fr}
+  .path__img{aspect-ratio:4/5;max-height:420px}
   .rmw__bar{grid-template-columns:54px 1fr 22px;gap:12px}
   .rmw__count,.rmw__lvl-badge{display:none}
   .rmw__res,.rmw__empty,.rmw__det,.rmw__task{padding-left:20px}
