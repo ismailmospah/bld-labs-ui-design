@@ -560,6 +560,7 @@ section{position:relative;padding:clamp(90px,14vh,160px) clamp(20px,5vw,72px)}
 .rm__by a:hover{color:var(--green)}
 .rm__note{font-family:var(--px);font-size:clamp(16px,2.4vw,26px);letter-spacing:1px;margin-bottom:28px;direction:rtl;text-align:right}
 .rm__note span{color:var(--green)}
+.rm__note--end{text-align:center;margin:clamp(40px,7vh,80px) 0 0;opacity:.85}
 .rmw__empty{display:block;padding:13px 6px 13px 106px;border-top:1px dashed var(--line);color:var(--grey);font-size:13px;font-style:italic}
 .rm__cta{text-align:center;margin-top:clamp(60px,10vh,110px);border:1px solid var(--line);padding:clamp(34px,5vw,60px)}
 .rm__cta p{font-family:var(--px);font-size:clamp(20px,3vw,34px);margin-bottom:24px;letter-spacing:1px}
