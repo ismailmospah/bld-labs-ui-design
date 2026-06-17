@@ -488,3 +488,90 @@ section{position:relative;padding:clamp(90px,14vh,160px) clamp(20px,5vw,72px)}
 @media (prefers-reduced-motion:reduce){
   .grain,.blink,.hero__scroll i{animation:none!important}
 }
+
+/* ================================================================
+   SUBPAGES — learning / roadmap / blogs
+================================================================ */
+.subpage main{padding:130px clamp(20px,5vw,72px) 80px;max-width:1200px;margin:0 auto}
+
+/* shared headers */
+.rm__title,.learn__title,.soon__title{
+  font-family:var(--sans);font-weight:900;letter-spacing:-0.02em;line-height:.98;
+  font-size:clamp(44px,8vw,104px);margin:14px 0 22px;
+}
+.rm__accent{font-family:var(--px);font-weight:400;color:var(--green);font-size:.82em;letter-spacing:2px}
+.rm__lead{max-width:60ch;color:var(--grey);font-weight:300;line-height:1.7;font-size:clamp(15px,1.6vw,18px)}
+.rm__lead a{color:var(--green);border-bottom:1px solid transparent;transition:border-color .25s}
+.rm__lead a:hover{border-color:var(--green)}
+.rm__meta{display:flex;gap:14px;flex-wrap:wrap;margin-top:30px}
+.rm__meta span{font-family:var(--mono);font-size:11px;letter-spacing:1px;color:var(--grey);border:1px solid var(--line);padding:9px 15px}
+.rm__meta b{color:var(--green)}
+
+/* roadmap levels */
+.rm__level{margin-top:clamp(50px,8vh,90px)}
+.rm__lvl{font-family:var(--px);font-size:clamp(20px,3vw,34px);letter-spacing:1px;font-weight:400;display:flex;align-items:baseline;gap:16px;margin-bottom:24px;flex-wrap:wrap}
+.rm__lvl-no{color:transparent;-webkit-text-stroke:1px var(--green);font-size:1.1em}
+.rm__lvl em{font-family:var(--mono);font-style:normal;font-size:12px;letter-spacing:1px;color:var(--grey)}
+.rm__list{border-top:1px solid var(--line)}
+.rmw{border-bottom:1px solid var(--line)}
+.rmw__bar{
+  width:100%;background:none;border:0;cursor:none;display:grid;
+  grid-template-columns:88px 1fr auto 26px;align-items:center;gap:18px;
+  padding:20px 6px;text-align:left;color:var(--white);transition:padding-left .3s,background .25s;
+}
+@media (hover:none){.rmw__bar{cursor:pointer}}
+.rmw__bar:hover{background:rgba(82,186,95,.05);padding-left:16px}
+.rmw__wk{font-family:var(--mono);font-size:12px;color:var(--green);letter-spacing:1px}
+.rmw__title{font-family:var(--sans);font-weight:700;font-size:clamp(15px,1.9vw,22px);letter-spacing:-0.01em}
+.rmw__count{font-family:var(--mono);font-size:10px;color:var(--grey);letter-spacing:1px}
+.rmw__sign{position:relative;width:15px;height:15px;justify-self:end}
+.rmw__sign::before,.rmw__sign::after{content:'';position:absolute;background:var(--green);transition:transform .35s}
+.rmw__sign::before{left:0;top:50%;width:100%;height:1.5px;transform:translateY(-50%)}
+.rmw__sign::after{left:50%;top:0;width:1.5px;height:100%;transform:translateX(-50%)}
+.rmw.is-open .rmw__sign::after{transform:translateX(-50%) scaleY(0)}
+.rmw.is-open .rmw__title{color:var(--green)}
+.rmw__res-wrap{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.6,0,.2,1)}
+.rmw.is-open .rmw__res-wrap{max-height:600px}
+.rmw__res{
+  display:flex;align-items:center;gap:12px;padding:13px 6px 13px 106px;
+  border-top:1px dashed var(--line);color:var(--grey);font-size:14px;font-weight:300;transition:color .2s,background .2s;
+}
+.rmw__res:hover{color:var(--white);background:rgba(82,186,95,.04)}
+.rmw__res i{font-family:var(--mono);font-style:normal;font-size:9px;letter-spacing:1px;color:var(--green);border:1px solid rgba(82,186,95,.4);padding:3px 7px;flex:none}
+.rmw__res b{margin-left:auto;color:var(--green)}
+.rmw__empty{display:block;padding:13px 6px 13px 106px;border-top:1px dashed var(--line);color:var(--grey);font-size:13px;font-style:italic}
+.rm__cta{text-align:center;margin-top:clamp(60px,10vh,110px);border:1px solid var(--line);padding:clamp(34px,5vw,60px)}
+.rm__cta p{font-family:var(--px);font-size:clamp(20px,3vw,34px);margin-bottom:24px;letter-spacing:1px}
+
+/* learning paths */
+.paths{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:clamp(40px,6vh,70px)}
+.path{border:1px solid var(--line);background:var(--ink);overflow:hidden;display:flex;flex-direction:column;transition:border-color .3s,transform .4s}
+.path:hover{border-color:var(--green);transform:translateY(-6px)}
+.path__img{height:220px;overflow:hidden;position:relative}
+.path__img img{width:100%;height:100%;object-fit:cover;object-position:top;filter:grayscale(.7);transition:filter .5s,transform .8s}
+.path:hover .path__img img{filter:grayscale(0);transform:scale(1.05)}
+.path__body{padding:clamp(22px,3vw,34px);display:flex;flex-direction:column;gap:14px;flex:1}
+.path__tag{font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--green)}
+.path__body h2{font-family:var(--sans);font-weight:800;font-size:clamp(22px,2.6vw,32px);letter-spacing:-0.01em}
+.path__body p{color:var(--grey);font-weight:300;font-size:14px;line-height:1.6}
+.path__meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
+.path__meta span{font-family:var(--mono);font-size:9px;letter-spacing:1px;color:var(--grey);border:1px solid var(--line);padding:6px 10px}
+.path__go{margin-top:auto;color:var(--green);font-family:var(--mono);font-size:13px;letter-spacing:1px}
+.path--soon{opacity:.5}
+.path__go--soon{color:var(--grey)}
+.path--soon .path__body{justify-content:center;min-height:280px}
+
+/* blogs coming soon */
+.blogs main{display:flex;flex-direction:column;justify-content:center;min-height:80vh}
+.soon{text-align:center;max-width:600px;margin:0 auto}
+.soon__icon{font-family:var(--px);color:var(--green);font-size:28px;letter-spacing:4px;display:block;margin-bottom:24px;animation:blink 1.2s steps(1) infinite}
+.soon__text{color:var(--grey);font-weight:300;line-height:1.7;font-size:clamp(15px,1.6vw,18px);margin:0 auto 34px;max-width:48ch}
+.soon__bar{width:min(360px,80%);height:3px;background:var(--line);margin:0 auto 40px;overflow:hidden}
+.soon__bar i{display:block;height:100%;width:20%;background:var(--green);box-shadow:0 0 12px rgba(82,186,95,.6)}
+
+@media (max-width:760px){
+  .paths{grid-template-columns:1fr}
+  .rmw__bar{grid-template-columns:60px 1fr 22px;gap:12px}
+  .rmw__count{display:none}
+  .rmw__res,.rmw__empty{padding-left:20px}
+}
