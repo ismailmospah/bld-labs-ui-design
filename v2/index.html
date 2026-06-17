@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BLD Labs — Product &amp; Design Studio</title>
+<meta name="description" content="BLD Labs is a product studio helping startups and companies turn complex ideas into clear, usable and scalable digital products.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ============ PRELOADER ============ -->
+<div class="loader" id="loader">
+  <div class="loader__inner">
+    <span class="loader__mark">BLD</span>
+    <div class="loader__bar"><i id="loaderFill"></i></div>
+    <span class="loader__pct" id="loaderPct">00</span>
+  </div>
+</div>
+
+<div class="cursor" id="cursor" aria-hidden="true"></div>
+<div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="nav">
+  <a href="#top" class="nav__logo" data-hover>
+    <img src="assets/img/logo.svg" alt="BLD Labs">
+  </a>
+  <nav class="nav__links">
+    <a href="#about" data-hover>About</a>
+    <a href="#services" data-hover>Services</a>
+    <a href="#work" data-hover>Work</a>
+    <a href="#process" data-hover>Process</a>
+  </nav>
+  <a href="#contact" class="nav__cta" data-hover data-magnetic><span>Start a project</span></a>
+  <button class="nav__burger" id="burger" aria-label="menu"><span></span><span></span></button>
+</header>
+<div class="menu" id="menu">
+  <a href="#about">About</a><a href="#services">Services</a><a href="#work">Work</a><a href="#process">Process</a><a href="#contact">Contact</a>
+</div>
+
+<main id="top">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <canvas id="blob" aria-hidden="true"></canvas>
+    <div class="hero__top">
+      <span class="kick">[ Product &amp; Design Studio ]</span>
+      <span class="kick kick--right">EST. CAIRO — Ⓒ 2026</span>
+    </div>
+    <h1 class="hero__title">
+      <span class="ln"><span class="up">Building digital</span></span>
+      <span class="ln"><span class="up">products that</span></span>
+      <span class="ln"><span class="up">actually <em>make&nbsp;sense.</em></span></span>
+    </h1>
+    <div class="hero__bottom">
+      <p class="hero__lead reveal-up">We don't start with pixels. We start by understanding the problem, the user and the business — then we design products that last.</p>
+      <div class="hero__act reveal-up">
+        <a href="#work" class="btn" data-hover data-magnetic><span>View our work</span></a>
+        <a href="#contact" class="btn btn--line" data-hover data-magnetic><span>Start a project</span></a>
+      </div>
+    </div>
+    <div class="hero__scroll"><span>Scroll to explore</span><i></i></div>
+  </section>
+
+  <!-- ============ MARQUEE ============ -->
+  <div class="strip">
+    <div class="strip__track">
+      <span>PRODUCT DESIGN <b>✦</b> UX RESEARCH <b>✦</b> UI DESIGN <b>✦</b> DEVELOPMENT <b>✦</b> PRODUCT DESIGN <b>✦</b> UX RESEARCH <b>✦</b> UI DESIGN <b>✦</b> DEVELOPMENT <b>✦</b>&nbsp;</span>
+      <span aria-hidden="true">PRODUCT DESIGN <b>✦</b> UX RESEARCH <b>✦</b> UI DESIGN <b>✦</b> DEVELOPMENT <b>✦</b> PRODUCT DESIGN <b>✦</b> UX RESEARCH <b>✦</b> UI DESIGN <b>✦</b> DEVELOPMENT <b>✦</b>&nbsp;</span>
+    </div>
+  </div>
+
+  <!-- ============ ABOUT ============ -->
+  <section class="about" id="about">
+    <span class="lab">(01) — About the studio</span>
+    <div class="about__grid">
+      <h2 class="about__statement">
+        <span class="word">BLD</span> <span class="word">Labs</span> <span class="word">helps</span> <span class="word">startups</span> <span class="word">&amp;</span> <span class="word">companies</span> <span class="word">turn</span> <span class="word">complex</span> <span class="word">ideas</span> <span class="word">into</span> <span class="word"><em>clear,</em></span> <span class="word"><em>usable</em></span> <span class="word">and</span> <span class="word"><em>scalable</em></span> <span class="word">digital</span> <span class="word">products.</span>
+      </h2>
+      <div class="about__side">
+        <p class="reveal-up">We believe great products are built on deep understanding — not assumptions. That's why research, strategy and problem definition come before visuals.</p>
+        <div class="about__stats">
+          <div class="reveal-up"><strong data-count="24">0</strong><span>Products shipped</span></div>
+          <div class="reveal-up"><strong data-count="18">0</strong><span>Clients worldwide</span></div>
+          <div class="reveal-up"><strong data-count="5">0</strong><span>Years building</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SERVICES (editorial accordion) ============ -->
+  <section class="serv" id="services">
+    <div class="serv__head">
+      <span class="lab">(02) — What we do</span>
+      <h2 class="serv__h">Four ways<br>we <em>build.</em></h2>
+    </div>
+    <ul class="acc" id="acc">
+      <li class="acc__item is-open" data-img="assets/img/carmax.jpg">
+        <button class="acc__bar" data-hover>
+          <span class="acc__no">01</span>
+          <span class="acc__name">Product Design</span>
+          <span class="acc__sign"></span>
+        </button>
+        <div class="acc__body">
+          <p>Designing end-to-end digital products that balance business goals, user needs, and technical constraints.</p>
+          <div class="acc__tags"><i>Business goals</i><i>User needs</i><i>Tech constraints</i></div>
+        </div>
+      </li>
+      <li class="acc__item" data-img="assets/img/ghym-dash.jpg">
+        <button class="acc__bar" data-hover>
+          <span class="acc__no">02</span>
+          <span class="acc__name">UX Research</span>
+          <span class="acc__sign"></span>
+        </button>
+        <div class="acc__body">
+          <p>Uncovering real user problems through research, testing, and insights that guide confident product decisions.</p>
+          <div class="acc__tags"><i>Interviews</i><i>Usability testing</i><i>Insights</i></div>
+        </div>
+      </li>
+      <li class="acc__item" data-img="assets/img/wajba.jpg">
+        <button class="acc__bar" data-hover>
+          <span class="acc__no">03</span>
+          <span class="acc__name">UI Design</span>
+          <span class="acc__sign"></span>
+        </button>
+        <div class="acc__body">
+          <p>Creating clean, accessible, and consistent interfaces that feel professional and intentional.</p>
+          <div class="acc__tags"><i>Design systems</i><i>Accessibility</i><i>Consistency</i></div>
+        </div>
+      </li>
+      <li class="acc__item" data-img="assets/img/ghym-web.jpg">
+        <button class="acc__bar" data-hover>
+          <span class="acc__no">04</span>
+          <span class="acc__name">Development</span>
+          <span class="acc__sign"></span>
+        </button>
+        <div class="acc__body">
+          <p>Full-stack web &amp; mobile development — Frontend, Backend, and Flutter solutions.</p>
+          <div class="acc__tags"><i>Frontend</i><i>Backend</i><i>Flutter</i></div>
+        </div>
+      </li>
+    </ul>
+    <div class="acc__media" id="accMedia">
+      <img src="assets/img/carmax.jpg" alt="">
+    </div>
+  </section>
+
+  <!-- ============ WORK (sticky stacking) ============ -->
+  <section class="work" id="work">
+    <div class="work__intro">
+      <span class="lab">(03) — Selected work</span>
+      <h2 class="work__h">Products we<br>brought to <em>life.</em></h2>
+    </div>
+    <div class="stack">
+      <article class="scard" style="--i:0">
+        <div class="scard__inner">
+          <div class="scard__txt">
+            <span class="scard__no">01 / 06</span>
+            <h3>CarMax</h3>
+            <p class="scard__cat">Car Rental Platform · UX / UI</p>
+            <p class="scard__desc">A smart car-rental platform with clear listings, transparent pricing and an easy booking flow — browse, compare and reserve in a few steps.</p>
+            <span class="scard__link" data-hover>Transparent pricing → less friction</span>
+          </div>
+          <div class="scard__img"><img src="assets/img/carmax.jpg" alt="CarMax"></div>
+        </div>
+      </article>
+      <article class="scard" style="--i:1">
+        <div class="scard__inner">
+          <div class="scard__txt">
+            <span class="scard__no">02 / 06</span>
+            <h3>Wajba</h3>
+            <p class="scard__cat">Food Ordering App · UX / UI</p>
+            <p class="scard__desc">A smart food-ordering app with clear restaurant listings and a smooth flow — find what fits your mood and order in just a few steps.</p>
+            <span class="scard__link" data-hover>Faster decisions → fewer drop-offs</span>
+          </div>
+          <div class="scard__img"><img src="assets/img/wajba.jpg" alt="Wajba"></div>
+        </div>
+      </article>
+      <article class="scard" style="--i:2">
+        <div class="scard__inner">
+          <div class="scard__txt">
+            <span class="scard__no">03 / 06</span>
+            <h3>Ghym</h3>
+            <p class="scard__cat">Education Platform · Web</p>
+            <p class="scard__desc">A unified platform where institutes showcase courses &amp; trainers and manage enrollment, while students enjoy a simple, interactive learning journey.</p>
+            <span class="scard__link" data-hover>Institutes + trainers + students</span>
+          </div>
+          <div class="scard__img"><img src="assets/img/ghym-web.jpg" alt="Ghym"></div>
+        </div>
+      </article>
+      <article class="scard" style="--i:3">
+        <div class="scard__inner">
+          <div class="scard__txt">
+            <span class="scard__no">04 / 06</span>
+            <h3>Ghym Dashboard</h3>
+            <p class="scard__cat">SaaS · Admin Panel</p>
+            <p class="scard__desc">The control room for institutes — managing courses, instructors and enrollments through a clear, data-dense admin experience.</p>
+            <span class="scard__link" data-hover>Manage everything in one place</span>
+          </div>
+          <div class="scard__img"><img src="assets/img/ghym-dash.jpg" alt="Ghym Dashboard"></div>
+        </div>
+      </article>
+      <article class="scard" style="--i:4">
+        <div class="scard__inner">
+          <div class="scard__txt">
+            <span class="scard__no">05 / 06</span>
+            <h3>Otlob</h3>
+            <p class="scard__cat">E-commerce · UX / UI</p>
+            <p class="scard__desc">A smart shopping platform with organised categories, smart search and a smooth checkout that makes online buying simple and fast.</p>
+            <span class="scard__link" data-hover>Less cart abandonment</span>
+          </div>
+          <div class="scard__img"><img src="assets/img/otlop.jpg" alt="Otlob"></div>
+        </div>
+      </article>
+      <article class="scard" style="--i:5">
+        <div class="scard__inner">
+          <div class="scard__txt">
+            <span class="scard__no">06 / 06</span>
+            <h3>Prince of Gatherings</h3>
+            <p class="scard__cat">Party Game · Brand + UI</p>
+            <p class="scard__desc">Quick, easy-to-start challenges that spark laughter and competition instantly — the perfect mood-changer for any gathering.</p>
+            <span class="scard__link" data-hover>No setup. Instant fun.</span>
+          </div>
+          <div class="scard__img"><img src="assets/img/prince.jpg" alt="Prince of Gatherings"></div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============ PROCESS (drawn timeline) ============ -->
+  <section class="proc" id="process">
+    <div class="proc__head">
+      <span class="lab">(04) — How we work</span>
+      <h2 class="proc__h">From <em>understanding</em><br>to launch.</h2>
+    </div>
+    <div class="proc__line"><i id="procLine"></i></div>
+    <ol class="proc__steps">
+      <li class="pstep reveal-up"><span class="pstep__no">01</span><h3>Understand</h3><p>Deep-dive workshops, research and problem definition. We learn the business and the user before anything is designed.</p></li>
+      <li class="pstep reveal-up"><span class="pstep__no">02</span><h3>Define</h3><p>Strategy, scope and structure. We turn messy ideas into a clear, prioritized product direction.</p></li>
+      <li class="pstep reveal-up"><span class="pstep__no">03</span><h3>Design</h3><p>Wireframes, interfaces and prototypes — tested with real users and refined until they feel effortless.</p></li>
+      <li class="pstep reveal-up"><span class="pstep__no">04</span><h3>Build &amp; Launch</h3><p>Full-stack development across web, backend and Flutter — shipped, measured and improved.</p></li>
+    </ol>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section class="contact" id="contact">
+    <span class="lab">(05) — Let's talk</span>
+    <h2 class="contact__h">
+      <span class="ln"><span class="up">Have an idea</span></span>
+      <span class="ln"><span class="up">worth <em>building?</em></span></span>
+    </h2>
+    <a href="mailto:bldlabscompany@gmail.com" class="contact__mail" data-hover data-magnetic><span>bldlabscompany@gmail.com</span></a>
+    <div class="contact__socials">
+      <a href="https://www.linkedin.com/company/bld-labs/" target="_blank" rel="noopener" data-hover>LinkedIn</a>
+      <a href="https://www.instagram.com/bldlabs?igsh=Y2RuZXNjb2RlcWh0&utm_source=qr" target="_blank" rel="noopener" data-hover>Instagram</a>
+      <a href="https://www.facebook.com/share/17wT9DX4nm/?mibextid=wwXIfr" target="_blank" rel="noopener" data-hover>Facebook</a>
+      <a href="https://www.tiktok.com/@bld.labs?_r=1&_t=ZS-93QfRJeNITV" target="_blank" rel="noopener" data-hover>TikTok</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="foot__row">
+    <span>© 2026 BLD Labs</span>
+    <span>Product &amp; Design Studio</span>
+    <span>Cairo, Egypt</span>
+    <a href="#top" data-hover>Back to top ↑</a>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
