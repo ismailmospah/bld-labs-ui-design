@@ -374,12 +374,12 @@ burger.addEventListener('click', () => {
 /* ---------------- marquee : velocity-aware ---------------- */
 document.querySelectorAll('.marquee').forEach(mq => {
   const track = mq.querySelector('.marquee__track');
-  const tween = gsap.to(track, { xPercent: -50, ease: 'none', duration: 22, repeat: -1 });
+  const tween = gsap.to(track, { xPercent: -50, ease: 'none', duration: 40, repeat: -1 });
   ScrollTrigger.create({
     trigger: mq,
     onUpdate: self => {
-      const v = gsap.utils.clamp(0.4, 4, Math.abs(self.getVelocity()) / 300);
-      gsap.to(tween, { timeScale: (self.direction || 1) * v, duration: 0.3, overwrite: true });
+      const v = gsap.utils.clamp(0.6, 2, Math.abs(self.getVelocity()) / 400);
+      gsap.to(tween, { timeScale: (self.direction || 1) * v, duration: 0.8, overwrite: true });
     }
   });
 });
