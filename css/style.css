@@ -63,6 +63,12 @@ main{position:relative;z-index:1}
   70%{transform:translate(7%,-4%)}90%{transform:translate(-3%,7%)}
 }
 
+/* disable cursor + field + glow on roadmap page */
+.no-cursor .cursor,
+.no-cursor .field,
+.no-cursor .glow{display:none!important}
+.no-cursor,.no-cursor *{cursor:auto!important}
+
 /* ============ custom cursor ============ */
 .cursor{
   position:fixed;top:0;left:0;z-index:999;pointer-events:none;
