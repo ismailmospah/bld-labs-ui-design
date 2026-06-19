@@ -600,9 +600,17 @@ section{position:relative;padding:clamp(90px,14vh,160px) clamp(20px,5vw,72px)}
 }
 .rmw__res:hover{border-color:rgba(82,186,95,.5);background:rgba(82,186,95,.06);color:var(--white)}
 .rmw__res>span{white-space:nowrap}
-.rmw__type{font-family:var(--mono);font-style:normal;font-size:9px;letter-spacing:1px;padding:3px 7px;flex:none;border:1px solid}
+.rmw__type{font-family:var(--mono);font-style:normal;font-size:9px;letter-spacing:1px;padding:3px 7px;flex:none;border:1px solid;display:inline-flex;align-items:center;gap:4px}
 .rmw__type--article{color:var(--green);border-color:rgba(82,186,95,.4)}
 .rmw__type--video{color:var(--lime);border-color:rgba(181,232,72,.4)}
+.rmw__type--article::before{
+  content:'';display:inline-block;width:8px;height:10px;flex:none;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 10' fill='none' stroke='%2352BA5F' stroke-width='1.2'%3E%3Crect x='.6' y='.6' width='6.8' height='8.8'/%3E%3Cline x1='2' y1='3.5' x2='6' y2='3.5'/%3E%3Cline x1='2' y1='5.5' x2='6' y2='5.5'/%3E%3Cline x1='2' y1='7.5' x2='5' y2='7.5'/%3E%3C/svg%3E") no-repeat center/contain;
+}
+.rmw__type--video::before{
+  content:'';display:inline-block;width:8px;height:9px;flex:none;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 9' fill='%23B5E848'%3E%3Cpolygon points='1,1 7,4.5 1,8'/%3E%3C/svg%3E") no-repeat center/contain;
+}
 /* assignment card */
 .rmw__task{
   display:flex;flex-direction:column;gap:8px;align-items:flex-start;

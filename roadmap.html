@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=8">
+<link rel="stylesheet" href="css/style.css?v=9">
 </head>
 <body class="subpage no-cursor">
 <div class="scanlines" aria-hidden="true"></div>
@@ -45,11 +45,6 @@
       <span><b>111</b> Resources</span>
       <span>Beginner → Pro</span>
     </div>
-  </div>
-  <div class="rm__desc">
-    <p class="rm__desc-en">Not sure where to start or what to learn next in UI/UX? At BLD Labs, we've created a structured UI/UX roadmap to help designers focus on the right skills in the right order — from design fundamentals and UX research to UI design, design systems, and product thinking. The goal is to give you a clear learning path and help you avoid getting lost in the endless amount of content available online.</p>
-    <div class="rm__desc-sep"></div>
-    <p class="rm__desc-ar">مش عارف تبدأ منين أو تتعلم إيه بعد كده في مجال الـ UI/UX؟ في BLD Labs جهزنا Roadmap منظمة تساعدك تعرف المهارات اللي محتاج تتعلمها والترتيب المناسب ليها، بداية من الأساسيات، مرورًا بالـ UX Research والـ UI Design، وصولًا إلى Design Systems وProduct Thinking. الهدف إن يكون عندك مسار واضح للتعلم بدل ما تضيع وسط كمية المحتوى الكبيرة الموجودة أونلاين.</p>
   </div>
   <div class="rm__level">
     <h2 class="rm__lvl"><span class="rm__lvl-no">01</span>BEGINNER<em>WEEKS 01—08</em></h2>
@@ -358,6 +353,11 @@ Example: &quot;Students attending lectures via the Zoom app are struggling to st
 </div>
     </div><!-- end intermediate rm__list -->
   </div><!-- end intermediate rm__level -->
+  <div class="rm__desc">
+    <p class="rm__desc-en">Not sure where to start or what to learn next in UI/UX? At BLD Labs, we've created a structured UI/UX roadmap to help designers focus on the right skills in the right order — from design fundamentals and UX research to UI design, design systems, and product thinking. The goal is to give you a clear learning path and help you avoid getting lost in the endless amount of content available online.</p>
+    <div class="rm__desc-sep"></div>
+    <p class="rm__desc-ar">مش عارف تبدأ منين أو تتعلم إيه بعد كده في مجال الـ UI/UX؟ في BLD Labs جهزنا Roadmap منظمة تساعدك تعرف المهارات اللي محتاج تتعلمها والترتيب المناسب ليها، بداية من الأساسيات، مرورًا بالـ UX Research والـ UI Design، وصولًا إلى Design Systems وProduct Thinking. الهدف إن يكون عندك مسار واضح للتعلم بدل ما تضيع وسط كمية المحتوى الكبيرة الموجودة أونلاين.</p>
+  </div>
   <div class="rm__cta">
     <p>Ready to build it for real?</p>
     <a href="index.html#contact" class="btn btn--solid" data-hover data-magnetic>START A PROJECT</a>
@@ -388,6 +388,10 @@ document.querySelectorAll('.rmw__res-wrap').forEach(function(wrap) {
   resources.forEach(function(r) { mat.appendChild(r); });
   var det = wrap.querySelector('.rmw__det');
   if (det) det.after(mat); else wrap.prepend(mat);
+});
+// replace task label icon with checkmark SVG
+document.querySelectorAll('.rmw__task-lbl').forEach(function(lbl) {
+  lbl.innerHTML = '<svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex:none"><polyline points="1,6 4,9 10,2" stroke="#52BA5F" stroke-width="1.5" stroke-linecap="square" fill="none"/></svg> TASK';
 });
 </script>
 </body>

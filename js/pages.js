@@ -22,7 +22,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 
 /* ---------------- interactive pixel field + glow ---------------- */
 (function field() {
-  if (reduced) return;
+  if (reduced || document.body.classList.contains('no-cursor')) return;
   const dpr = Math.min(devicePixelRatio || 1, 2);
   const canvas = document.createElement('canvas');
   canvas.className = 'field';
