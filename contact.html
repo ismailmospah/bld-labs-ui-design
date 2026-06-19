@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Start a Project — BLD Labs</title>
-<meta name="description" content="Tell us what you're building. BLD Labs will get back to you within 48 hours.">
+<meta name="description" content="Describe your project and we'll get back to you in less than 8 hours.">
 <link rel="icon" href="assets/img/logo.svg" type="image/svg+xml">
 <meta property="og:title" content="Start a Project — BLD Labs">
-<meta property="og:description" content="Tell us what you're building. BLD Labs will get back to you within 48 hours.">
+<meta property="og:description" content="Describe your project and we'll get back to you in less than 8 hours.">
 <meta property="og:image" content="https://bld-labs.com/assets/img/og-image.jpg">
 <meta property="og:url" content="https://bld-labs.com/contact">
 <meta property="og:type" content="website">
@@ -44,95 +44,83 @@
 <main id="top" class="cpage">
   <div class="cpage__inner">
 
-    <!-- Left: headline -->
-    <div class="cpage__left">
-      <p class="section__tag">// 05 — YOUR MOVE</p>
-      <h1 class="cpage__title">LET'S<br><span class="rm__accent">BUILD<i class="dot"></i></span></h1>
-      <p class="cpage__lead">Got an idea? A product that needs rescuing? A brand that needs teeth? Tell us — we'll get back within 48 hours.</p>
-      <div class="cpage__reach">
-        <a href="mailto:bldlabscompany@gmail.com" class="cpage__link" data-hover>
-          <span class="cpage__link-lbl">EMAIL</span>
-          bldlabscompany@gmail.com
-        </a>
-        <a href="https://wa.me/201093723960" target="_blank" rel="noopener" class="cpage__link" data-hover>
-          <span class="cpage__link-lbl">WHATSAPP</span>
-          +20 109 372 3960
-        </a>
-        <a href="https://www.behance.net/bld_labscompany" target="_blank" rel="noopener" class="cpage__link" data-hover>
-          <span class="cpage__link-lbl">BEHANCE</span>
-          bld_labscompany ↗
-        </a>
-      </div>
+    <!-- Header -->
+    <div class="cpage__head">
+      <p class="section__tag">// START A PROJECT</p>
+      <h1 class="cpage__title">DESCRIBE YOUR<br><span class="rm__accent">PROJECT<i class="dot"></i></span></h1>
+      <p class="cpage__lead">We'll get back to you in less than 8 hours.</p>
     </div>
 
-    <!-- Right: form -->
-    <div class="cpage__right">
-      <div class="cform__wrap">
-        <div class="cform__bar">
-          <i></i><i></i><i></i>
-          <span>/bld/start-a-project</span>
+    <!-- Form -->
+    <div class="cform__wrap">
+      <div class="cform__bar">
+        <i></i><i></i><i></i>
+        <span>/bld/start-a-project</span>
+      </div>
+
+      <form class="cform" id="cform" novalidate>
+        <div class="cform__error" id="cformError" style="display:none"></div>
+
+        <div class="cform__row">
+          <label>FULL NAME <em>*</em><input type="text" name="from_name" required placeholder="Your name"></label>
+          <label>WHATSAPP <em>*</em><input type="tel" name="whatsapp_number" required placeholder="+20 100 000 0000"></label>
         </div>
-
-        <!-- Success state -->
-        <div class="cform__success" id="cformSuccess" hidden>
-          <span class="cform__ok">▮</span>
-          <h2>BRIEF RECEIVED<i class="dot"></i></h2>
-          <p>We'll review your project and get back to you within 48 hours.</p>
-          <button class="btn btn--ghost" id="cformReset" data-hover>SEND ANOTHER →</button>
-        </div>
-
-        <!-- Form -->
-        <form class="cform" id="cform" novalidate>
-          <div class="cform__error" id="cformError" hidden></div>
-
-          <div class="cform__row">
-            <label>FULL NAME <em>*</em><input type="text" name="from_name" required placeholder="Your name"></label>
-            <label>WHATSAPP <em>*</em><input type="tel" name="whatsapp_number" required placeholder="+20 100 000 0000"></label>
-          </div>
-          <div class="cform__row">
-            <label>COUNTRY <em>*</em>
-              <select name="country" id="cfCountry" required>
-                <option value="" disabled selected>Select country…</option>
-                <option>Egypt</option>
-                <option>Saudi Arabia</option>
-                <option>UAE</option>
-                <option>Kuwait</option>
-                <option>Qatar</option>
-                <option>Bahrain</option>
-                <option>Oman</option>
-                <option>Jordan</option>
-                <option value="other">Other</option>
-              </select>
-            </label>
-            <label>COMPANY <em>*</em><input type="text" name="company_name" required placeholder="Your company"></label>
-          </div>
-
-          <label id="cfOtherCountryWrap" hidden>SPECIFY COUNTRY <em>*</em><input type="text" name="country_other" id="cfOtherCountry" placeholder="Please specify"></label>
-
-          <label>SERVICE <em>*</em>
-            <select name="service" id="cfService" required>
-              <option value="" disabled selected>Select a service…</option>
-              <option value="Product Design">Product Design</option>
-              <option value="UX Research">UX Research</option>
-              <option value="UI Design">UI Design</option>
-              <option value="Development">Development</option>
+        <div class="cform__row">
+          <label>COUNTRY <em>*</em>
+            <select name="country" id="cfCountry" required>
+              <option value="" disabled selected>Select country…</option>
+              <option>Egypt</option>
+              <option>Saudi Arabia</option>
+              <option>UAE</option>
+              <option>Kuwait</option>
+              <option>Qatar</option>
+              <option>Bahrain</option>
+              <option>Oman</option>
+              <option>Jordan</option>
               <option value="other">Other</option>
             </select>
           </label>
-          <label id="cfOtherServiceWrap" hidden>DESCRIBE SERVICE <em>*</em><input type="text" name="service_other" id="cfOtherService" placeholder="What do you need?"></label>
+          <label>COMPANY <em>*</em><input type="text" name="company_name" required placeholder="Your company"></label>
+        </div>
 
-          <div class="cform__row">
-            <label>BUDGET <em>*</em><input type="text" name="budget" required placeholder="e.g. $2,000–5,000"></label>
-            <label>INDUSTRY <em>*</em><input type="text" name="industry" required placeholder="e.g. Healthcare"></label>
-          </div>
-          <label>PROJECT DETAILS <em>*</em><textarea name="message" rows="5" required placeholder="Briefly describe your project, goals, and timeline…"></textarea></label>
+        <label id="cfOtherCountryWrap" style="display:none">SPECIFY COUNTRY <em>*</em><input type="text" name="country_other" id="cfOtherCountry" placeholder="Please specify"></label>
 
-          <div class="cform__actions">
-            <button type="submit" class="btn btn--solid cform__submit" id="cformBtn" data-hover data-magnetic>SEND BRIEF →</button>
-            <a href="https://wa.me/201093723960" target="_blank" rel="noopener" class="btn btn--ghost" data-hover data-magnetic>WHATSAPP ↗</a>
-          </div>
-        </form>
-      </div>
+        <label>SERVICE <em>*</em>
+          <select name="service" id="cfService" required>
+            <option value="" disabled selected>Select a service…</option>
+            <option value="Product Design">Product Design</option>
+            <option value="UX Research">UX Research</option>
+            <option value="UI Design">UI Design</option>
+            <option value="Development">Development</option>
+            <option value="other">Other</option>
+          </select>
+        </label>
+        <label id="cfOtherServiceWrap" style="display:none">DESCRIBE SERVICE <em>*</em><input type="text" name="service_other" id="cfOtherService" placeholder="What do you need?"></label>
+
+        <div class="cform__row">
+          <label>BUDGET <em>*</em><input type="text" name="budget" required placeholder="e.g. $2,000–5,000"></label>
+          <label>INDUSTRY <em>*</em><input type="text" name="industry" required placeholder="e.g. Healthcare"></label>
+        </div>
+        <label>PROJECT DETAILS <em>*</em><textarea name="message" rows="5" required placeholder="Briefly describe your project, goals, and timeline…"></textarea></label>
+
+        <button type="submit" class="btn btn--solid cform__submit" id="cformBtn" data-hover data-magnetic>SEND BRIEF →</button>
+      </form>
+    </div>
+
+    <!-- Contact links below form -->
+    <div class="cpage__reach">
+      <a href="mailto:bldlabscompany@gmail.com" class="cpage__link" data-hover>
+        <span class="cpage__link-lbl">EMAIL</span>
+        bldlabscompany@gmail.com
+      </a>
+      <a href="https://wa.me/201093723960" target="_blank" rel="noopener" class="cpage__link" data-hover>
+        <span class="cpage__link-lbl">WHATSAPP</span>
+        +20 109 372 3960
+      </a>
+      <a href="https://www.behance.net/bld_labscompany" target="_blank" rel="noopener" class="cpage__link" data-hover>
+        <span class="cpage__link-lbl">BEHANCE</span>
+        bld_labscompany ↗
+      </a>
     </div>
 
   </div>

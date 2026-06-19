@@ -2,56 +2,30 @@
    BLD LABS — contact page styles
 ================================================================ */
 
-/* ---- layout ---- */
 .cpage {
-  min-height: 100vh;
-  padding: clamp(100px, 12vw, 160px) clamp(20px, 5vw, 80px) clamp(60px, 8vw, 100px);
+  padding: clamp(100px, 12vw, 140px) clamp(20px, 5vw, 80px) clamp(60px, 8vw, 100px);
 }
 .cpage__inner {
-  max-width: 1200px;
+  max-width: 780px;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 1.4fr;
-  gap: clamp(40px, 6vw, 100px);
-  align-items: start;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
 }
 
-/* ---- left column ---- */
+/* ---- header ---- */
 .cpage__title {
   font-family: var(--px);
-  font-size: clamp(52px, 8vw, 110px);
-  line-height: 1;
+  font-size: clamp(40px, 7vw, 90px);
+  line-height: 1.05;
   letter-spacing: .02em;
-  margin: 18px 0 24px;
+  margin: 14px 0 18px;
 }
 .cpage__lead {
   color: var(--grey);
   font-weight: 300;
-  font-size: clamp(14px, 1.4vw, 17px);
-  line-height: 1.75;
-  max-width: 38ch;
-  margin-bottom: 48px;
-}
-.cpage__reach {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-.cpage__link {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  border-left: 2px solid var(--line);
-  padding-left: 16px;
-  font-size: 13px;
-  transition: border-color .25s, color .25s;
-}
-.cpage__link:hover { border-color: var(--green); color: var(--green); }
-.cpage__link-lbl {
-  font-family: var(--mono);
-  font-size: 9px;
-  letter-spacing: 2px;
-  color: var(--green);
+  font-size: clamp(14px, 1.5vw, 17px);
+  line-height: 1.7;
 }
 
 /* ---- form wrapper ---- */
@@ -133,7 +107,6 @@
   gap: 16px;
 }
 
-/* error / success */
 .cform__error {
   font-family: var(--mono);
   font-size: 11px;
@@ -142,43 +115,34 @@
   padding: 12px 14px;
   letter-spacing: .5px;
 }
-.cform__actions {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-.cform__submit { flex: 1; min-width: 160px; }
 
-/* success state */
-.cform__success {
-  padding: clamp(32px, 5vw, 60px) clamp(20px, 3vw, 36px);
-  text-align: center;
+.cform__submit { width: 100%; }
+
+/* ---- contact links below form ---- */
+.cpage__reach {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  padding-top: 8px;
+  border-top: 1px solid var(--line);
+}
+.cpage__link {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 16px;
+  gap: 4px;
+  font-size: 13px;
+  transition: color .25s;
 }
-.cform__ok {
-  font-family: var(--px);
-  font-size: 36px;
+.cpage__link:hover { color: var(--green); }
+.cpage__link-lbl {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 2px;
   color: var(--green);
-  animation: blink 1s steps(1) infinite;
-}
-.cform__success h2 {
-  font-family: var(--px);
-  font-size: clamp(22px, 3vw, 36px);
-  letter-spacing: .04em;
-}
-.cform__success p {
-  color: var(--grey);
-  font-weight: 300;
-  max-width: 34ch;
-  line-height: 1.7;
 }
 
 /* ---- mobile ---- */
-@media (max-width: 860px) {
-  .cpage__inner { grid-template-columns: 1fr; }
-  .cpage__left  { position: static; }
-  .cform__row   { grid-template-columns: 1fr; }
+@media (max-width: 600px) {
+  .cform__row { grid-template-columns: 1fr; }
+  .cpage__reach { flex-direction: column; gap: 16px; }
 }

@@ -11,8 +11,6 @@
   const form        = document.getElementById('cform');
   const btn         = document.getElementById('cformBtn');
   const errorBox    = document.getElementById('cformError');
-  const successBox  = document.getElementById('cformSuccess');
-  const resetBtn    = document.getElementById('cformReset');
   const cfService   = document.getElementById('cfService');
   const cfOtherSvc  = document.getElementById('cfOtherServiceWrap');
   const cfOtherSvcIn= document.getElementById('cfOtherService');
@@ -20,41 +18,26 @@
   const cfOtherCtr  = document.getElementById('cfOtherCountryWrap');
   const cfOtherCtrIn= document.getElementById('cfOtherCountry');
 
-  /* show/hide "Other" service field */
   cfService.addEventListener('change', () => {
     const isOther = cfService.value === 'other';
-    cfOtherSvc.hidden = !isOther;
+    cfOtherSvc.style.display = isOther ? 'flex' : 'none';
     cfOtherSvcIn.required = isOther;
   });
 
-  /* show/hide "Other" country field */
   cfCountry.addEventListener('change', () => {
     const isOther = cfCountry.value === 'other';
-    cfOtherCtr.hidden = !isOther;
+    cfOtherCtr.style.display = isOther ? 'flex' : 'none';
     cfOtherCtrIn.required = isOther;
-  });
-
-  /* reset to blank form */
-  resetBtn.addEventListener('click', () => {
-    form.reset();
-    cfOtherSvc.hidden = true;
-    cfOtherCtr.hidden = true;
-    cfOtherSvcIn.required = false;
-    cfOtherCtrIn.required = false;
-    successBox.hidden = true;
-    form.hidden = false;
-    errorBox.hidden = true;
   });
 
   form.addEventListener('submit', async e => {
     e.preventDefault();
-    errorBox.hidden = true;
+    errorBox.style.display = 'none';
 
     if (!form.checkValidity()) { form.reportValidity(); return; }
 
     const fd = new FormData(form);
 
-    /* resolve "Other" values */
     const service = cfService.value === 'other'
       ? `Other: ${fd.get('service_other') || ''}`.trim()
       : cfService.value;
@@ -64,14 +47,14 @@
       : cfCountry.value;
 
     const payload = {
-      from_name:      fd.get('from_name'),
-      whatsapp_number:fd.get('whatsapp_number'),
+      from_name:       fd.get('from_name'),
+      whatsapp_number: fd.get('whatsapp_number'),
       country,
-      company_name:   fd.get('company_name'),
+      company_name:    fd.get('company_name'),
       service,
-      budget:         fd.get('budget') || 'Not specified',
-      industry:       fd.get('industry') || 'Not specified',
-      message:        fd.get('message') || 'Not specified',
+      budget:          fd.get('budget') || 'Not specified',
+      industry:        fd.get('industry') || 'Not specified',
+      message:         fd.get('message') || 'Not specified',
     };
 
     btn.textContent = 'SENDING…';
@@ -80,12 +63,10 @@
     try {
       const res = await emailjs.send(SERVICE_ID, TEMPLATE_ID, payload);
       if (res.status !== 200) throw new Error('send failed');
-      form.hidden = true;
-      successBox.hidden = false;
+      window.location.href = 'contact-success.html';
     } catch (err) {
       errorBox.textContent = '▮ Something went wrong — please try again or reach us on WhatsApp.';
-      errorBox.hidden = false;
-    } finally {
+      errorBox.style.display = 'block';
       btn.textContent = 'SEND BRIEF →';
       btn.disabled = false;
     }

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brief Received — BLD Labs</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="assets/img/logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+  .success-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: clamp(40px, 8vw, 80px) clamp(20px, 5vw, 60px);
+  }
+  .success-page__icon {
+    font-family: var(--px);
+    font-size: clamp(40px, 8vw, 72px);
+    color: var(--green);
+    display: block;
+    margin-bottom: 32px;
+    animation: blink 1s steps(1) infinite;
+  }
+  .success-page__title {
+    font-family: var(--px);
+    font-size: clamp(32px, 6vw, 72px);
+    line-height: 1.05;
+    letter-spacing: .02em;
+    margin-bottom: 20px;
+  }
+  .success-page__sub {
+    color: var(--grey);
+    font-weight: 300;
+    font-size: clamp(14px, 1.5vw, 18px);
+    line-height: 1.7;
+    max-width: 40ch;
+    margin: 0 auto 40px;
+  }
+  .success-page__actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+</style>
+</head>
+<body class="subpage">
+<div class="scanlines" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+<div class="cursor" id="cursor" aria-hidden="true"><span class="cursor__box"></span><span class="cursor__label" id="cursorLabel"></span></div>
+
+<header class="nav is-scrolled">
+  <a href="index.html" class="nav__logo" data-hover><img src="assets/img/logo.svg" alt="BLD Labs"></a>
+  <nav class="nav__links">
+    <a href="index.html#work" data-hover>WORK</a>
+    <a href="learning.html" data-hover>LEARNING</a>
+    <a href="blogs.html" data-hover>BLOGS</a>
+  </nav>
+  <a href="index.html" class="btn btn--solid nav__cta" data-hover data-magnetic>← HOME</a>
+</header>
+
+<main class="success-page">
+  <span class="success-page__icon">▮▮▮</span>
+  <h1 class="success-page__title">BRIEF<br><span class="rm__accent">RECEIVED<i class="dot"></i></span></h1>
+  <p class="success-page__sub">We'll review your project and get back to you in less than 8 hours.</p>
+  <div class="success-page__actions">
+    <a href="index.html" class="btn btn--solid" data-hover data-magnetic>← BACK TO HOME</a>
+    <a href="index.html#work" class="btn btn--ghost" data-hover data-magnetic>SEE OUR WORK</a>
+  </div>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+<script src="js/pages.js"></script>
+</body>
+</html>
