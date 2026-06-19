@@ -62,14 +62,15 @@
   padding: clamp(20px, 3vw, 36px);
 }
 .cform label {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+  display: block;
   font-family: var(--mono);
   font-size: 10px;
   letter-spacing: 1.5px;
   color: var(--grey);
 }
+.cform label input,
+.cform label select,
+.cform label textarea { display: block; margin-top: 8px; }
 .cform label em { color: var(--green); font-style: normal; }
 .cform input,
 .cform select,
