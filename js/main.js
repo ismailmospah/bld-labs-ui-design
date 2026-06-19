@@ -184,7 +184,7 @@ function runBoot() {
 function exitPreloader() {
   const tl = gsap.timeline();
   tl.to('#preloader', {
-    yPercent: -100, duration: 0.7, ease: 'power4.inOut', delay: 0.25,
+    yPercent: -100, duration: 0.5, ease: 'power4.inOut', delay: 0.1,
     onComplete: () => document.getElementById('preloader').remove()
   });
   heroIntro(tl);
@@ -193,14 +193,14 @@ function exitPreloader() {
 /* ---------------- hero intro (slam, no fades) ---------------- */
 function heroIntro(tl) {
   tl.to('.hero__title .word', {
-    y: 0, duration: 0.55, ease: 'back.out(1.4)', stagger: 0.09
-  }, '-=0.15')
+    y: 0, duration: 0.4, ease: 'back.out(1.4)', stagger: 0.06
+  }, '-=0.25')
   .from('.hero__title .mark', {
-    scaleX: 0, transformOrigin: 'left', duration: 0.4, ease: 'power2.out', stagger: 0.12
-  }, '-=0.15')
+    scaleX: 0, transformOrigin: 'left', duration: 0.3, ease: 'power3.out', stagger: 0.08
+  }, '-=0.25')
   .to('.hero__inner .reveal', {
-    opacity: 1, y: 0, duration: 0.5, ease: 'power3.out', stagger: 0.12
-  }, '-=0.3');
+    opacity: 1, y: 0, duration: 0.45, ease: 'power3.out', stagger: 0.1
+  }, '-=0.2');
   typeLine('> BLD.LABS — PRODUCT & DESIGN STUDIO_');
 }
 
