@@ -1,0 +1,184 @@
+/* ================================================================
+   BLD LABS — contact page styles
+================================================================ */
+
+/* ---- layout ---- */
+.cpage {
+  min-height: 100vh;
+  padding: clamp(100px, 12vw, 160px) clamp(20px, 5vw, 80px) clamp(60px, 8vw, 100px);
+}
+.cpage__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: clamp(40px, 6vw, 100px);
+  align-items: start;
+}
+
+/* ---- left column ---- */
+.cpage__title {
+  font-family: var(--px);
+  font-size: clamp(52px, 8vw, 110px);
+  line-height: 1;
+  letter-spacing: .02em;
+  margin: 18px 0 24px;
+}
+.cpage__lead {
+  color: var(--grey);
+  font-weight: 300;
+  font-size: clamp(14px, 1.4vw, 17px);
+  line-height: 1.75;
+  max-width: 38ch;
+  margin-bottom: 48px;
+}
+.cpage__reach {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.cpage__link {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border-left: 2px solid var(--line);
+  padding-left: 16px;
+  font-size: 13px;
+  transition: border-color .25s, color .25s;
+}
+.cpage__link:hover { border-color: var(--green); color: var(--green); }
+.cpage__link-lbl {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--green);
+}
+
+/* ---- form wrapper ---- */
+.cform__wrap {
+  border: 1px solid var(--line);
+  background: var(--ink);
+  overflow: hidden;
+}
+.cform__bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--grey);
+}
+.cform__bar i {
+  display: inline-block;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--line);
+}
+.cform__bar i:first-child  { background: #ff5f57; }
+.cform__bar i:nth-child(2) { background: #febc2e; }
+.cform__bar i:nth-child(3) { background: #28c840; }
+
+/* ---- form body ---- */
+.cform {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: clamp(20px, 3vw, 36px);
+}
+.cform label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  color: var(--grey);
+}
+.cform label em { color: var(--green); font-style: normal; }
+.cform input,
+.cform select,
+.cform textarea {
+  background: rgba(255,255,255,.03);
+  border: 1px solid var(--line);
+  color: var(--white);
+  font-family: var(--sans);
+  font-size: 14px;
+  padding: 12px 14px;
+  outline: none;
+  transition: border-color .2s;
+  resize: none;
+  appearance: none;
+  border-radius: 0;
+  width: 100%;
+}
+.cform input::placeholder,
+.cform textarea::placeholder { color: rgba(244,244,240,.25); }
+.cform input:focus,
+.cform select:focus,
+.cform textarea:focus { border-color: var(--green); }
+.cform select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%238a8a85' d='M0 0l6 8 6-8z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 38px;
+  cursor: pointer;
+}
+.cform select option { background: #0d0d0d; }
+
+.cform__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* error / success */
+.cform__error {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: #ff6b6b;
+  border: 1px solid rgba(255,107,107,.3);
+  padding: 12px 14px;
+  letter-spacing: .5px;
+}
+.cform__actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.cform__submit { flex: 1; min-width: 160px; }
+
+/* success state */
+.cform__success {
+  padding: clamp(32px, 5vw, 60px) clamp(20px, 3vw, 36px);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+.cform__ok {
+  font-family: var(--px);
+  font-size: 36px;
+  color: var(--green);
+  animation: blink 1s steps(1) infinite;
+}
+.cform__success h2 {
+  font-family: var(--px);
+  font-size: clamp(22px, 3vw, 36px);
+  letter-spacing: .04em;
+}
+.cform__success p {
+  color: var(--grey);
+  font-weight: 300;
+  max-width: 34ch;
+  line-height: 1.7;
+}
+
+/* ---- mobile ---- */
+@media (max-width: 860px) {
+  .cpage__inner { grid-template-columns: 1fr; }
+  .cpage__left  { position: static; }
+  .cform__row   { grid-template-columns: 1fr; }
+}
