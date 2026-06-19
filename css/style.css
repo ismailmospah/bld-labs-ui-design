@@ -537,6 +537,7 @@ section{position:relative;padding:clamp(90px,14vh,160px) clamp(20px,5vw,72px)}
   font-family:var(--sans);font-weight:900;letter-spacing:-0.02em;line-height:.98;
   font-size:clamp(44px,8vw,104px);margin:14px 0 22px;
 }
+.rm__title{font-family:var(--px);font-weight:400;letter-spacing:2px}
 .rm__accent{font-family:var(--px);font-weight:400;color:var(--green);font-size:.82em;letter-spacing:2px}
 .rm__lead{max-width:60ch;color:var(--grey);font-weight:300;line-height:1.7;font-size:clamp(15px,1.6vw,18px)}
 .rm__lead a{color:var(--green);border-bottom:1px solid transparent;transition:border-color .25s}
