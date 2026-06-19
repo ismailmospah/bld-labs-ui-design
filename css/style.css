@@ -259,6 +259,49 @@ section{position:relative;padding:clamp(90px,14vh,160px) clamp(20px,5vw,72px)}
 .stat strong::after{content:'+';color:var(--lime)}
 .stat span{font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--grey)}
 
+/* ============ about ============ */
+.about{max-width:1300px}
+.about__body{
+  display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,80px);
+  align-items:start;
+}
+.about__lead{
+  font-family:var(--sans);font-size:clamp(18px,2vw,24px);font-weight:700;
+  line-height:1.5;letter-spacing:-0.01em;margin-bottom:20px;
+}
+.about__para{
+  color:var(--grey);font-size:clamp(14px,1.4vw,16px);line-height:1.8;
+  font-weight:300;margin-bottom:36px;
+}
+.about__chips{display:flex;flex-wrap:wrap;gap:10px}
+.about__chips span{
+  font-family:var(--mono);font-size:10px;letter-spacing:2px;
+  color:var(--green);border:1px solid rgba(82,186,95,.4);padding:6px 14px;
+}
+.about__card{border:1px solid var(--line);background:var(--ink);display:flex;flex-direction:column}
+.about__card-bar{
+  display:flex;align-items:center;gap:8px;padding:10px 16px;
+  border-bottom:1px solid var(--line);background:rgba(255,255,255,.02);
+}
+.about__card-bar i{width:10px;height:10px;border-radius:50%;display:inline-block}
+.about__card-bar i:nth-child(1){background:#ff5f57}
+.about__card-bar i:nth-child(2){background:#ffbd2e}
+.about__card-bar i:nth-child(3){background:#28c840}
+.about__card-bar span{font-family:var(--mono);font-size:11px;color:var(--grey);margin-left:8px}
+.about__card-body{padding:clamp(28px,4vw,44px);display:flex;flex-direction:column;gap:30px}
+.about__logo{height:52px;width:auto}
+.about__meta{display:flex;flex-direction:column;border:1px solid var(--line)}
+.about__meta-row{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:11px 14px;border-bottom:1px solid var(--line);
+  font-family:var(--mono);font-size:11px;letter-spacing:1px;
+}
+.about__meta-row:last-child{border-bottom:none}
+.about__meta-row span{color:var(--grey)}
+.about__meta-row b{color:var(--white);font-weight:700}
+.about__status{color:var(--green)!important}
+@media(max-width:900px){.about__body{grid-template-columns:1fr}}
+
 /* ============ services : module console ============ */
 .services{position:relative}
 .console{
