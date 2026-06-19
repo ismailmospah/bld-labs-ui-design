@@ -418,6 +418,16 @@ document.querySelectorAll('.section__title').forEach(el => {
   });
 });
 
+/* ---------------- about : staggered columns ---------------- */
+(function aboutReveal() {
+  const cols = document.querySelectorAll('.about__text, .about__visual');
+  if (!cols.length) return;
+  gsap.from(cols, {
+    opacity: 0, y: 40, duration: 0.8, ease: 'power3.out', stagger: 0.15,
+    scrollTrigger: { trigger: '.about__body', start: 'top 82%', once: true }
+  });
+})();
+
 /* ---------------- counters ---------------- */
 document.querySelectorAll('[data-count]').forEach(el => {
   const target = +el.dataset.count;
