@@ -277,6 +277,7 @@ section{position:relative;padding:clamp(90px,14vh,160px) clamp(20px,5vw,72px)}
 .about__chips span{
   font-family:var(--mono);font-size:10px;letter-spacing:2px;
   color:var(--green);border:1px solid rgba(82,186,95,.4);padding:6px 14px;
+  white-space:nowrap;
 }
 .about__card{border:1px solid var(--line);background:var(--ink);display:flex;flex-direction:column}
 .about__card-bar{
