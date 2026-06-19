@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=3">
+<link rel="stylesheet" href="css/style.css?v=5">
 </head>
 <body class="subpage">
 <div class="scanlines" aria-hidden="true"></div>
@@ -369,5 +369,21 @@ Example: &quot;Students attending lectures via the Zoom app are struggling to st
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
 <script src="js/pages.js"></script>
+<script>
+// wrap resources in materials container with label
+document.querySelectorAll('.rmw__res-wrap').forEach(function(wrap) {
+  var resources = Array.from(wrap.querySelectorAll('.rmw__res'));
+  if (!resources.length) return;
+  var mat = document.createElement('div');
+  mat.className = 'rmw__materials';
+  var lbl = document.createElement('span');
+  lbl.className = 'rmw__materials-lbl';
+  lbl.textContent = '⊞ STUDY MATERIALS';
+  mat.appendChild(lbl);
+  resources.forEach(function(r) { mat.appendChild(r); });
+  var det = wrap.querySelector('.rmw__det');
+  if (det) det.after(mat); else wrap.prepend(mat);
+});
+</script>
 </body>
 </html>
