@@ -218,6 +218,11 @@ section{position:relative;padding:clamp(90px,14vh,160px) clamp(20px,5vw,72px)}
   color:var(--grey);line-height:1.65;max-width:560px;
 }
 .hero__cta{margin-top:40px;display:flex;gap:18px;flex-wrap:wrap}
+@media(max-width:600px){
+  .hero__cta{flex-direction:column}
+  .hero__cta .btn{width:100%;justify-content:center;text-align:center}
+  .hero__title .word--mark{display:block}
+}
 .hero__foot{
   position:absolute;bottom:26px;left:0;right:0;z-index:2;
   display:flex;justify-content:space-between;align-items:center;
