@@ -750,6 +750,50 @@ section{position:relative;padding:clamp(90px,14vh,160px) clamp(20px,5vw,72px)}
 .svc__card h2{font-family:var(--sans);font-weight:800;font-size:clamp(24px,3vw,36px);letter-spacing:-0.01em}
 .svc__card p{color:var(--grey);font-weight:300;line-height:1.6;font-size:15px}
 
+/* ================================================================
+   BLOG — index cards + Arabic (RTL) article pages
+================================================================ */
+.post,.blog__grid,.blog__lead-ar{--ar:'IBM Plex Sans Arabic',system-ui,-apple-system,sans-serif}
+.blog__lead-ar{font-family:var(--ar);color:var(--grey);font-weight:300;line-height:1.9;font-size:clamp(15px,1.6vw,18px);max-width:60ch;margin-top:14px}
+.blog__grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
+.blog__grid--index{margin-top:clamp(40px,6vh,70px)}
+.blog__card{font-family:var(--ar);border:1px solid var(--line);background:var(--ink);padding:clamp(22px,2.6vw,32px);display:flex;flex-direction:column;gap:14px;transition:border-color .3s,transform .4s}
+.blog__card:hover{border-color:var(--green);transform:translateY(-6px)}
+.blog__card h2{font-family:var(--ar);font-weight:700;font-size:clamp(19px,2vw,23px);line-height:1.5}
+.blog__card p{color:var(--grey);font-weight:300;line-height:1.8;font-size:15px}
+.blog__tag{font-family:var(--ar);font-size:12px;font-weight:500;color:var(--green);border:1px solid rgba(82,186,95,.4);padding:4px 12px;align-self:flex-start}
+.blog__meta{margin-top:auto;color:var(--grey);font-size:13px}
+
+.post{font-family:var(--ar)}
+.subpage main.post{max-width:880px}
+.post__head{display:flex;flex-direction:column;gap:18px;margin-bottom:clamp(36px,5vh,56px)}
+.post__title{font-family:var(--ar);font-weight:700;font-size:clamp(30px,4.6vw,52px);line-height:1.35;letter-spacing:0}
+.post__meta{display:flex;flex-wrap:wrap;gap:8px 18px;color:var(--grey);font-size:14px}
+.post__meta span+span::before{content:'·';margin-left:18px;color:var(--green)}
+.post__body{font-size:clamp(17px,1.8vw,19px);line-height:2;color:#d6d6d1;font-weight:400}
+.post__body>*+*{margin-top:1.1em}
+.post__body h2{font-family:var(--ar);font-weight:700;font-size:clamp(22px,2.6vw,28px);line-height:1.5;color:var(--white);margin-top:1.9em}
+.post__body strong{color:var(--white);font-weight:700}
+.post__body a{color:var(--green);border-bottom:1px solid rgba(82,186,95,.4);transition:border-color .25s}
+.post__body a:hover{border-color:var(--green)}
+.post__body ul,.post__body ol{padding-right:1.4em}
+.post__body li{margin-top:.55em;padding-right:.3em}
+.post__body ul li::marker{color:var(--green)}
+.post__body ol li::marker{color:var(--green);font-family:var(--mono)}
+.post__table{overflow-x:auto;border:1px solid var(--line)}
+.post__table table{width:100%;border-collapse:collapse;font-size:15px;line-height:1.7;min-width:520px}
+.post__table th,.post__table td{padding:14px 16px;text-align:right;border-bottom:1px solid var(--line);vertical-align:top}
+.post__table thead th{color:var(--green);font-weight:700;background:rgba(82,186,95,.05)}
+.post__table tbody th{color:var(--white);font-weight:500}
+.post__table tbody tr:last-child>*{border-bottom:0}
+.post__cta{margin-top:clamp(56px,8vh,90px);border:1px solid var(--green);background:rgba(82,186,95,.04);padding:clamp(24px,3vw,40px);display:flex;flex-direction:column;gap:14px}
+.post__cta h2{font-family:var(--ar);font-weight:700;font-size:clamp(22px,2.6vw,30px)}
+.post__cta p{color:var(--grey);font-weight:300;line-height:1.9}
+.post__cta-btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:6px}
+.post .btn{font-family:var(--ar);letter-spacing:0;font-size:15px}
+.post .svc__crumbs{font-family:var(--ar);font-size:13px;letter-spacing:0}
+.post .svc__h{font-family:var(--ar);letter-spacing:0;font-size:14px}
+
 /* home: link under the services console */
 .services__all{margin-top:clamp(28px,4vw,44px)}
 
