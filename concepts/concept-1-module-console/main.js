@@ -43,9 +43,13 @@ function scramble(el, finalText, dur = 600) {
   }
   requestAnimationFrame(frame);
 }
+// mouse only — on iOS a tap fires mouseenter first, and changing the text
+// there makes Safari swallow the click (links needed a second tap)
 document.querySelectorAll('[data-scramble]').forEach(el => {
   const original = el.textContent;
-  el.addEventListener('mouseenter', () => scramble(el, original, 450));
+  el.addEventListener('pointerenter', e => {
+    if (e.pointerType === 'mouse') scramble(el, original, 450);
+  });
 });
 
 /* ---------------- custom cursor ---------------- */
