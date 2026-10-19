@@ -6,6 +6,8 @@ gsap.registerPlugin(ScrollTrigger);
 
 const isTouch = matchMedia('(hover:none)').matches;
 const reduced = matchMedia('(prefers-reduced-motion:reduce)').matches;
+// per-page copy overrides (the Arabic home page sets window.BLD_I18N before this script)
+const I18N = window.BLD_I18N || {};
 
 /* ---------------- interactive pixel field + cursor glow ---------------- */
 (function field() {
@@ -205,7 +207,7 @@ function heroIntro(tl) {
   .to('.hero__inner .reveal', {
     opacity: 1, y: 0, duration: 0.45, ease: 'power3.out', stagger: 0.1
   }, '-=0.2');
-  typeLine('> BLD.LABS — PRODUCT & DESIGN STUDIO_');
+  typeLine(I18N.typeLine || '> BLD.LABS — PRODUCT & DESIGN STUDIO_');
 }
 
 function typeLine(text) {
@@ -392,7 +394,7 @@ document.querySelectorAll('.marquee').forEach(mq => {
 (function statementReveal() {
   const el = document.getElementById('statementText');
   if (!el) return;
-  const hot = ['UNDERSTANDING', 'ASSUMPTIONS.', 'BEFORE'];
+  const hot = I18N.hot || ['UNDERSTANDING', 'ASSUMPTIONS.', 'BEFORE'];
   el.innerHTML = el.textContent.split(' ').map(w =>
     `<span class="w${hot.includes(w) ? ' hot' : ''}">${w}</span>`).join(' ');
   const words = el.querySelectorAll('.w');
@@ -449,7 +451,7 @@ document.querySelectorAll('[data-count]').forEach(el => {
 (function moduleConsole() {
   const list = document.getElementById('modList');
   if (!list) return;
-  const MODS = [
+  const MODS = I18N.mods || [
     {
       title: 'PRODUCT DESIGN',
       path: '/bld/services/product-design',
@@ -508,7 +510,7 @@ document.querySelectorAll('[data-count]').forEach(el => {
     scramble(pathEl, mod.path, 380);
     descEl.textContent = mod.desc;
     gsap.fromTo(descEl, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.35, ease: 'power2.out' });
-    idxEl.textContent = 'MODULE 0' + (i + 1) + ' / 0' + MODS.length;
+    idxEl.textContent = (I18N.module || 'MODULE') + ' 0' + (i + 1) + ' / 0' + MODS.length;
     renderMeters(mod);
   }
 
