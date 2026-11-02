@@ -109,7 +109,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=14">
+<link rel="stylesheet" href="css/style.css?v=15">
 <!-- Meta Pixel Code -->
 <script>
 !function(f,b,e,v,n,t,s)
@@ -310,15 +310,22 @@ src="https://www.facebook.com/tr?id=1684474276310732&ev=PageView&noscript=1"
     </div>
   </section>
 
-  <!-- ============ WORK : HORIZONTAL ============ -->
+  <!-- ============ WORK : SLIDER (buttons on desktop, swipe on touch) ============ -->
   <section class="work" id="work">
     <div class="work__pin">
       <div class="work__head">
         <p class="section__tag">// 04 — SELECTED WORK</p>
         <h2 class="section__title glitch" data-text="THE PROOF">THE PROOF</h2>
-        <span class="work__count"><b id="workIdx">01</b>/06</span>
+        <div class="work__ctrl">
+          <span class="work__count"><b id="workIdx">01</b>/06</span>
+          <div class="work__nav" dir="ltr">
+            <button type="button" class="work__btn" id="workPrev" aria-label="Previous project" aria-controls="workTrack" data-hover>&larr;</button>
+            <button type="button" class="work__btn" id="workNext" aria-label="Next project" aria-controls="workTrack" data-hover>&rarr;</button>
+          </div>
+        </div>
+        <span class="work__hint" aria-hidden="true">SWIPE FOR MORE &#8646;</span>
       </div>
-      <div class="work__track" id="workTrack">
+      <div class="work__track" id="workTrack" role="region" aria-label="Selected work" tabindex="0">
         <a class="card" href="https://www.behance.net/bld_labscompany" target="_blank" rel="noopener" data-hover data-label="VIEW CASE">
           <div class="card__img"><img src="assets/img/carmax.jpg" alt="CAR Max app design"></div>
           <div class="card__meta"><span class="card__num">01</span><h3>CAR MAX</h3><p>AUTOMOTIVE APP · UI/UX</p></div>
@@ -490,6 +497,6 @@ src="https://www.facebook.com/tr?id=1684474276310732&ev=PageView&noscript=1"
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
-<script src="js/main.js"></script>
+<script src="js/main.js?v=2"></script>
 </body>
 </html>

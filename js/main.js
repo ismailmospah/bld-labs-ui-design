@@ -533,30 +533,51 @@ document.querySelectorAll('[data-count]').forEach(el => {
   });
 })();
 
-/* ---------------- work : pinned horizontal scroll ---------------- */
-(function workScroll() {
+/* ---------------- work : slider ----------------
+   The track is a native scroller, so touch swipes and trackpads move it for
+   free. This only wires the desktop arrow buttons and keeps the 01/06
+   counter and the buttons' disabled state in step with where it is. */
+(function workSlider() {
   const track = document.getElementById('workTrack');
+  if (!track) return;
   const idxEl = document.getElementById('workIdx');
+  const prev = document.getElementById('workPrev');
+  const next = document.getElementById('workNext');
   const cards = track.children.length;
-  function dist() { return track.scrollWidth - document.querySelector('.work__pin').clientWidth + 80; }
-  gsap.to(track, {
-    x: () => -dist(),
-    ease: 'none',
-    scrollTrigger: {
-      trigger: '.work',
-      start: 'top top',
-      end: () => '+=' + dist(),
-      pin: true,
-      scrub: 0.6,
-      invalidateOnRefresh: true,
-      onUpdate: self => {
-        const i = Math.min(cards, Math.max(1, Math.round(self.progress * (cards - 1)) + 1));
-        idxEl.textContent = String(i).padStart(2, '0');
-      }
-    }
-  });
+  const step = () => track.children[0].getBoundingClientRect().width +
+    parseFloat(getComputedStyle(track).columnGap || 0);
+  const max = () => track.scrollWidth - track.clientWidth;
+
+  function update() {
+    const x = track.scrollLeft, end = max();
+    if (prev) prev.disabled = x <= 2;
+    if (next) next.disabled = x >= end - 2;
+    // at the far end the last card is fully in view, so count it as current
+    const i = x >= end - 2 ? cards : Math.min(cards, Math.round(x / step()) + 1);
+    if (idxEl) idxEl.textContent = String(i).padStart(2, '0');
+  }
+  const go = dir => track.scrollBy({ left: dir * step(), behavior: reduced ? 'auto' : 'smooth' });
+  if (prev) prev.addEventListener('click', () => go(-1));
+  if (next) next.addEventListener('click', () => go(1));
+
+  let ticking = false;
+  track.addEventListener('scroll', () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => { update(); ticking = false; });
+  }, { passive: true });
+  addEventListener('resize', update);
+
+  // Lenis takes over wheel events for the page. Let mostly-sideways trackpad
+  // gestures stay with the track so they slide the projects instead.
+  track.addEventListener('wheel', e => {
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) e.stopPropagation();
+  }, { passive: true });
+
+  update();
+
   // card entrance
-  gsap.from('.card', {
+  if (!reduced) gsap.from('.card', {
     y: 90, opacity: 0, stagger: 0.08, duration: 0.6, ease: 'power3.out',
     scrollTrigger: { trigger: '.work', start: 'top 70%' }
   });

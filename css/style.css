@@ -379,20 +379,42 @@ section{position:relative;padding:clamp(90px,14vh,160px) clamp(20px,5vw,72px)}
   .console__body p{min-height:7em}
 }
 
-/* ============ work : horizontal ============ */
+/* ============ work : slider ============
+   A native horizontal scroller: the page scrolls normally past it, desktop
+   moves it with the arrow buttons (or a trackpad), touch screens swipe it.
+   It used to be pinned and driven by page scroll, which hijacked scrolling. */
 .work{padding:0}
-.work__pin{
-  height:100svh;display:flex;flex-direction:column;justify-content:center;
-  overflow:hidden;padding:90px clamp(20px,5vw,72px) 30px;
-}
-.work__head{display:flex;align-items:flex-end;gap:30px;flex-wrap:wrap;margin-bottom:34px}
+.work__pin{padding:clamp(90px,14vh,160px) clamp(20px,5vw,72px) 0;--gutter:clamp(20px,5vw,72px)}
+.work__head{display:flex;align-items:flex-end;gap:18px 30px;flex-wrap:wrap;margin-bottom:34px}
 .work__head .section__title{margin-bottom:0}
-.work__count{
-  margin-left:auto;font-family:var(--mono);font-size:14px;color:var(--grey);letter-spacing:2px;
-}
+.work__ctrl{margin-inline-start:auto;display:flex;align-items:center;gap:22px}
+.work__count{font-family:var(--mono);font-size:14px;color:var(--grey);letter-spacing:2px}
 .work__count b{color:var(--green);font-size:22px}
-.work__track{display:flex;gap:clamp(20px,3vw,44px);will-change:transform}
-.card{flex:0 0 clamp(280px,30vw,430px)}
+.work__nav{display:flex;gap:10px}
+.work__btn{
+  width:52px;height:52px;display:grid;place-items:center;background:transparent;color:var(--white);
+  border:1px solid var(--line);font-family:var(--mono);font-size:20px;cursor:pointer;
+  transition:border-color .25s,color .25s,background .25s,opacity .25s;
+}
+.work__btn:hover:not(:disabled){border-color:var(--green);color:var(--black);background:var(--green)}
+.work__btn:focus-visible{outline:2px solid var(--green);outline-offset:3px}
+.work__btn:disabled{opacity:.3;cursor:default}
+.work__hint{display:none;font-family:var(--mono);font-size:11px;letter-spacing:2px;color:var(--grey)}
+.work__track{
+  display:flex;gap:clamp(20px,3vw,44px);overflow-x:auto;overscroll-behavior-x:contain;
+  scroll-snap-type:x mandatory;scroll-padding-inline:var(--gutter);
+  margin-inline:calc(var(--gutter) * -1);padding:0 var(--gutter) 6px;
+  scrollbar-width:none;-webkit-overflow-scrolling:touch;
+}
+.work__track::-webkit-scrollbar{display:none}
+.work__track:focus-visible{outline:2px solid var(--green);outline-offset:4px}
+.card{flex:0 0 clamp(280px,30vw,430px);scroll-snap-align:start}
+/* touch screens: no buttons, the finger is the control; show the next card peeking */
+@media (hover:none){
+  .work__nav{display:none}
+  .work__hint{display:block;width:100%}
+  .card{flex-basis:min(78vw,430px)}
+}
 .card__img{
   height:clamp(320px,52vh,520px);overflow:hidden;border:1px solid var(--line);
   position:relative;background:var(--ink);
