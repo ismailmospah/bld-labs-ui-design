@@ -28,7 +28,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/style.css?v=14">
+<link rel="stylesheet" href="/css/style.css?v=15">
 <!-- Meta Pixel Code -->
 <script>
 !function(f,b,e,v,n,t,s)
@@ -228,15 +228,22 @@ src="https://www.facebook.com/tr?id=1684474276310732&ev=PageView&noscript=1"
     </div>
   </section>
 
-  <!-- ============ WORK : HORIZONTAL ============ -->
+  <!-- ============ WORK : SLIDER (buttons on desktop, swipe on touch) ============ -->
   <section class="work" id="work">
     <div class="work__pin">
       <div class="work__head">
         <p class="section__tag">// 04 — أعمال مختارة</p>
         <h2 class="section__title glitch" data-text="أعمالنا تتحدث">أعمالنا تتحدث</h2>
-        <span class="work__count ltr"><b id="workIdx">01</b>/06</span>
+        <div class="work__ctrl">
+          <span class="work__count ltr"><b id="workIdx">01</b>/06</span>
+          <div class="work__nav" dir="ltr">
+            <button type="button" class="work__btn" id="workPrev" aria-label="المشروع السابق" aria-controls="workTrack" data-hover>&larr;</button>
+            <button type="button" class="work__btn" id="workNext" aria-label="المشروع التالي" aria-controls="workTrack" data-hover>&rarr;</button>
+          </div>
+        </div>
+        <span class="work__hint" aria-hidden="true">اسحب لتشاهد المزيد &#8646;</span>
       </div>
-      <div class="work__track" id="workTrack" dir="ltr">
+      <div class="work__track" id="workTrack" dir="ltr" role="region" aria-label="أعمال مختارة" tabindex="0">
         <a class="card" href="https://www.behance.net/bld_labscompany" target="_blank" rel="noopener" data-hover data-label="شاهد">
           <div class="card__img"><img src="/assets/img/carmax.jpg" alt="CAR Max app design"></div>
           <div class="card__meta" dir="rtl"><span class="card__num">01</span><h3>CAR MAX</h3><p>تطبيق سيارات · UI/UX</p></div>
@@ -364,6 +371,6 @@ src="https://www.facebook.com/tr?id=1684474276310732&ev=PageView&noscript=1"
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
 <script>window.BLD_I18N = {"typeLine": "> BLD.LABS — استوديو منتجات وتصميم_", "hot": ["عميق", "افتراضات.", "قبل"], "module": "وحدة", "mods": [{"title": "تصميم المنتج", "path": "/bld/services/product-design", "desc": "تصميم منتجات رقمية متكاملة توازن بين أهداف البزنس واحتياجات المستخدم والقيود التقنية.", "meters": [["الاستراتيجية", 9], ["التركيز على المستخدم", 10], ["قابلية التوسع", 8]]}, {"title": "بحث تجربة المستخدم", "path": "/bld/services/ux-research", "desc": "اكتشاف مشاكل المستخدمين الحقيقية من خلال البحث والاختبار والرؤى التي توجّه قرارات المنتج بثقة.", "meters": [["المقابلات", 9], ["اختبارات الاستخدام", 9], ["الرؤى", 10]]}, {"title": "تصميم الواجهات", "path": "/bld/services/ui-design", "desc": "واجهات نظيفة ومتسقة وسهلة الوصول، تبدو احترافية ومدروسة في كل تفصيلة.", "meters": [["الاتساق", 10], ["سهولة الوصول", 9], ["الإتقان", 10]]}, {"title": "التطوير", "path": "/bld/services/development", "desc": "تطوير ويب وموبايل متكامل — واجهات أمامية وخلفية وتطبيقات Flutter.", "meters": [["الواجهة الأمامية", 9], ["الخلفية", 9], ["FLUTTER", 10]]}]};</script>
-<script src="/js/main.js"></script>
+<script src="/js/main.js?v=2"></script>
 </body>
 </html>
