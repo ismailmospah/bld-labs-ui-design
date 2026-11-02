@@ -869,3 +869,21 @@ html:not(.ar) .nav__lang{font-family:'IBM Plex Sans Arabic',sans-serif;font-size
 .prodstrip__item b{font-family:var(--sans);font-weight:800;font-size:clamp(17px,1.8vw,20px)}
 .prodstrip__item em{font-style:normal;font-family:var(--mono);font-size:10px;letter-spacing:1px;color:var(--grey);line-height:1.5}
 @media (max-width:860px){.prodstrip__grid{grid-template-columns:1fr}}
+
+/* product detail pages (/products/<name>) */
+.prodd__hero{display:grid;grid-template-columns:minmax(0,340px) 1fr;gap:clamp(24px,4vw,56px);align-items:start}
+.prodd__shot{border:1px solid var(--line);background:#000;aspect-ratio:4/5;overflow:hidden}
+.prodd__shot img{width:100%;height:100%;object-fit:cover}
+.prodd__intro .rm__lead{max-width:62ch}
+.prodd__facts{display:flex;flex-wrap:wrap;gap:1px;background:var(--line);border:1px solid var(--line);margin-top:28px}
+.prodd__facts div{flex:1 1 150px;background:var(--black);padding:14px 16px;display:flex;flex-direction:column;gap:6px}
+.prodd__facts dt{font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--grey)}
+.prodd__facts dd{font-family:var(--mono);font-size:12px;letter-spacing:1px;color:var(--green)}
+@media (max-width:760px){
+  .prodd__hero{grid-template-columns:1fr}
+  .prodd__shot{max-width:340px}
+}
+/* products list: the card's image and name open the detail page */
+.prod .path__img a,.prod .path__img a img{display:block;width:100%;height:100%}
+.prod h2 a{transition:color .25s}
+.prod h2 a:hover{color:var(--green)}
