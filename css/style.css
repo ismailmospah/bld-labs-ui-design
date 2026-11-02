@@ -891,3 +891,5 @@ html:not(.ar) .nav__lang{font-family:'IBM Plex Sans Arabic',sans-serif;font-size
 .prod__open::after{content:'';position:absolute;inset:0;z-index:1}
 .prod:hover .prod__open{color:var(--green)}
 .prod__links a{position:relative;z-index:2}
+/* a product's headline number (e.g. downloads), shown under its name */
+.prod__stat{font-family:var(--mono);font-size:12px;letter-spacing:1px;color:var(--lime)}
