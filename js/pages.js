@@ -20,6 +20,60 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 });
 
+/* ---------------- mobile menu ----------------
+   Inner pages only carry the desktop nav links, which are hidden at
+   ≤900px. There a burger beside the language switch opens a full-screen
+   menu built from those same links, so every page reaches every section.
+   contact.html already ships the burger + menu markup, so reuse it. */
+(function mobileMenu() {
+  const nav = document.getElementById('nav');
+  const links = nav && nav.querySelector('.nav__links');
+  if (!links) return;
+  const ar = document.documentElement.lang === 'ar';
+  let burger = document.getElementById('burger');
+  let menu = document.getElementById('menu');
+  if (!burger) {
+    burger = document.createElement('button');
+    burger.type = 'button';
+    burger.className = 'nav__burger';
+    burger.id = 'burger';
+    burger.innerHTML = '<span></span><span></span>';
+    nav.appendChild(burger);
+  }
+  if (!menu) {
+    menu = document.createElement('nav');
+    menu.className = 'menu';
+    menu.id = 'menu';
+    links.querySelectorAll('a').forEach(a => {
+      const item = document.createElement('a');
+      item.href = a.getAttribute('href');
+      item.textContent = a.textContent;
+      menu.appendChild(item);
+    });
+    nav.after(menu);
+  }
+  menu.setAttribute('aria-label', ar ? 'القائمة' : 'Menu');
+  menu.setAttribute('data-lenis-prevent', ''); // Lenis blocks scrolling while stopped, except here
+  burger.setAttribute('aria-controls', 'menu');
+  const isOpen = () => menu.classList.contains('is-open');
+  function set(open, init) {
+    menu.classList.toggle('is-open', open);
+    burger.classList.toggle('is-open', open);
+    burger.setAttribute('aria-expanded', String(open));
+    burger.setAttribute('aria-label', open ? (ar ? 'إغلاق القائمة' : 'Close menu') : (ar ? 'فتح القائمة' : 'Open menu'));
+    menu.inert = !open; // keep the off-screen links out of the tab order
+    if (init) return; // first paint: don't touch scrolling
+    if (open) lenis.stop(); else lenis.start();
+  }
+  set(false, true);
+  burger.addEventListener('click', () => set(!isOpen()));
+  menu.addEventListener('click', e => { if (e.target.closest('a')) set(false); });
+  addEventListener('keydown', e => {
+    if (e.key === 'Escape' && isOpen()) { set(false); burger.focus(); }
+  });
+  matchMedia('(min-width:901px)').addEventListener('change', e => { if (e.matches) set(false); });
+})();
+
 /* ---------------- interactive pixel field + glow ---------------- */
 (function field() {
   if (reduced || document.body.classList.contains('no-cursor')) return;
