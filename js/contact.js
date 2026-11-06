@@ -11,7 +11,7 @@
     sending: 'SENDING…',
     send: 'SEND BRIEF →',
     error: '▮ Something went wrong — please try again or reach us on WhatsApp.',
-    success: 'contact-success.html',
+    success: '/contact-success',
   }, window.BLD_I18N || {});
 
   emailjs.init(PUBLIC_KEY);
