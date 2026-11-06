@@ -1008,3 +1008,6 @@ html.ar .about__sub{letter-spacing:0;font-size:14px}
 .about__more{margin-top:28px}
 .about__prodlead{margin:0 0 22px}
 .about__allprods{margin-top:28px}
+/* footer: link to the founder's page */
+.footer__founder{color:var(--white);text-decoration:underline;text-underline-offset:3px;transition:color .25s}
+.footer__founder:hover{color:var(--green)}
