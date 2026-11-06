@@ -371,10 +371,25 @@ const nav = document.getElementById('nav');
 const burger = document.getElementById('burger');
 const menu = document.getElementById('menu');
 lenis.on('scroll', ({ scroll }) => nav.classList.toggle('is-scrolled', scroll > 40));
-function closeMenu() { menu.classList.remove('is-open'); burger.classList.remove('is-open'); }
-burger.addEventListener('click', () => {
-  menu.classList.toggle('is-open');
-  burger.classList.toggle('is-open');
+// same behaviour as the inner pages' menu in pages.js
+const menuAr = document.documentElement.lang === 'ar';
+burger.setAttribute('aria-controls', 'menu');
+menu.setAttribute('data-lenis-prevent', ''); // Lenis blocks scrolling while stopped, except here
+function setMenu(open, init) {
+  menu.classList.toggle('is-open', open);
+  burger.classList.toggle('is-open', open);
+  burger.setAttribute('aria-expanded', String(open));
+  burger.setAttribute('aria-label', open ? (menuAr ? 'إغلاق القائمة' : 'Close menu') : (menuAr ? 'فتح القائمة' : 'Open menu'));
+  menu.inert = !open; // keep the off-screen links out of the tab order
+  if (init) return; // first paint: don't touch scrolling
+  if (open) lenis.stop(); else lenis.start();
+}
+function closeMenu() { if (menu.classList.contains('is-open')) setMenu(false); }
+setMenu(false, true);
+burger.addEventListener('click', () => setMenu(!menu.classList.contains('is-open')));
+menu.addEventListener('click', e => { if (e.target.closest('a')) closeMenu(); });
+addEventListener('keydown', e => {
+  if (e.key === 'Escape' && menu.classList.contains('is-open')) { setMenu(false); burger.focus(); }
 });
 
 /* ---------------- marquee : velocity-aware ---------------- */

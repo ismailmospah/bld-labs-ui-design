@@ -135,9 +135,14 @@ main{position:relative;z-index:1}
 /* mobile menu */
 .menu{
   position:fixed;inset:0;z-index:99;background:var(--ink);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8vh;
+  display:flex;flex-direction:column;align-items:center;gap:clamp(14px,4.5vh,44px);
+  /* starts below the fixed header and scrolls when the links outgrow the
+     screen; the auto margins keep the list centred whenever it fits */
+  padding:100px 20px 48px;overflow-y:auto;overscroll-behavior:contain;
   transform:translateY(-100%);transition:transform .5s cubic-bezier(.77,0,.18,1);
 }
+.menu > :first-child{margin-top:auto}
+.menu > :last-child{margin-bottom:auto}
 .menu.is-open{transform:translateY(0)}
 .menu a{font-family:var(--px);font-size:clamp(28px,8vw,44px);color:var(--white)}
 .menu a:active{color:var(--green)}
@@ -418,17 +423,32 @@ section{position:relative;padding:clamp(90px,14vh,160px) clamp(20px,5vw,72px)}
 .card__img{
   height:clamp(320px,52vh,520px);overflow:hidden;border:1px solid var(--line);
   position:relative;background:var(--ink);
+  transition:transform .5s cubic-bezier(.22,1,.36,1),border-color .35s,box-shadow .5s;
 }
+/* hover frame: a green inset line drawn over the image */
 .card__img::after{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(to top,rgba(6,6,6,.55),transparent 45%);
+  content:'';position:absolute;inset:0;pointer-events:none;
+  box-shadow:inset 0 0 0 2px var(--green);opacity:0;transition:opacity .35s;
 }
+/* full colour at rest; hover lifts the shot, zooms it a touch, frames it in
+   green and turns the title green */
 .card__img img{
   width:100%;height:100%;object-fit:cover;object-position:top;
-  filter:grayscale(.9) contrast(1.05);
-  transition:filter .5s,transform .8s cubic-bezier(.22,1,.36,1);
+  transition:transform .8s cubic-bezier(.22,1,.36,1);
 }
-.card:hover .card__img img{filter:grayscale(0);transform:scale(1.06)}
+.card:hover .card__img,.card:focus-visible .card__img{
+  transform:translateY(-8px);border-color:var(--green);
+  box-shadow:0 22px 50px -24px rgba(82,186,95,.55);
+}
+.card:hover .card__img::after,.card:focus-visible .card__img::after{opacity:1}
+.card:hover .card__img img,.card:focus-visible .card__img img{transform:scale(1.05)}
+.card__meta h3{transition:color .3s}
+.card:hover .card__meta h3,.card:focus-visible .card__meta h3{color:var(--green)}
+.card:focus-visible{outline:none}
+@media (prefers-reduced-motion:reduce){
+  .card:hover .card__img,.card:focus-visible .card__img,
+  .card:hover .card__img img,.card:focus-visible .card__img img{transform:none}
+}
 .card__meta{display:flex;align-items:baseline;gap:14px;padding-top:16px;flex-wrap:wrap}
 .card__num{font-family:var(--mono);font-size:12px;color:var(--green)}
 .card__meta h3{font-family:var(--sans);font-size:clamp(17px,1.8vw,23px);letter-spacing:0;font-weight:800}
@@ -540,8 +560,8 @@ section{position:relative;padding:clamp(90px,14vh,160px) clamp(20px,5vw,72px)}
     display:flex;flex-direction:column;gap:6px;background:none;border:none;cursor:pointer;padding:8px;
   }
   .nav__burger span{width:28px;height:3px;background:var(--green);transition:transform .3s,opacity .3s}
-  .nav__burger.is-open span:first-child{transform:translateY(9px) rotate(45deg)}
-  .nav__burger.is-open span:last-child{transform:translateY(-9px) rotate(-45deg)}
+  .nav__burger.is-open span:first-child{transform:translateY(4.5px) rotate(45deg)}
+  .nav__burger.is-open span:last-child{transform:translateY(-4.5px) rotate(-45deg)}
   .stats{grid-template-columns:repeat(2,1fr)}
   .proc{grid-template-columns:repeat(2,1fr)}
   .footer__grid{grid-template-columns:1fr 1fr}
@@ -865,7 +885,12 @@ html.ar .svc__faq summary,html.ar .svc__faq p{text-align:right}
 .nav__lang:hover{background:var(--green);color:var(--black)}
 html:not(.ar) .nav__lang{font-family:'IBM Plex Sans Arabic',sans-serif;font-size:13px}
 .nav__end{display:flex;align-items:center;gap:14px}
-@media (max-width:900px){ .nav__end .nav__cta{display:none} }
+@media (max-width:900px){
+  .nav__end .nav__cta{display:none}
+  /* phones: language switch sits right beside the burger, not mid-bar */
+  .nav__end{margin-inline-start:auto}
+  .nav__burger{margin-inline-start:10px}
+}
 
 /* ================================================================
    PRODUCTS — products BLD Labs owns and runs (/products)
@@ -944,3 +969,6 @@ html:not(.ar) .nav__lang{font-family:'IBM Plex Sans Arabic',sans-serif;font-size
   .case__duo,.case__type{grid-template-columns:1fr}
   .case__swatches{grid-template-columns:repeat(2,1fr)}
 }
+/* the screens strip: Behance-style, images stacked edge to edge */
+.case__stack{border:1px solid var(--line);background:var(--ink)}
+.case__stack img{display:block;width:100%;height:auto}
