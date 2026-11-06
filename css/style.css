@@ -972,3 +972,5 @@ html:not(.ar) .nav__lang{font-family:'IBM Plex Sans Arabic',sans-serif;font-size
 /* the screens strip: Behance-style, images stacked edge to edge */
 .case__stack{border:1px solid var(--line);background:var(--ink)}
 .case__stack img{display:block;width:100%;height:auto}
+/* case study titles: the green dot stays on the same line as the last word */
+.case__last{white-space:nowrap}
