@@ -944,3 +944,6 @@ html:not(.ar) .nav__lang{font-family:'IBM Plex Sans Arabic',sans-serif;font-size
   .case__duo,.case__type{grid-template-columns:1fr}
   .case__swatches{grid-template-columns:repeat(2,1fr)}
 }
+/* the screens strip: Behance-style, images stacked edge to edge */
+.case__stack{border:1px solid var(--line);background:var(--ink)}
+.case__stack img{display:block;width:100%;height:auto}
