@@ -3,7 +3,7 @@ import json, os
 from clean_links import fix_html
 
 SITE = "https://bld-labs.com"
-CSS_V = 25
+CSS_V = 26
 
 
 def analytics(root, path):
