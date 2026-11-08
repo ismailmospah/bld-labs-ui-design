@@ -87,7 +87,14 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 
 /* ---------------- text scramble utility ---------------- */
 const GLYPHS = '█▓▒░<>/\\_01BLDX#%&';
+// Edit the link's existing text node instead of replacing it (el.textContent = …
+// swaps in a new node every frame). Safari only fires a click when mousedown and
+// mouseup land on the same node, so clicking a nav link mid-scramble did nothing
+// and it took a second click.
 function scramble(el, finalText, dur = 600) {
+  let node = el.firstChild;
+  if (!node || node.nodeType !== 3 || el.childNodes.length !== 1) { el.textContent = finalText; node = el.firstChild; }
+  cancelAnimationFrame(el._scrambleRaf);
   const len = finalText.length;
   const start = performance.now();
   function frame(now) {
@@ -99,10 +106,10 @@ function scramble(el, finalText, dur = 600) {
         ? finalText[i]
         : GLYPHS[(Math.random() * GLYPHS.length) | 0];
     }
-    el.textContent = out;
-    if (p < 1) requestAnimationFrame(frame);
+    node.data = out;
+    if (p < 1) el._scrambleRaf = requestAnimationFrame(frame);
   }
-  requestAnimationFrame(frame);
+  el._scrambleRaf = requestAnimationFrame(frame);
 }
 // mouse only — on iOS a tap fires mouseenter first, and changing the text
 // there makes Safari swallow the click (links needed a second tap)
@@ -110,6 +117,11 @@ document.querySelectorAll('[data-scramble]').forEach(el => {
   const original = el.textContent;
   el.addEventListener('pointerenter', e => {
     if (e.pointerType === 'mouse') scramble(el, original, 450);
+  });
+  // a press stops the effect at once, so the click always lands on settled text
+  el.addEventListener('pointerdown', () => {
+    cancelAnimationFrame(el._scrambleRaf);
+    if (el.firstChild && el.firstChild.nodeType === 3) el.firstChild.data = original;
   });
 });
 
