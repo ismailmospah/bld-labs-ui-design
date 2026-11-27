@@ -94,7 +94,7 @@ ARTICLES = []
 
 ARTICLES.append(dict(
     slug="qalqalah",
-    draft=True,
+    draft=False,
     chapter="صفات الحروف",
     title="ما هي القلقلة؟ حروفها ومراتبها بالأمثلة",
     short="ما هي القلقلة؟",
@@ -160,7 +160,7 @@ ARTICLES.append(dict(
 
 ARTICLES.append(dict(
     slug="noon-sakinah-tanween",
-    draft=True,
+    draft=False,
     chapter="النون الساكنة والتنوين",
     title="أحكام النون الساكنة والتنوين: الدليل الكامل بالأمثلة",
     short="أحكام النون الساكنة والتنوين",
@@ -238,7 +238,7 @@ ARTICLES.append(dict(
 
 ARTICLES.append(dict(
     slug="izhar-halqi",
-    draft=True,
+    draft=False,
     chapter="النون الساكنة والتنوين",
     title="الإظهار الحلقي: حروفه الستة وأمثلته من القرآن",
     short="الإظهار الحلقي",
@@ -288,7 +288,7 @@ ARTICLES.append(dict(
 
 ARTICLES.append(dict(
     slug="idgham",
-    draft=True,
+    draft=False,
     chapter="النون الساكنة والتنوين",
     title="الإدغام بغنة وبغير غنة: الفرق بالأمثلة",
     short="الإدغام بغنّة وبغير غنّة",
@@ -348,7 +348,7 @@ ARTICLES.append(dict(
 
 ARTICLES.append(dict(
     slug="iqlab-ikhfa",
-    draft=True,
+    draft=False,
     chapter="النون الساكنة والتنوين",
     title="الإقلاب والإخفاء الحقيقي: الشرح والأمثلة",
     short="الإقلاب والإخفاء الحقيقي",
@@ -414,7 +414,7 @@ ARTICLES.append(dict(
 
 ARTICLES.append(dict(
     slug="meem-sakinah",
-    draft=True,
+    draft=False,
     chapter="الميم الساكنة",
     title="أحكام الميم الساكنة: الإخفاء والإدغام والإظهار الشفوي",
     short="أحكام الميم الساكنة",
