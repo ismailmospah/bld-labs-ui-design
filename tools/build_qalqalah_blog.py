@@ -27,7 +27,7 @@ OUT = ROOT / "qalqalah"
 SITE = "https://qalqalahapp.bld-labs.com"
 APPSTORE = "https://apps.apple.com/eg/app/qalqalah-tajweed-quran-hifz/id6833678640"
 PLAY = "https://play.google.com/store/apps/details?id=com.tajweed.tajweedApp"
-CSS_V = "6"
+CSS_V = "7"
 TODAY = "2026-11-27"
 
 
@@ -547,8 +547,10 @@ NAV = """<header class="nav" id="nav">
     <a href="/" class="nav__brand" aria-label="قلقلة — الرئيسية"><svg><use href="#logo"/></svg><span>قلقلة</span></a>
     <nav class="nav__links" aria-label="روابط الموقع">
       <a href="/#features">المزايا</a>
-      <a href="/blog" class="is-on">المدونة</a>
+      <a href="/#day">يومك مع قلقلة</a>
+      <a href="/#letters">القلقلة</a>
       <a href="/#faq">الأسئلة</a>
+      <a href="/blog">المدونة</a>
     </nav>
     <a href="/#download" class="btn btn--light btn--sm">حمّل التطبيق</a>
   </div>
