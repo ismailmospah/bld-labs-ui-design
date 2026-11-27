@@ -19,7 +19,9 @@
     { "src": "/roadmap", "dest": "/learning/roadmap", "status": 308 },
     { "src": "/qalqalah/?", "has": [{ "type": "host", "value": "qalqalahapp.bld-labs.com" }], "status": 308, "headers": { "Location": "/" } },
     { "src": "/(qalqalah|Qalqalah|QALQALAH|qalqalah-app)/?", "status": 308, "headers": { "Location": "https://qalqalahapp.bld-labs.com/" } },
+    { "src": "/qalqalah/blog(/.*)?", "status": 308, "headers": { "Location": "https://qalqalahapp.bld-labs.com/blog$1" } },
     { "src": "/", "has": [{ "type": "host", "value": "qalqalahapp.bld-labs.com" }], "dest": "/qalqalah", "continue": true },
+    { "src": "/((?!qalqalah(?:/|$)).+)", "has": [{ "type": "host", "value": "qalqalahapp.bld-labs.com" }], "dest": "/qalqalah/$1", "continue": true },
     { "handle": "filesystem" },
     { "src": "/(.*)", "dest": "/404.html", "status": 404 }
   ]
