@@ -27,7 +27,7 @@ OUT = ROOT / "qalqalah"
 SITE = "https://qalqalahapp.bld-labs.com"
 APPSTORE = "https://apps.apple.com/eg/app/qalqalah-tajweed-quran-hifz/id6833678640"
 PLAY = "https://play.google.com/store/apps/details?id=com.tajweed.tajweedApp"
-CSS_V = "15"
+CSS_V = "16"
 TODAY = "2026-11-27"
 
 

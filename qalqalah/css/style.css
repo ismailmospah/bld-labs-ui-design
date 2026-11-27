@@ -405,5 +405,5 @@ h3{font-size:22px;font-weight:700;line-height:1.35}
 .nav__lang{gap:6px}
 .nav__lang-i{width:16px;height:16px;flex:none;opacity:.85}
 @media (max-width:1000px){
-  .nav__lang{margin-inline-start:auto}
+  .nav__lang{margin-inline-start:auto;margin-inline-end:0}
 }
