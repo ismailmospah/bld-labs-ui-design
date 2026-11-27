@@ -1244,12 +1244,13 @@ src="https://www.facebook.com/tr?id=1684474276310732&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-D1EHTD3H4N"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1QJBZP31DV"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', 'G-D1EHTD3H4N');
+  gtag('config', 'G-1QJBZP31DV');   // Qalqalah's own Analytics property
+  gtag('config', 'G-D1EHTD3H4N');   // BLD Labs: keep until Search Console is verified another way
 </script>"""
 
 
