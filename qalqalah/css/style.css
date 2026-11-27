@@ -333,7 +333,8 @@ h3{font-size:22px;font-weight:700;line-height:1.35}
    RESPONSIVE
 ================================================================= */
 @media (max-width:1000px){
-  .nav__links{display:none}
+  /* on small screens keep only the link to the blog (a separate page); the in-page links are dropped */
+  .nav__links a:not([href="/blog"]){display:none}
   .nav__bar{justify-content:space-between}
   .bento{grid-template-columns:repeat(2,1fr)}
   .tile--tajweed,.tile--quiz,.tile--teacher,.tile--badges{grid-column:span 2}
