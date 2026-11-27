@@ -334,7 +334,7 @@ h3{font-size:22px;font-weight:700;line-height:1.35}
 ================================================================= */
 @media (max-width:1000px){
   /* on small screens keep only the link to the blog (a separate page); the in-page links are dropped */
-  .nav__links a:not([href="/blog"]){display:none}
+  .nav__links a:not([href$="/blog"]){display:none}
   .nav__bar{justify-content:space-between}
   .bento{grid-template-columns:repeat(2,1fr)}
   .tile--tajweed,.tile--quiz,.tile--teacher,.tile--badges{grid-column:span 2}
@@ -387,3 +387,18 @@ h3{font-size:22px;font-weight:700;line-height:1.35}
 }
 .btn{white-space:nowrap}
 .nav__brand svg{flex:none}
+[dir="ltr"] .quiz__next svg{transform:scaleX(-1)}
+@media (max-width:520px){
+  .nav__bar{gap:10px}
+  .nav .btn--sm{padding:0 14px}
+  /* the English menu is wider (Qalqalah + Blog): keep the logo, drop the word */
+  [lang="en"] .nav__brand span{display:none}
+}
+@media (max-width:380px){
+  .nav__brand span{display:none}
+}
+@media (max-width:340px){
+  .nav__bar{padding-inline:12px 6px;gap:8px}
+  .nav .btn--sm{padding:0 10px;font-size:13px}
+  .nav__lang{min-width:34px;padding:0 8px;margin-inline-end:0}
+}

@@ -27,7 +27,7 @@ OUT = ROOT / "qalqalah"
 SITE = "https://qalqalahapp.bld-labs.com"
 APPSTORE = "https://apps.apple.com/eg/app/qalqalah-tajweed-quran-hifz/id6833678640"
 PLAY = "https://play.google.com/store/apps/details?id=com.tajweed.tajweedApp"
-CSS_V = "10"
+CSS_V = "12"
 TODAY = "2026-11-27"
 
 
@@ -40,10 +40,13 @@ def p(text):
     return f"<p>{text}</p>"
 
 
+LANG = "ar"   # set to "en" while the English content below is defined; note() and link() follow it
+
+
 def ex(verse, ref, rule=""):
     """One example from the Mushaf. `verse` may contain <mark> around the letters in question."""
     tag = f"<b>{rule}</b>" if rule else ""
-    return (f'<figure class="ex"><p class="quran ex__v">{verse}</p>'
+    return (f'<figure class="ex"><p class="quran ex__v" dir="rtl" lang="ar">{verse}</p>'
             f'<figcaption><span>{ref}</span>{tag}</figcaption></figure>')
 
 
@@ -51,19 +54,23 @@ def exs(*items):
     return '<div class="exs">' + "".join(items) + "</div>"
 
 
-def matn(source, *pairs):
+def matn(source, *pairs, gloss=""):
+    """Lines of a Tajweed poem (Arabic, RTL). `gloss` is an English meaning shown under them."""
     rows = "".join(f"<p><span>{a}</span><span>{b}</span></p>" for a, b in pairs)
-    return f'<blockquote class="matn">{rows}<cite>{source}</cite></blockquote>'
+    g = f'<span class="matn__gloss" dir="ltr" lang="en">{gloss}</span>' if gloss else ""
+    return f'<blockquote class="matn"><div dir="rtl" lang="ar">{rows}</div>{g}<cite>{source}</cite></blockquote>'
 
 
 def letters(chars, caption=""):
     chips = "".join(f"<li>{c}</li>" for c in chars)
     cap = f"<p>{caption}</p>" if caption else ""
-    return f'<div class="chips"><ul>{chips}</ul>{cap}</div>'
+    return f'<div class="chips"><ul dir="rtl" lang="ar">{chips}</ul>{cap}</div>'
 
 
 def note(text, kind="tip"):
-    label = {"tip": "فائدة", "warn": "تنبيه", "app": "في قلقلة"}[kind]
+    labels = {"ar": {"tip": "فائدة", "warn": "تنبيه", "app": "في قلقلة"},
+              "en": {"tip": "Tip", "warn": "Watch out", "app": "In Qalqalah"}}
+    label = labels[LANG][kind]
     return f'<aside class="note note--{kind}"><b>{label}</b><p>{text}</p></aside>'
 
 
@@ -82,7 +89,7 @@ def table(head, rows):
 
 
 def link(slug, text):
-    return f'<a href="/blog/{slug}">{text}</a>'
+    return f'<a href="{"/en" if LANG == "en" else ""}/blog/{slug}">{text}</a>'
 
 
 NOON_OPTS = ["إظهار حلقي", "إدغام بغنّة", "إدغام بغير غنّة", "إقلاب", "إخفاء حقيقي"]
@@ -667,6 +674,549 @@ ARTICLES = GUIDES + ARTICLES
 BY_SLUG = {a["slug"]: a for a in ARTICLES}
 
 
+# ------------------------------------------------------------------ English
+# English versions of every article, published at /en/blog/<slug>. Quran text and
+# poem lines stay in Arabic; explanations, labels and quizzes are in English.
+LANG = "en"
+
+NOON_OPTS_EN = ["Izhar (clear)", "Idgham with ghunnah", "Idgham without ghunnah", "Iqlab (conversion)", "Ikhfa (concealment)"]
+
+
+def qen(ar_item, ref, ask, why, options):
+    """An English quiz question that reuses the Arabic one's verse and answer."""
+    return dict(ar_item, ref=ref, ask=ask, why=why, options=options)
+
+
+def quiz_of(slug):
+    return BY_SLUG[slug]["quiz"]
+
+
+EN = {}
+
+_q = quiz_of("qalqalah")
+_QAL = ["Minor qalqalah", "Major qalqalah", "No qalqalah"]
+EN["qalqalah"] = dict(
+    chapter="Letter characteristics",
+    title="What Is Qalqalah in Tajweed? Letters, Levels and Examples",
+    short="What is qalqalah?",
+    desc="Qalqalah in Tajweed explained: its definition, the five letters of «qutbu jadd», when it applies, its minor and major levels, with examples from the Quran and common mistakes.",
+    lead="Qalqalah is a quality that gives five letters of the Quran a clear echo when they carry a sukun. It is also the name of our app, because it sums up what we love about Tajweed: a small detail that, once mastered, shows in your whole recitation.",
+    body=[
+        h2("taarif", "What is qalqalah?"),
+        p("<strong>Linguistically,</strong> qalqalah means disturbance or shaking."),
+        p("<strong>In Tajweed,</strong> it is a slight vibration at the letter's point of articulation when the letter is pronounced with a sukun, so that a strong, clear echo is heard. The letter is not swallowed, and it is not given a full vowel either: it gets a light bounce."),
+        h2("huroof", "The five letters of qalqalah"),
+        p("There are five qalqalah letters, gathered in the phrase <span class=\"q\" lang=\"ar\">«قُطْبُ جَدٍّ»</span> (qutbu jadd). Imam Ibn al-Jazari lists them in his poem, al-Muqaddimah al-Jazariyyah: <span class=\"q\" lang=\"ar\">«قَلْقَلَةٌ قُطْبُ جَدٍّ»</span>."),
+        letters("قطبجد", "Qaf, Ta, Ba, Jim and Dal"),
+        p("These letters bounce because they combine two strong qualities: <strong>jahr</strong> (the voice carries without breathiness) and <strong>shiddah</strong> (the sound is held back). When they carry a sukun, both the sound and the breath are trapped, so the letter needs this echo to be heard."),
+        h2("mata", "When does qalqalah happen?"),
+        p("Qalqalah applies to these letters <strong>only when they carry a sukun</strong>, whether the sukun is part of the word or comes from stopping on the letter. If the letter has a fathah, dammah or kasrah, there is no qalqalah."),
+        exs(ex("<mark>قُ</mark>لْ هُوَ ٱللَّهُ أَحَدٌ", "Al-Ikhlas · 1", "The qaf has a vowel: no qalqalah")),
+        h2("maratib", "The levels of qalqalah"),
+        p("How strong the echo is depends on where the letter with sukun appears:"),
+        "<h3>1. Minor qalqalah (sughra)</h3>",
+        p("When the letter has an original sukun in the middle of a word, or at the end of a word while you keep reading."),
+        exs(
+            ex("ٱ<mark>قْ</mark>رَأْ بِٱسْمِ رَبِّكَ", "Al-Alaq · 1"),
+            ex("وَقَدْ خَلَقَكُمْ أَ<mark>طْ</mark>وَارًا", "Nuh · 14"),
+            ex("إِنَّ شَانِئَكَ هُوَ ٱلْأَ<mark>بْ</mark>تَرُ", "Al-Kawthar · 3"),
+            ex("وَهَدَيْنَٰهُ ٱلنَّ<mark>جْ</mark>دَيْنِ", "Al-Balad · 10"),
+            ex("قَ<mark>دْ</mark> أَفْلَحَ ٱلْمُؤْمِنُونَ", "Al-Mu'minun · 1"),
+            ex("لَمْ يَلِ<mark>دْ</mark> وَلَمْ يُولَدْ", "Al-Ikhlas · 3", "The dal of «yalid» when reading on"),
+        ),
+        "<h3>2. Major qalqalah (kubra)</h3>",
+        p("When you stop on a qalqalah letter at the end of a word, so it takes a sukun because of the stop. Here the echo is clearer and stronger."),
+        exs(
+            ex("قُلْ أَعُوذُ بِرَبِّ ٱلْفَلَ<mark>قِ</mark>", "Al-Falaq · 1", "When stopping"),
+            ex("قُلْ هُوَ ٱللَّهُ أَحَ<mark>دٌ</mark>", "Al-Ikhlas · 1", "When stopping"),
+            ex("وَمِن شَرِّ حَاسِدٍ إِذَا حَسَ<mark>دَ</mark>", "Al-Falaq · 5", "When stopping"),
+            ex("وَٱللَّهُ مِن وَرَآئِهِم مُّحِي<mark>طٌۢ</mark>", "Al-Buruj · 20", "When stopping"),
+        ),
+        "<h3>3. A higher level, according to some scholars</h3>",
+        p("Some teachers of recitation mention a third level, stronger than the major one: stopping on a qalqalah letter that has a <strong>shaddah</strong>, as when stopping on «وَتَبَّ»."),
+        exs(ex("تَبَّتْ يَدَآ أَبِى لَهَبٍ وَتَ<mark>بَّ</mark>", "Al-Masad · 1", "When stopping")),
+        note("Dividing qalqalah into levels is a teaching convention: some authors give two levels and some three. In practice, what matters is that qalqalah happens on a letter with sukun, and is clearest when you stop on it.", "tip"),
+        h2("akhtaa", "Common mistakes"),
+        "<ul class=\"list\">"
+        "<li><strong>Turning the echo into a full vowel:</strong> like reading the qaf of «iqra'» with a fathah. It should be a light bounce, not a vowel.</li>"
+        "<li><strong>Bouncing a letter that has a vowel:</strong> like the qaf in «qul», which has a dammah, so it gets no qalqalah.</li>"
+        "<li><strong>Exaggerating:</strong> until the letter sounds doubled or is followed by an extra sound.</li>"
+        "<li><strong>Ignoring it:</strong> so the letter is swallowed, especially when stopping on «al-falaq» and «ahad».</li>"
+        "</ul>",
+        note("In Qalqalah you hear the examples recited, test yourself with short questions after every rule, and get reminders to review until it sticks.", "app"),
+    ],
+    quiz=[
+        qen(_q[0], "Al-Alaq · 1", "What level of qalqalah does the qaf have when you keep reading?", "The qaf has an original sukun in the middle of the word, so its qalqalah is minor.", _QAL),
+        qen(_q[1], "Al-Falaq · 1", "If you stop on «al-falaq», what level of qalqalah is it?", "The qaf takes a sukun because you stop at the end of the word, so its qalqalah is major.", _QAL),
+        qen(_q[2], "Al-Ikhlas · 1", "Is there qalqalah on the highlighted qaf?", "The qaf has a dammah here, and qalqalah only happens on a letter with sukun.", _QAL),
+    ],
+)
+
+_q = quiz_of("noon-sakinah-tanween")
+EN["noon-sakinah-tanween"] = dict(
+    chapter="Noon sakinah and tanween",
+    title="Rules of Noon Sakinah and Tanween: The Complete Guide with Examples",
+    short="Noon sakinah and tanween",
+    desc="The four rules of noon sakinah and tanween: izhar, idgham, iqlab and ikhfa, with the letters of each rule, examples from the Quran, lines from Tuhfat al-Atfal and a summary table.",
+    lead="The first chapter most Tajweed students learn, and a rule you will meet on every page of the Mushaf. This guide puts the four rules, their letters and their examples in one place, then lets you test yourself.",
+    body=[
+        h2("taarif", "What are noon sakinah and tanween?"),
+        p("<strong>Noon sakinah</strong> is a noon with no vowel. It appears in nouns, verbs and particles, in the middle or at the end of a word, and it is written and pronounced whether you keep reading or stop, as in «مِنْ», «أَنْعَمْتَ» and «يَنْهَوْنَ»."),
+        p("<strong>Tanween</strong> is an extra noon sakinah added to the end of a noun in pronunciation. It isn't written as a noon and is dropped when you stop. In the Mushaf it is shown by a doubled vowel: «عَلِيمٌ», «هُدًى», «يَوْمَئِذٍ»."),
+        p("Because tanween is pronounced as a noon sakinah, both follow the same rules, and the rule depends on the letter that comes <strong>after</strong> them."),
+        matn("Tuhfat al-Atfal", ("لِلنُّونِ إِنْ تَسْكُنْ وَلِلتَّنْوِينِ", "أَرْبَعُ أَحْكَامٍ فَخُذْ تَبْيِينِي"),
+             gloss="“Noon sakinah and tanween have four rules, so take my explanation.”"),
+        h2("molakhas", "The four rules at a glance"),
+        table(["Rule", "Letters", "How it sounds", "Example"], [
+            ["Izhar halqi", "ء هـ ع ح غ خ", "A clear noon, no added ghunnah", "<span class=\"q\" lang=\"ar\">مِنْ عِلْمٍ</span>"],
+            ["Idgham with ghunnah", "ي ن م و («yanmu»)", "The noon merges into the next letter, with ghunnah", "<span class=\"q\" lang=\"ar\">مَن يَقُولُ</span>"],
+            ["Idgham without ghunnah", "ل ر", "The noon merges into the next letter, no ghunnah", "<span class=\"q\" lang=\"ar\">مِّن رَّبِّهِمْ</span>"],
+            ["Iqlab", "ب", "Turns into a concealed meem, with ghunnah", "<span class=\"q\" lang=\"ar\">مِنۢ بَعْدِ</span>"],
+            ["Ikhfa haqiqi", "The other 15 letters", "Between clear and merged, with ghunnah", "<span class=\"q\" lang=\"ar\">مِن قَبْلِكَ</span>"],
+        ]),
+        h2("izhar", "1. Izhar halqi (clear pronunciation)"),
+        p("If noon sakinah or tanween is followed by one of the six throat letters, the noon is pronounced clearly, with no added ghunnah."),
+        letters("ءهعحغخ", "Hamzah, Ha (ه), Ayn, Ha (ح), Ghayn and Kha"),
+        exs(
+            ex("صِرَٰطَ ٱلَّذِينَ أَ<mark>نْعَ</mark>مْتَ عَلَيْهِمْ", "Al-Fatihah · 7"),
+            ex("وَٱللَّهُ عَلِي<mark>مٌ حَ</mark>كِيمٌ", "An-Nisa · 26"),
+        ),
+        p("More detail, with an example for each letter: " + link("izhar-halqi", "Izhar halqi explained") + "."),
+        h2("idgham", "2. Idgham (merging)"),
+        p("Idgham means merging the noon sakinah or tanween into the following letter, so the two become one letter with a shaddah. Its six letters are gathered in the word <span class=\"q\" lang=\"ar\">«يَرْمَلُونَ»</span> (yarmaloon), and it comes in two kinds:"),
+        "<h3>Idgham with ghunnah: the letters of «يَنْمُو» (yanmu)</h3>",
+        exs(
+            ex("وَمِنَ ٱلنَّاسِ <mark>مَن يَ</mark>قُولُ", "Al-Baqarah · 8"),
+            ex("وُجُوهٌ يَوْمَئِذٍ <mark>نَّ</mark>اضِرَةٌ", "Al-Qiyamah · 22"),
+        ),
+        "<h3>Idgham without ghunnah: lam and ra</h3>",
+        exs(
+            ex("أُو۟لَٰٓئِكَ عَلَىٰ هُدًى <mark>مِّن رَّ</mark>بِّهِمْ", "Al-Baqarah · 5"),
+            ex("ذَٰلِكَ ٱلْكِتَٰبُ لَا رَيْبَ ۛ فِيهِ ۛ <mark>هُدًى لِّ</mark>لْمُتَّقِينَ", "Al-Baqarah · 2"),
+        ),
+        note("There is no idgham when the noon and a letter of «يَنْمُو» are in the same word: the noon is pronounced clearly, as in «دُنْيَا», «صِنْوَانٌ», «بُنْيَانٌ» and «قِنْوَانٌ».", "warn"),
+        p("The difference between the two kinds, and their exceptions: " + link("idgham", "Idgham with and without ghunnah") + "."),
+        h2("iqlab", "3. Iqlab (conversion)"),
+        p("If noon sakinah or tanween is followed by <strong>ba</strong>, the noon turns into a concealed meem, with ghunnah. In the Mushaf it is marked by a small meem above the noon or the tanween."),
+        exs(
+            ex("قَالَ يَٰٓـَٔادَمُ أَ<mark>نۢبِ</mark>ئْهُم بِأَسْمَآئِهِمْ", "Al-Baqarah · 33"),
+            ex("إِنَّ ٱللَّهَ سَمِي<mark>عٌۢ بَ</mark>صِيرٌ", "Al-Mujadilah · 1"),
+        ),
+        h2("ikhfa", "4. Ikhfa haqiqi (concealment)"),
+        p("If noon sakinah or tanween is followed by any of the remaining fifteen letters, the noon is pronounced in a state between izhar and idgham, without a shaddah, while keeping the ghunnah."),
+        letters("صذثكجشقسدطزفتضظ"),
+        exs(
+            ex("وَمَآ أُنزِلَ <mark>مِن قَ</mark>بْلِكَ", "Al-Baqarah · 4"),
+            ex("إِنَّآ أَ<mark>نزَ</mark>لْنَٰهُ فِى لَيْلَةِ ٱلْقَدْرِ", "Al-Qadr · 1"),
+        ),
+        p("Iqlab and ikhfa, with an example for each of the fifteen letters: " + link("iqlab-ikhfa", "Iqlab and ikhfa explained") + "."),
+        h2("ghunnah", "How long is the ghunnah?"),
+        p("The ghunnah in idgham with ghunnah, iqlab and ikhfa lasts about <strong>two counts</strong> (two harakahs). You learn it by listening to a skilled reciter more than by counting."),
+        note("In Qalqalah this chapter comes as short lessons, one rule per lesson with its examples, followed by questions like the ones below.", "app"),
+    ],
+    quiz=[
+        qen(_q[0], "Al-Baqarah · 8", "Which rule applies to the noon sakinah in the highlighted word?", "It is followed by «ي» (ya), one of the letters of «يَنْمُو», so it merges with ghunnah.", NOON_OPTS_EN),
+        qen(_q[1], "An-Nisa · 26", "Which rule applies to the tanween in the highlighted word?", "It is followed by «ح» (ha), a throat letter, so the tanween is pronounced clearly.", NOON_OPTS_EN),
+        qen(_q[2], "Al-Baqarah · 5", "Which rule applies to the noon sakinah in the highlighted word?", "It is followed by ra, so it merges completely, without ghunnah.", NOON_OPTS_EN),
+        qen(_q[3], "Al-Baqarah · 33", "Which rule applies to the noon sakinah in the highlighted word?", "It is followed by ba, so it turns into a concealed meem, with ghunnah.", NOON_OPTS_EN),
+        qen(_q[4], "Al-Baqarah · 4", "Which rule applies to the noon sakinah in the highlighted word?", "It is followed by qaf, one of the ikhfa letters, so it is concealed, with ghunnah.", NOON_OPTS_EN),
+    ],
+)
+
+_q = quiz_of("izhar-halqi")
+EN["izhar-halqi"] = dict(
+    chapter="Noon sakinah and tanween",
+    title="Izhar Halqi: The Six Throat Letters, with Examples from the Quran",
+    short="Izhar halqi",
+    desc="Izhar halqi of noon sakinah and tanween explained: its definition, the six throat letters, why it is called halqi, an example from the Quran for each letter, and common mistakes.",
+    lead="The first rule of noon sakinah and tanween, and the easiest to pronounce: the noon is said clearly, as it is. Knowing its letters precisely is what sets it apart from the other rules.",
+    body=[
+        h2("taarif", "What is izhar?"),
+        p("<strong>Linguistically,</strong> izhar means making something clear."),
+        p("<strong>In Tajweed,</strong> it means pronouncing the noon sakinah or tanween clearly from its point of articulation, with no added ghunnah, when it is followed by one of the izhar letters."),
+        h2("huroof", "The six letters of izhar"),
+        letters("ءهعحغخ", "Hamzah, Ha (ه), Ayn, Ha (ح), Ghayn and Kha"),
+        matn("Tuhfat al-Atfal",
+             ("فَالْأَوَّلُ الْإِظْهَارُ قَبْلَ أَحْرُفِ", "لِلْحَلْقِ سِتٍّ رُتِّبَتْ فَلْتَعْرِفِ"),
+             ("هَمْزٌ فَهَاءٌ ثُمَّ عَيْنٌ حَاءُ", "مُهْمَلَتَانِ ثُمَّ غَيْنٌ خَاءُ"),
+             gloss="“The first is izhar, before the six throat letters in their order, so know them: hamzah, then ha, then ayn and ha (both undotted), then ghayn and kha.”"),
+        h2("lemaza", "Why is it called halqi, and why is the noon clear?"),
+        p("It is called <strong>halqi</strong> (“of the throat”) because its six letters come from the throat. The noon stays clear because its point of articulation, the tip of the tongue, is <strong>far from the throat</strong>, so the two sounds don't overlap in a way that would call for merging or concealing."),
+        h2("amthila", "An example for each letter"),
+        p("Izhar happens within one word, across two words, and with tanween:"),
+        exs(
+            ex("<mark>مَنْ ءَ</mark>امَنَ بِٱللَّهِ وَٱلْيَوْمِ ٱلْءَاخِرِ", "Al-Baqarah · 62", "Hamzah"),
+            ex("<mark>كُلٌّ ءَ</mark>امَنَ بِٱللَّهِ", "Al-Baqarah · 285", "Hamzah, with tanween"),
+            ex("وَمَن يُضْلِلِ ٱللَّهُ فَمَا لَهُۥ <mark>مِنْ هَ</mark>ادٍ", "Ar-Ra'd · 33", "Ha (ه)"),
+            ex("خَلَقَ ٱلْإِنسَٰنَ <mark>مِنْ عَ</mark>لَقٍ", "Al-Alaq · 2", "Ayn"),
+            ex("تَنزِيلٌ <mark>مِّنْ حَ</mark>كِيمٍ حَمِيدٍ", "Fussilat · 42", "Ha (ح)"),
+            ex("وَنَزَعْنَا مَا فِى صُدُورِهِم <mark>مِّنْ غِ</mark>لٍّ", "Al-A'raf · 43", "Ghayn"),
+            ex("وَءَامَنَهُم <mark>مِّنْ خَ</mark>وْفٍ", "Quraysh · 4", "Kha"),
+        ),
+        note("In «كُلٌّ ءَامَنَ» the tanween on the lam is followed by a hamzah, so it is pronounced clearly. Remember that tanween is pronounced as a noon even though it isn't written as one.", "tip"),
+        h2("akhtaa", "Common mistakes"),
+        "<ul class=\"list\">"
+        "<li><strong>Adding ghunnah:</strong> stretching the noon through the nose before the throat letter. It should be pronounced normally and clearly.</li>"
+        "<li><strong>Pausing on the noon:</strong> cutting the sound between it and the throat letter. Join them smoothly.</li>"
+        "<li><strong>Bouncing the noon:</strong> noon is not a qalqalah letter, so it gets no echo.</li>"
+        "</ul>",
+        p("Izhar is the first of four rules; see them all in the " + link("noon-sakinah-tanween", "guide to noon sakinah and tanween") + "."),
+    ],
+    quiz=[
+        qen(_q[0], "Quraysh · 4", "Which rule applies to the noon sakinah in the highlighted word?", "It is followed by kha, a throat letter, so it is pronounced clearly.", NOON_OPTS_EN),
+        qen(_q[1], "Al-Fatihah · 7", "Which rule applies to the noon sakinah in the highlighted word?", "The noon is followed by ayn in the same word, so it is pronounced clearly.", NOON_OPTS_EN),
+        qen(_q[2], "Al-Baqarah · 4", "And this one? Which rule applies to the noon sakinah in the highlighted word?", "Qaf is not a throat letter but one of the ikhfa letters, so the noon is concealed, with ghunnah.", NOON_OPTS_EN),
+    ],
+)
+
+_q = quiz_of("idgham")
+_IDG = ["Idgham with ghunnah", "Idgham without ghunnah", "Izhar"]
+EN["idgham"] = dict(
+    chapter="Noon sakinah and tanween",
+    title="Idgham With and Without Ghunnah: The Difference, with Examples",
+    short="Idgham",
+    desc="Idgham in the rules of noon sakinah and tanween: the letters of «yarmaloon», the difference between idgham with and without ghunnah, complete and incomplete idgham, and the exceptions in the Hafs narration.",
+    lead="Idgham turns two letters into one. But sometimes it comes with ghunnah and sometimes without, and it has a few specific exceptions. Here is the whole difference, with examples.",
+    body=[
+        h2("taarif", "What is idgham?"),
+        p("<strong>Linguistically,</strong> idgham means inserting one thing into another."),
+        p("<strong>In Tajweed,</strong> it is when a letter with sukun meets a voweled letter and they become one letter with a shaddah. In this chapter: the noon sakinah or tanween merges into the letter after it."),
+        h2("huroof", "The letters of idgham: «يَرْمَلُونَ» (yarmaloon)"),
+        letters("يرملون", "Ya, Ra, Meem, Lam, Waw and Noon"),
+        matn("Tuhfat al-Atfal",
+             ("وَالثَّانِ إِدْغَامٌ بِسِتَّةٍ أَتَتْ", "فِي يَرْمَلُونَ عِنْدَهُمْ قَدْ ثَبَتَتْ"),
+             ("لَكِنَّهَا قِسْمَانِ قِسْمٌ يُدْغَمَا", "فِيهِ بِغُنَّةٍ بِيَنْمُو عُلِمَا"),
+             ("إِلَّا إِذَا كَانَا بِكِلْمَةٍ فَلَا", "تُدْغِمْ كَدُنْيَا ثُمَّ صِنْوَانٍ تَلَا"),
+             ("وَالثَّانِ إِدْغَامٌ بِغَيْرِ غُنَّهْ", "فِي اللَّامِ وَالرَّا ثُمَّ كَرِّرَنَّهْ"),
+             gloss="“The second is idgham, with six letters gathered in «yarmaloon». They are of two kinds: one merges with ghunnah, known by «yanmu», unless both are in one word, then do not merge, as in «dunya» and «sinwan». The other is idgham without ghunnah, in lam and ra.”"),
+        h2("bighunnah", "Idgham with ghunnah: the letters of «يَنْمُو» (yanmu)"),
+        p("If noon sakinah or tanween is followed, in the next word, by one of the letters of <span class=\"q\" lang=\"ar\">«يَنْمُو»</span>, the noon merges into it with a ghunnah of about two counts."),
+        exs(
+            ex("وَمِنَ ٱلنَّاسِ <mark>مَن يَ</mark>قُولُ", "Al-Baqarah · 8", "Ya"),
+            ex("وَمَا بِكُم <mark>مِّن نِّ</mark>عْمَةٍ فَمِنَ ٱللَّهِ", "An-Nahl · 53", "Noon"),
+            ex("وَمَآ أَنزَلَ ٱللَّهُ مِنَ ٱلسَّمَآءِ <mark>مِن مَّ</mark>آءٍ", "Al-Baqarah · 164", "Meem"),
+            ex("وَمَا لَهُم مِّن دُونِهِۦ <mark>مِن وَ</mark>الٍ", "Ar-Ra'd · 11", "Waw"),
+            ex("وُجُو<mark>هٌ يَ</mark>وْمَئِ<mark>ذٍ نَّ</mark>اضِرَةٌ", "Al-Qiyamah · 22", "Tanween with ya, then noon"),
+        ),
+        "<h3>Complete and incomplete</h3>",
+        p("Idgham into <strong>noon and meem</strong> is <strong>complete</strong>, because the noon disappears entirely, sound and quality. Into <strong>ya and waw</strong> it is <strong>incomplete</strong>, because the noon disappears but its quality, the ghunnah, remains."),
+        h2("bighairghunnah", "Idgham without ghunnah: lam and ra"),
+        p("If noon sakinah or tanween is followed by <strong>lam</strong> or <strong>ra</strong>, the noon merges into it completely, with no ghunnah, and the lam or ra takes a shaddah."),
+        exs(
+            ex("ذَٰلِكَ ٱلْكِتَٰبُ لَا رَيْبَ ۛ فِيهِ ۛ <mark>هُدًى لِّ</mark>لْمُتَّقِينَ", "Al-Baqarah · 2", "Lam"),
+            ex("أُو۟لَٰٓئِكَ عَلَىٰ هُدًى <mark>مِّن رَّ</mark>بِّهِمْ", "Al-Baqarah · 5", "Ra"),
+            ex("إِنَّ ٱللَّهَ غَفُو<mark>رٌ رَّ</mark>حِيمٌ", "Al-Baqarah · 173", "Ra, with tanween"),
+        ),
+        h2("istithnaa", "When there is no idgham"),
+        "<h3>1. When both are in the same word</h3>",
+        p("If the noon sakinah and a letter of «يَنْمُو» are in <strong>one word</strong>, the noon is pronounced clearly. This is called <strong>izhar mutlaq</strong> (absolute izhar), and it occurs in four words in the Quran:"),
+        letters(["دُنْيَا", "صِنْوَانٌ", "قِنْوَانٌ", "بُنْيَانٌ"]),
+        "<h3>2. Places specific to the Hafs narration</h3>",
+        "<ul class=\"list\">"
+        "<li><span class=\"q\" lang=\"ar\">«يسٓ ۚ وَٱلْقُرْءَانِ ٱلْحَكِيمِ»</span> and <span class=\"q\" lang=\"ar\">«نٓ ۚ وَٱلْقَلَمِ»</span>: the noon is pronounced clearly in Hafs from Asim, by way of al-Shatibiyyah.</li>"
+        "<li><span class=\"q\" lang=\"ar\">«وَقِيلَ مَنْ ۜ رَاقٍ»</span> (Al-Qiyamah · 27): no idgham, because of the brief pause (sakt) on the noon.</li>"
+        "</ul>",
+        note("Don't memorize these as abstract rules: listen to them from a skilled reciter and repeat them. Your ear will hold on to them faster.", "tip"),
+        p("Idgham is the second rule of " + link("noon-sakinah-tanween", "noon sakinah and tanween") + "."),
+    ],
+    quiz=[
+        qen(_q[0], "Al-Baqarah · 5", "Which rule applies to the noon sakinah in the highlighted word?", "It is followed by ra, so it merges without ghunnah.", _IDG),
+        qen(_q[1], "Ar-Ra'd · 11", "Which rule applies to the noon sakinah in the highlighted word?", "It is followed by waw, a letter of «يَنْمُو», in the next word, so it merges with ghunnah (incomplete idgham).", _IDG),
+        qen(_q[2], "Example", "Which rule applies to the noon sakinah in «ad-dunya»?", "The noon and the ya are in the same word, so there is no idgham: it is izhar mutlaq.", _IDG),
+    ],
+)
+
+_q = quiz_of("iqlab-ikhfa")
+EN["iqlab-ikhfa"] = dict(
+    chapter="Noon sakinah and tanween",
+    title="Iqlab and Ikhfa Haqiqi: Explanation and Examples",
+    short="Iqlab and ikhfa",
+    desc="Iqlab and ikhfa haqiqi in the rules of noon sakinah and tanween: the letter of iqlab, the fifteen letters of ikhfa, how to pronounce them, the length of the ghunnah, and examples from the Quran.",
+    lead="Two rules that share the ghunnah and differ in everything else: iqlab has one letter, ikhfa has fifteen. Here is how to tell them apart and how to pronounce them.",
+    body=[
+        h2("iqlab", "Iqlab"),
+        p("<strong>Linguistically,</strong> iqlab means turning something over. <strong>In Tajweed,</strong> it means turning the noon sakinah or tanween into a <strong>concealed meem</strong>, with ghunnah, when it is followed by <strong>ba</strong>."),
+        letters("ب", "One letter: ba"),
+        matn("Tuhfat al-Atfal", ("وَالثَّالِثُ الْإِقْلَابُ عِنْدَ الْبَاءِ", "مِيمًا بِغُنَّةٍ مَعَ الْإِخْفَاءِ"),
+             gloss="“The third is iqlab before ba: it becomes a meem, with ghunnah and concealment.”"),
+        "<h3>How to spot it in the Mushaf</h3>",
+        p("A <strong>small meem</strong> (ۢ) is written above the noon or the tanween to mark iqlab. It happens within one word, across two words, and with tanween:"),
+        exs(
+            ex("قَالَ يَٰٓـَٔادَمُ أَ<mark>نۢبِ</mark>ئْهُم بِأَسْمَآئِهِمْ", "Al-Baqarah · 33", "Within one word"),
+            ex("ٱلَّذِينَ يَنقُضُونَ عَهْدَ ٱللَّهِ <mark>مِنۢ بَ</mark>عْدِ مِيثَٰقِهِۦ", "Al-Baqarah · 27", "Across two words"),
+            ex("إِنَّ ٱللَّهَ سَمِي<mark>عٌۢ بَ</mark>صِيرٌ", "Al-Mujadilah · 1", "With tanween"),
+        ),
+        note("Iqlab is three steps in one moment: turn the noon into a meem, conceal the meem by closing the lips lightly, and hold the ghunnah for two counts.", "tip"),
+        h2("ikhfa", "Ikhfa haqiqi"),
+        p("<strong>Linguistically,</strong> ikhfa means concealing. <strong>In Tajweed,</strong> it means pronouncing the noon sakinah or tanween in a state <strong>between izhar and idgham</strong>, without a shaddah, while keeping the ghunnah, when it is followed by one of the ikhfa letters."),
+        p("It is called <strong>haqiqi</strong> (“true”) because the concealment is fully realized in it, and to distinguish it from the ikhfa shafawi of " + link("meem-sakinah", "meem sakinah") + "."),
+        h2("huroof", "The fifteen letters of ikhfa"),
+        p("They are the letters left after the letters of izhar, idgham and iqlab. The author of the Tuhfah coded them in the first letter of each word of this line:"),
+        matn("Tuhfat al-Atfal",
+             ("وَالرَّابِعُ الْإِخْفَاءُ عِنْدَ الْفَاضِلِ", "مِنَ الْحُرُوفِ وَاجِبٌ لِلْفَاضِلِ"),
+             ("فِي خَمْسَةٍ مِنْ بَعْدِ عَشْرٍ رَمْزُهَا", "فِي كِلْمِ هَذَا الْبَيْتِ قَدْ ضَمَّنْتُهَا"),
+             ("صِفْ ذَا ثَنَا كَمْ جَادَ شَخْصٌ قَدْ سَمَا", "دُمْ طَيِّبًا زِدْ فِي تُقًى ضَعْ ظَالِمَا"),
+             gloss="“The fourth is ikhfa, required before the remaining letters: fifteen of them, whose codes I have placed in the words of this line.” The third line is the code: the first letter of each of its words is an ikhfa letter."),
+        letters("صذثكجشقسدطزفتضظ"),
+        h2("amthila", "Examples from the Quran"),
+        exs(
+            ex("إِن <mark>يَنصُ</mark>رْكُمُ ٱللَّهُ فَلَا غَالِبَ لَكُمْ", "Al Imran · 160", "Sad"),
+            ex("إِنَّمَآ أَنتَ <mark>مُنذِ</mark>رٌ", "Ar-Ra'd · 7", "Dhal"),
+            ex("فَجَعَلْنَٰهُ هَبَآءً <mark>مَّنثُ</mark>ورًا", "Al-Furqan · 23", "Tha"),
+            ex("<mark>إِن كُ</mark>نتُمْ صَٰدِقِينَ", "Al-Baqarah · 23", "Kaf"),
+            ex("وَإِذْ <mark>أَنجَ</mark>يْنَٰكُم مِّنْ ءَالِ فِرْعَوْنَ", "Al-A'raf · 141", "Jim"),
+            ex("<mark>مِن شَ</mark>رِّ مَا خَلَقَ", "Al-Falaq · 2", "Shin"),
+            ex("وَمَآ أُنزِلَ <mark>مِن قَ</mark>بْلِكَ", "Al-Baqarah · 4", "Qaf"),
+            ex("خَلَقَ ٱلْ<mark>إِنسَ</mark>ٰنَ مِنْ عَلَقٍ", "Al-Alaq · 2", "Sin"),
+            ex("فَلَا تَجْعَلُوا۟ لِلَّهِ <mark>أَندَ</mark>ادًا", "Al-Baqarah · 22", "Dal"),
+            ex("وَمَا <mark>يَنطِ</mark>قُ عَنِ ٱلْهَوَىٰٓ", "An-Najm · 3", "Ta (ط)"),
+            ex("إِنَّآ <mark>أَنزَ</mark>لْنَٰهُ فِى لَيْلَةِ ٱلْقَدْرِ", "Al-Qadr · 1", "Zay"),
+            ex("وَمِمَّا رَزَقْنَٰهُمْ <mark>يُنفِ</mark>قُونَ", "Al-Baqarah · 3", "Fa"),
+            ex("تَجْرِى <mark>مِن تَ</mark>حْتِهَا ٱلْأَنْهَٰرُ", "Al-Baqarah · 25", "Ta (ت)"),
+            ex("وَطَلْحٍ <mark>مَّنضُ</mark>ودٍ", "Al-Waqi'ah · 29", "Dad"),
+            ex("فَلْ<mark>يَنظُ</mark>رِ ٱلْإِنسَٰنُ إِلَىٰ طَعَامِهِۦٓ", "Abasa · 24", "Dha (ظ)"),
+        ),
+        h2("tafkhim", "The ghunnah: how long, heavy or light"),
+        p("The ghunnah in iqlab and ikhfa lasts about <strong>two counts</strong>. The ghunnah of ikhfa follows the letter after it: it is heavy (<em>tafkhim</em>) before the elevated letters (ص ض ط ظ ق), as in «yansurkum» and «min qablika», and light (<em>tarqiq</em>) before the others, as in «mundhir» and «yunfiqun»."),
+        note("The most common mistake in ikhfa: pressing the tip of the tongue where the noon is made, as in izhar. In ikhfa the tongue moves toward the next letter, and the ghunnah comes from the nose.", "warn"),
+        p("Iqlab and ikhfa are the third and fourth " + link("noon-sakinah-tanween", "rules of noon sakinah and tanween") + "."),
+    ],
+    quiz=[
+        qen(_q[0], "Al-Baqarah · 27", "Which rule applies to the noon sakinah in the highlighted word?", "It is followed by ba, so it turns into a concealed meem, with ghunnah.", NOON_OPTS_EN),
+        qen(_q[1], "Al-Waqi'ah · 29", "Which rule applies to the noon sakinah in the highlighted word?", "It is followed by dad, an ikhfa letter, so it is concealed with a heavy ghunnah.", NOON_OPTS_EN),
+        qen(_q[2], "Al-Baqarah · 3", "Which rule applies to the noon sakinah in the highlighted word?", "It is followed by fa, an ikhfa letter, so it is concealed with a light ghunnah.", NOON_OPTS_EN),
+    ],
+)
+
+_q = quiz_of("meem-sakinah")
+_MEEM = ["Ikhfa shafawi", "Idgham shafawi", "Izhar shafawi"]
+EN["meem-sakinah"] = dict(
+    chapter="Meem sakinah",
+    title="Rules of Meem Sakinah: Ikhfa, Idgham and Izhar Shafawi",
+    short="Meem sakinah",
+    desc="The three rules of meem sakinah: ikhfa shafawi, idgham mithlayn saghir and izhar shafawi, with the letters of each rule, examples from the Quran and lines from Tuhfat al-Atfal.",
+    lead="After noon sakinah comes meem sakinah, a shorter and easier chapter: just three rules, all of them made with the lips.",
+    body=[
+        h2("taarif", "What is meem sakinah?"),
+        p("It is a meem with no vowel. It appears in the middle and at the end of words, in nouns, verbs and particles, as in «أَمْ», «لَهُمْ» and «يَمْشُونَ». It never comes before a long alif."),
+        matn("Tuhfat al-Atfal",
+             ("وَالْمِيمُ إِنْ تَسْكُنْ تَجِي قَبْلَ الْهِجَا", "لَا أَلِفٍ لَيِّنَةٍ لِذِي الْحِجَا"),
+             ("أَحْكَامُهَا ثَلَاثَةٌ لِمَنْ ضَبَطْ", "إِخْفَاءٌ ادْغَامٌ وَإِظْهَارٌ فَقَطْ"),
+             gloss="“When meem has a sukun, it comes before the letters, never before a soft alif. Its rules are three, for whoever learns them: ikhfa, idgham and izhar, nothing more.”"),
+        table(["Rule", "Letter after the meem", "Example"], [
+            ["Ikhfa shafawi", "Ba", "<span class=\"q\" lang=\"ar\">تَرْمِيهِم بِحِجَارَةٍ</span>"],
+            ["Idgham mithlayn saghir", "Meem", "<span class=\"q\" lang=\"ar\">كَم مِّن فِئَةٍ</span>"],
+            ["Izhar shafawi", "All other letters", "<span class=\"q\" lang=\"ar\">أَلَمْ تَرَ</span>"],
+        ]),
+        h2("ikhfa", "1. Ikhfa shafawi"),
+        p("If meem sakinah is followed by <strong>ba</strong>, the meem is concealed with a ghunnah of two counts. It is called <strong>shafawi</strong> (“of the lips”) because meem and ba are both made with the lips."),
+        matn("Tuhfat al-Atfal", ("فَالْأَوَّلُ الْإِخْفَاءُ عِنْدَ الْبَاءِ", "وَسَمِّهِ الشَّفْوِيَّ لِلْقُرَّاءِ"),
+             gloss="“The first is ikhfa, before ba; call it shafawi, as the reciters do.”"),
+        exs(ex("تَرْمِي<mark>هِم بِ</mark>حِجَارَةٍ مِّن سِجِّيلٍ", "Al-Fil · 4")),
+        note("Teachers of recitation differ on how the lips meet in ikhfa shafawi: fully closed, or with a very slight gap. Follow what you learned from your teacher.", "tip"),
+        h2("idgham", "2. Idgham mithlayn saghir"),
+        p("If meem sakinah is followed by a <strong>voweled meem</strong>, the first merges into the second and they become one meem with a shaddah, with a ghunnah of two counts. It is called <strong>idgham shafawi</strong> or <strong>idgham mithlayn saghir</strong> (the minor merging of two identical letters)."),
+        matn("Tuhfat al-Atfal", ("وَالثَّانِ إِدْغَامٌ بِمِثْلِهَا أَتَى", "وَسَمِّ إِدْغَامًا صَغِيرًا يَا فَتَى"),
+             gloss="“The second is idgham, with a meem like it; call it the minor idgham, young one.”"),
+        exs(ex("<mark>كَم مِّ</mark>ن فِئَةٍ قَلِيلَةٍ غَلَبَتْ فِئَةً كَثِيرَةًۢ بِإِذْنِ ٱللَّهِ", "Al-Baqarah · 249")),
+        h2("izhar", "3. Izhar shafawi"),
+        p("If meem sakinah is followed by any letter other than ba and meem, the meem is pronounced clearly, with no added ghunnah."),
+        matn("Tuhfat al-Atfal",
+             ("وَالثَّالِثُ الْإِظْهَارُ فِي الْبَقِيَّهْ", "مِنْ أَحْرُفٍ وَسَمِّهَا شَفْوِيَّهْ"),
+             ("وَاحْذَرْ لَدَى وَاوٍ وَفَا أَنْ تَخْتَفِي", "لِقُرْبِهَا وَالِاتِّحَادِ فَاعْرِفِ"),
+             gloss="“The third is izhar, with the remaining letters; call it shafawi. And beware of hiding it before waw and fa, because of how close they are and how they share its place, so know it.”"),
+        exs(
+            ex("<mark>أَلَمْ تَ</mark>رَ كَيْفَ فَعَلَ رَبُّكَ بِأَصْحَٰبِ ٱلْفِيلِ", "Al-Fil · 1"),
+            ex("غَيْرِ ٱلْمَغْضُوبِ <mark>عَلَيْهِمْ وَ</mark>لَا ٱلضَّآلِّينَ", "Al-Fatihah · 7", "Waw"),
+            ex("أُو۟لَٰٓئِكَ أَصْحَٰبُ ٱلنَّارِ ۖ <mark>هُمْ فِ</mark>يهَا خَٰلِدُونَ", "Al-Baqarah · 39", "Fa"),
+        ),
+        note("The poem warns against concealing meem before <strong>waw</strong> and <strong>fa</strong>: fa is close to it in articulation, and waw is made with the lips just like it, so it is easy to hide it by mistake. Pronounce it clearly.", "warn"),
+        h2("farq", "How it differs from noon sakinah"),
+        p("In the " + link("noon-sakinah-tanween", "rules of noon sakinah") + " there are four possibilities. Meem sakinah has three, all “shafawi” because meem is made with the lips. The quick rule: <strong>ba is ikhfa, meem is idgham, everything else is izhar.</strong>"),
+    ],
+    quiz=[
+        qen(_q[0], "Al-Fil · 4", "Which rule applies to the meem sakinah in the highlighted word?", "It is followed by ba, so it is concealed, with ghunnah.", _MEEM),
+        qen(_q[1], "Al-Baqarah · 249", "Which rule applies to the meem sakinah in the highlighted word?", "It is followed by a voweled meem, so it merges into it, with ghunnah.", _MEEM),
+        qen(_q[2], "Al-Fatihah · 7", "Which rule applies to the meem sakinah in the highlighted word?", "It is followed by waw, so it is pronounced clearly, taking care not to hide it.", _MEEM),
+    ],
+)
+
+_SAMPLE_EN = [
+    qen(SAMPLE_QUIZ[0], "Al-Baqarah · 8", "Which rule applies to the noon sakinah in the highlighted word?", "It is followed by «ي» (ya), one of the letters of «يَنْمُو», so it merges with ghunnah.", NOON_OPTS_EN),
+    qen(SAMPLE_QUIZ[1], "An-Nisa · 26", "Which rule applies to the tanween in the highlighted word?", "It is followed by «ح» (ha), a throat letter, so the tanween is pronounced clearly.", NOON_OPTS_EN),
+    qen(SAMPLE_QUIZ[2], "Al-Baqarah · 33", "Which rule applies to the noon sakinah in the highlighted word?", "It is followed by ba, so it turns into a concealed meem, with ghunnah.", NOON_OPTS_EN),
+]
+_APP_TITLE_EN = ("Try it yourself", "A question like the ones in the app")
+
+EN["what-is-qalqalah-app"] = dict(
+    chapter="About the app",
+    title="What Is the Qalqalah App? Learn Tajweed and Memorize the Quran in One App",
+    short="What is Qalqalah?",
+    desc="Meet Qalqalah: Tajweed lessons based on Tuhfat al-Atfal, a surah-by-surah path to memorize the Quran, spaced review, qualified teachers and memorization groups. Free on iPhone and Android.",
+    lead="Qalqalah is an app for learning the rules of Tajweed and for memorizing and reviewing the Quran, in short daily lessons. Here is everything you need to know before you download it: who it is for, what is inside, and how it works.",
+    body=[
+        h2("liman", "Who is Qalqalah for?"),
+        "<ul class=\"list\">"
+        "<li><strong>Beginners</strong> who have never studied Tajweed.</li>"
+        "<li><strong>Non-Arabic speakers</strong>: the app is in English and Arabic.</li>"
+        "<li><strong>Anyone memorizing the Quran</strong> who needs a plan and regular review to make it stick.</li>"
+        "<li><strong>Learners who want a teacher</strong> to correct their recitation alongside the app.</li>"
+        "</ul>",
+        h2("tajweed", "The Tajweed path: one short lesson a day"),
+        p("Qalqalah's Tajweed lessons are based on the classic text Tuhfat al-Atfal, divided into short lessons: " + link("noon-sakinah-tanween", "noon sakinah and tanween") + ", ghunnah, " + link("meem-sakinah", "meem sakinah") + ", the rules of lam, and more. Each lesson covers one rule with its examples."),
+        p("After every rule you practice with recited examples from the Quran: true or false, choose the answer, and complete the verse, with a short explanation after each answer and a review at the end of every chapter."),
+        shots(("screen-tajweed.webp", "The Tajweed path"), ("screen-lesson.webp", "A question from the idgham lesson")),
+        h2("hifz", "The memorization path: surah by surah"),
+        p("A map of surahs you move through one after another, in short units that each end with a test, and a mastery test once you finish the surah. You only start a new surah once you've mastered the last one."),
+        shots(("screen-hifz.webp", "The surah map"), ("screen-home.webp", "Today's lesson on the home screen")),
+        h2("muraja", "Review that comes back right on time"),
+        p("The verses you've memorized come back for review at the right moment, and the app reminds you when a review is due. Every correct review pushes the next one further out, until the memorization is solid. This is called <strong>spaced review</strong>, one of the most effective ways to make memorization last."),
+        h2("muallim", "A teacher when you need one"),
+        p("The app guides you step by step, but Tajweed is learned by listening to and reciting for a teacher. That's why Qalqalah lists Tajweed and Hifz teachers: you can open their profiles and message them directly on WhatsApp to correct your recitation."),
+        h2("tahfeez", "What keeps you going"),
+        "<ul class=\"list\">"
+        "<li><strong>Points, levels and daily streaks</strong>, plus a weekly leaderboard.</li>"
+        "<li><strong>Memorization groups</strong> with friends: you study the same lessons and encourage each other.</li>"
+        "<li><strong>A badge for every surah</strong> you memorize, and a gold badge once you've mastered it through review.</li>"
+        "<li><strong>Gentle reminders</strong> and a weekly progress report.</li>"
+        "</ul>",
+        shots(("screen-group.webp", "A memorization group")),
+        h2("taklufa", "How much does it cost, and which devices does it run on?"),
+        p("Qalqalah is <strong>free</strong> to download on <strong>iPhone</strong> from the App Store and on <strong>Android</strong> from Google Play, in English and Arabic. Sign in with your account and your progress is saved to the cloud, so you can continue from any device."),
+        h2("man", "Who made Qalqalah?"),
+        p("Qalqalah is built by <a href=\"https://bld-labs.com/products/qalqalah\">BLD Labs</a>, a digital product design and development studio. We turned a traditional Tajweed curriculum into short lessons and exercises, and built a dashboard alongside it to update lessons and manage teachers without waiting for a new app release."),
+    ],
+    quiz=_SAMPLE_EN, quiz_title=_APP_TITLE_EN,
+)
+
+EN["best-tajweed-app"] = dict(
+    chapter="Choosing an app",
+    title="The Best App to Learn Tajweed: 7 Things to Look For Before You Choose",
+    short="Best app to learn Tajweed",
+    desc="How do you choose the best app to learn Tajweed? Seven practical criteria: a structured curriculum, recited examples from the Mushaf, practice after every rule, review, access to a teacher, a language you understand, and help staying consistent.",
+    lead="There are many Tajweed apps, and the “best” one is the one that teaches you correctly and suits the way you learn. Instead of a list of names, here are seven criteria you can use to judge any app, followed by how Qalqalah meets them.",
+    body=[
+        h2("manhaj", "1. A known, structured curriculum"),
+        p("Tajweed has classic texts that students have learned from for centuries, such as Tuhfat al-Atfal and al-Muqaddimah al-Jazariyyah. A good app builds its lessons on a clear curriculum and starts with the basics before the details, so you never face scattered rules with no order."),
+        h2("sawt", "2. Examples from the Mushaf, recited"),
+        p("Tajweed is heard before it is read. Look for an app that shows every rule in real verses from the Mushaf and lets you hear the correct pronunciation, not just written definitions."),
+        h2("tadreeb", "3. Practice after every rule"),
+        p("Reading an explanation isn't enough. A good app tests you after every rule with short questions, and explains the right answer when you get it wrong, so you learn from the mistake on the spot."),
+        h2("muraja", "4. Review that prevents forgetting"),
+        p("What isn't reviewed is forgotten. A review feature that brings back what you learned at the right moment is what turns lessons into a lasting skill."),
+        h2("muallim", "5. A path to a teacher"),
+        p("No app replaces reciting to a skilled teacher: Tajweed is learned by listening and reciting. The best apps don't pretend otherwise; they make it easy to reach a teacher when you need someone to correct your recitation."),
+        h2("lugha", "6. A language you understand"),
+        p("If Arabic isn't your first language, choose an app that explains in a language you understand, while keeping the verses in the Uthmani script."),
+        h2("istimrar", "7. Help staying consistent"),
+        p("Ten minutes a day is worth more than two hours once a month. Short lessons, gentle reminders, a daily streak and friends to learn with: small details that make a big difference."),
+        h2("qalqalah", "How Qalqalah meets these criteria"),
+        table(["Criterion", "In Qalqalah"], [
+            ["Structured curriculum", "Lessons based on Tuhfat al-Atfal, chapter by chapter"],
+            ["Examples from the Mushaf", "Every rule with recited examples from the Quran"],
+            ["Practice after every rule", "True or false, choose the answer and complete the verse, with an explanation after each answer"],
+            ["Review", "A review at the end of every chapter, and spaced review for memorization, with reminders"],
+            ["Teacher", "Tajweed and Hifz teachers you can message on WhatsApp"],
+            ["Language", "English and Arabic"],
+            ["Consistency", "Points, streaks, a leaderboard, groups and a weekly report"],
+        ]),
+        note("Whichever app you choose: start today with one lesson, and recite what you learn to someone who knows it well. The long road starts with a single rule.", "tip"),
+        p("If you're just starting out, here's " + link("learn-tajweed-for-beginners", "a practical plan to learn Tajweed from scratch") + "."),
+    ],
+    quiz=_SAMPLE_EN, quiz_title=_APP_TITLE_EN,
+)
+
+EN["best-quran-memorization-app"] = dict(
+    chapter="Memorization",
+    title="The Best App to Memorize the Quran: How to Choose One That Makes It Stick",
+    short="Best app to memorize the Quran",
+    desc="What makes a Quran memorization app good? A plan that fits your time, spaced review, no new memorization before mastery, tests, companions, and a teacher to recite to, plus practical tips to make your memorization last.",
+    lead="Memorizing is easy; keeping it is the challenge. So a memorization app shouldn't be judged by how many surahs it shows, but by whether it brings back what you've memorized before you forget it.",
+    body=[
+        "<figure class=\"ex ex--lead\"><p class=\"quran ex__v\" dir=\"rtl\" lang=\"ar\">وَلَقَدْ يَسَّرْنَا ٱلْقُرْءَانَ لِلذِّكْرِ فَهَلْ مِن مُّدَّكِرٍ</p><figcaption><span>“And We have certainly made the Quran easy to remember. So is there anyone who will be mindful?” · Al-Qamar 17</span></figcaption></figure>",
+        h2("maayeer", "What to look for in a memorization app"),
+        "<h3>1. A plan that fits your time</h3>",
+        p("A clear daily portion you can actually keep up with beats an ambitious plan you abandon after a week."),
+        "<h3>2. Spaced review</h3>",
+        p("The most important feature of a memorization app. Spaced review brings verses back at growing intervals: after a day, then a few days, then a week, then a month. You review what you're about to forget, and don't waste time on what's already solid."),
+        "<h3>3. Nothing new before mastery</h3>",
+        p("New memorization on top of a weak foundation collapses. A good app doesn't move you to a new surah until you've mastered the one before it."),
+        "<h3>4. Tests that measure mastery</h3>",
+        p("A short test at the end of every unit, and a mastery test for the whole surah, tell you where you really stand."),
+        "<h3>5. Companions on the way</h3>",
+        p("Memorizing with friends who encourage you and check on you is far easier than memorizing alone."),
+        "<h3>6. A teacher to recite to</h3>",
+        p("Reciting to someone skilled reveals mistakes you can't see yourself, in your memorization and in your recitation."),
+        h2("nasaeh", "Tips to make your memorization stick"),
+        "<ul class=\"list\">"
+        "<li><strong>Correct your recitation before you memorize:</strong> what you memorize wrong is hard to fix later. Learn the rules of " + link("noon-sakinah-tanween", "noon sakinah") + " and " + link("meem-sakinah", "meem sakinah") + " early.</li>"
+        "<li><strong>Memorize from one Mushaf:</strong> so the image of each page stays in your memory.</li>"
+        "<li><strong>Recite what you know in your prayers:</strong> it's the best review there is.</li>"
+        "<li><strong>Put review before new memorization:</strong> on a busy day, review and skip the new portion.</li>"
+        "<li><strong>Listen to a skilled reciter:</strong> before and after memorizing.</li>"
+        "</ul>",
+        h2("qalqalah", "How Qalqalah helps you memorize"),
+        table(["What you need", "In Qalqalah"], [
+            ["A plan", "A surah map you move through one by one, and today's portion on the home screen"],
+            ["Spaced review", "Verses come back right on time, with a reminder when they're due"],
+            ["Nothing new before mastery", "You move to the next surah after mastering the one before"],
+            ["Tests", "A test at the end of every unit, and a mastery test for the surah"],
+            ["Companions", "Memorization groups with friends, and public circles"],
+            ["Teacher", "Hifz teachers you can message on WhatsApp"],
+        ]),
+        shots(("screen-hifz.webp", "The surah map"), ("screen-group.webp", "A memorization group")),
+    ],
+)
+
+EN["learn-tajweed-for-beginners"] = dict(
+    chapter="For beginners",
+    title="How to Learn Tajweed from Scratch: A Practical Plan for Beginners",
+    short="Learn Tajweed from scratch",
+    desc="A practical plan to learn Tajweed from scratch in four weeks: the points of articulation, then noon sakinah and tanween, then meem sakinah and qalqalah, practicing on the short surahs, with tips for beginners.",
+    lead="You don't need any prior knowledge to start. You need the right order, ten minutes a day, and an ear trained on a skilled reciter. Here's a simple plan for your first month.",
+    body=[
+        h2("lemaza", "Why learn Tajweed?"),
+        p("Tajweed means giving every letter its due: its point of articulation, its qualities, and the rules that follow from them. Learning it protects your recitation from mistakes, and brings your reading closer to the way the Quran has been recited and passed down, generation after generation."),
+        h2("khotwat", "The right order to learn in"),
+        "<ol class=\"steps-list\">"
+        "<li><strong>Points of articulation (makharij):</strong> pronouncing each letter from its correct place, especially letters that sound alike, such as ح and هـ, س and ص, ذ and ز and ظ.</li>"
+        "<li><strong>" + link("noon-sakinah-tanween", "The rules of noon sakinah and tanween") + ":</strong> the most frequent rules in the Mushaf.</li>"
+        "<li><strong>" + link("meem-sakinah", "The rules of meem sakinah") + ":</strong> three short rules.</li>"
+        "<li><strong>" + link("qalqalah", "Qalqalah") + ":</strong> and the qualities of letters in general.</li>"
+        "<li><strong>Madd (elongation):</strong> its types and lengths.</li>"
+        "<li><strong>Practice:</strong> on short surahs you know, then reciting to a teacher.</li>"
+        "</ol>",
+        h2("khutta", "Your first four weeks"),
+        table(["Week", "What to learn", "Practice on"], [
+            ["1", "Points of articulation, and listening to a skilled reciter every day", "Surah Al-Fatihah"],
+            ["2", link("izhar-halqi", "Izhar halqi") + " and " + link("idgham", "idgham"), "An-Nas, Al-Falaq and Al-Ikhlas"],
+            ["3", link("iqlab-ikhfa", "Iqlab and ikhfa") + ", then meem sakinah", "Al-Masad back to Al-Kawthar"],
+            ["4", link("qalqalah", "Qalqalah") + ", and a review of everything so far", "What you know of Juz' Amma"],
+        ]),
+        note("Ten to fifteen minutes a day is enough. Consistency matters more than the length of each session.", "tip"),
+        h2("nasaeh", "Tips for beginners"),
+        "<ul class=\"list\">"
+        "<li><strong>Listen more than you read about the rules:</strong> the teaching recitation (al-Mushaf al-Mu'allim) of Sheikh Mahmoud Khalil Al-Husary is one of the most useful things to listen to while learning.</li>"
+        "<li><strong>One rule at a time:</strong> don't move to the next rule until you can recognize the current one when you recite.</li>"
+        "<li><strong>Look for the rule on every page you read:</strong> so Tajweed becomes a habit, not a lesson.</li>"
+        "<li><strong>Recite to someone skilled:</strong> even once a week.</li>"
+        "</ul>",
+        h2("akhtaa", "Mistakes beginners make"),
+        "<ul class=\"list\">"
+        "<li><strong>Memorizing rules without applying them:</strong> knowing the definition but not spotting the rule in a verse.</li>"
+        "<li><strong>Exaggerating:</strong> stretching the ghunnah or overdoing the qalqalah until the pronunciation changes.</li>"
+        "<li><strong>Rushing:</strong> moving between rules before the first one is solid.</li>"
+        "</ul>",
+        note("In Qalqalah this order is ready for you: short lessons that start from the basics, questions after every rule, review, and a teacher when you need one.", "app"),
+    ],
+    quiz=_SAMPLE_EN, quiz_title=("Practice", "Can you spot these rules?"),
+)
+
+for _a in ARTICLES:
+    _a["en"] = EN[_a["slug"]]
+LANG = "ar"
+
+
 # ------------------------------------------------------------------ page parts
 ICONS = """<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
 <symbol id="logo" viewBox="0 0 100 100"><circle cx="34" cy="15" r="7" fill="currentColor"/><circle cx="58" cy="15" r="7" fill="currentColor"/><circle cx="45" cy="54" r="24" fill="none" stroke="currentColor" stroke-width="12"/><path d="M60 72c8 9 15 14 28 12" fill="none" stroke="currentColor" stroke-width="12" stroke-linecap="round"/></symbol>
@@ -706,10 +1256,55 @@ def esc(s):
     return html.escape(s, quote=True)
 
 
-def head(title, desc, url, og, draft, ld):
+# Text that differs by language. Arabic is the default; English pages live under /en.
+STR = {
+    "ar": dict(dir="rtl", locale="ar_AR", alt_locale="en_US", brand="قلقلة", home="/", blog="/blog",
+               blog_name="المدونة", contact="https://bld-labs.com/ar/contact", contact_label="تواصل معنا",
+               bld="https://bld-labs.com/ar", made="صُنع في", year="٢٠٢٦", get_app="حمّل التطبيق",
+               nav=[("/#features", "المزايا"), ("/#day", "يومك مع قلقلة"), ("/#letters", "القلقلة"), ("/#faq", "الأسئلة")],
+               switch_label="EN", switch_lang="en", switch_aria="English",
+               store_small=("حمّله من", "حمّله من"), toc="في هذا المقال", read_more="اقرأ الشرح",
+               keep_learning="أكمل التعلّم", crumbs="مسار التنقل", answers="الإجابات", next_q="السؤال التالي",
+               practice=("تدرّب الآن", "اختبر فهمك"), cta_h="تعلّم التجويد درسًا بدرس.",
+               cta_p="دروس قصيرة مبنية على «تحفة الأطفال»، وأسئلة من آيات المصحف، ومراجعة تعود إليك في وقتها. مجاني على iPhone وأندرويد.",
+               cta_aria="حمّل قلقلة", team="فريق قلقلة",
+               blog_title="مدونة قلقلة: أحكام التجويد بالأمثلة",
+               blog_desc="شروح مبسّطة لأحكام التجويد بأمثلة من القرآن الكريم: القلقلة، وأحكام النون الساكنة والتنوين، والميم الساكنة، مع أسئلة تختبر بها فهمك.",
+               blog_eyebrow="مدونة قلقلة", blog_h1="أحكام التجويد،<br><span>بالأمثلة من المصحف.</span>",
+               blog_lead="شروح قصيرة وواضحة، مع آيات تسمعها وتقرؤها، وأسئلة تختبر بها نفسك في آخر كل مقال."),
+    "en": dict(dir="ltr", locale="en_US", alt_locale="ar_AR", brand="Qalqalah", home="/en", blog="/en/blog",
+               blog_name="Blog", contact="https://bld-labs.com/contact", contact_label="Contact us",
+               bld="https://bld-labs.com/", made="Made by", year="2026", get_app="Get the app",
+               nav=[("/en#features", "Features"), ("/en#day", "Your day"), ("/en#letters", "The name"), ("/en#faq", "FAQ")],
+               switch_label="عربي", switch_lang="ar", switch_aria="العربية",
+               store_small=("Download on the", "Get it on"), toc="In this article", read_more="Read more",
+               keep_learning="Keep learning", crumbs="Breadcrumb", answers="Answers", next_q="Next question",
+               practice=("Practice", "Test yourself"), cta_h="Learn Tajweed, one lesson at a time.",
+               cta_p="Short lessons based on Tuhfat al-Atfal, questions from real verses, and review that comes back right on time. Free on iPhone and Android.",
+               cta_aria="Get Qalqalah", team="Qalqalah team",
+               blog_title="Qalqalah Blog: Tajweed Rules with Examples",
+               blog_desc="Clear explanations of the rules of Tajweed with examples from the Quran: qalqalah, the rules of noon sakinah and tanween, meem sakinah, and how to choose an app, with a quiz in every article.",
+               blog_eyebrow="Qalqalah blog", blog_h1="The rules of Tajweed,<br><span>with examples from the Mushaf.</span>",
+               blog_lead="Short, clear explanations, with real verses to read and a quiz at the end of every article."),
+}
+
+
+def view(a, lang):
+    """The article's fields in `lang` (English text lives in a['en'])."""
+    return a if lang == "ar" else {**a, **a["en"]}
+
+
+def url_of(slug, lang):
+    base = "/en/blog" if lang == "en" else "/blog"
+    return f"{SITE}{base}/{slug}" if slug else f"{SITE}{base}"
+
+
+def head(title, desc, url, og, draft, ld, lang, alternates):
+    t = STR[lang]
     robots = '<meta name="robots" content="noindex">\n' if draft else '<meta name="robots" content="max-image-preview:large">\n'
+    alts = "".join(f'<link rel="alternate" hreflang="{hl}" href="{u}">\n' for hl, u in alternates)
     return f"""<!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="{lang}" dir="{t['dir']}">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -717,7 +1312,7 @@ def head(title, desc, url, og, draft, ld):
 <meta name="description" content="{esc(desc)}">
 {robots}<meta name="theme-color" content="#0A1414">
 <link rel="canonical" href="{url}">
-<link rel="icon" href="/qalqalah/assets/img/favicon.svg" type="image/svg+xml">
+{alts}<link rel="icon" href="/qalqalah/assets/img/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/qalqalah/assets/img/apple-touch-icon.png">
 <meta property="og:title" content="{esc(title)}">
 <meta property="og:description" content="{esc(desc)}">
@@ -726,8 +1321,9 @@ def head(title, desc, url, og, draft, ld):
 <meta property="og:image:height" content="630">
 <meta property="og:url" content="{url}">
 <meta property="og:type" content="article">
-<meta property="og:locale" content="ar_AR">
-<meta property="og:site_name" content="قلقلة">
+<meta property="og:locale" content="{t['locale']}">
+<meta property="og:locale:alternate" content="{t['alt_locale']}">
+<meta property="og:site_name" content="{t['brand']}">
 <meta name="twitter:card" content="summary_large_image">
 <script type="application/ld+json">
 {json.dumps(ld, ensure_ascii=False, indent=1)}
@@ -743,62 +1339,73 @@ def head(title, desc, url, og, draft, ld):
 </head>"""
 
 
-NAV = """<header class="nav" id="nav">
+def nav(lang, switch_href):
+    """Same menu as the home page of that language, plus the language switch."""
+    t = STR[lang]
+    links = "".join(f'\n      <a href="{h}">{label}</a>' for h, label in t["nav"])
+    return f"""<header class="nav" id="nav">
   <div class="nav__bar">
-    <a href="/" class="nav__brand" aria-label="قلقلة — الرئيسية"><svg><use href="#logo"/></svg><span>قلقلة</span></a>
-    <nav class="nav__links" aria-label="روابط الموقع">
-      <a href="/#features">المزايا</a>
-      <a href="/#day">يومك مع قلقلة</a>
-      <a href="/#letters">القلقلة</a>
-      <a href="/#faq">الأسئلة</a>
-      <a href="/blog">المدونة</a>
+    <a href="{t['home']}" class="nav__brand" aria-label="{t['brand']}"><svg><use href="#logo"/></svg><span>{t['brand']}</span></a>
+    <nav class="nav__links" aria-label="{t['brand']}">{links}
+      <a href="{t['blog']}">{t['blog_name']}</a>
     </nav>
-    <a href="/en" class="nav__lang" hreflang="en" lang="en" aria-label="English">EN</a>
-    <a href="/#download" class="btn btn--light btn--sm">حمّل التطبيق</a>
+    <a href="{switch_href}" class="nav__lang" hreflang="{t['switch_lang']}" lang="{t['switch_lang']}" aria-label="{t['switch_aria']}">{t['switch_label']}</a>
+    <a href="{t['home']}#download" class="btn btn--light btn--sm">{t['get_app']}</a>
   </div>
 </header>"""
 
-FOOT = f"""<footer class="foot dark">
+
+def foot(lang, switch_href):
+    t = STR[lang]
+    return f"""<footer class="foot dark">
   <div class="wrap foot__inner">
-    <a href="/" class="nav__brand" aria-label="قلقلة"><svg><use href="#logo"/></svg><span>قلقلة</span></a>
-    <nav class="foot__links" aria-label="روابط">
-      <a href="/blog">المدونة</a>
+    <a href="{t['home']}" class="nav__brand" aria-label="{t['brand']}"><svg><use href="#logo"/></svg><span>{t['brand']}</span></a>
+    <nav class="foot__links" aria-label="{t['brand']}">
+      <a href="{t['blog']}">{t['blog_name']}</a>
+      <a href="{switch_href}" hreflang="{t['switch_lang']}" lang="{t['switch_lang']}">{'English' if lang == 'ar' else 'العربية'}</a>
       <a href="{APPSTORE}" target="_blank" rel="noopener">App Store</a>
       <a href="{PLAY}" target="_blank" rel="noopener">Google Play</a>
-      <a href="https://bld-labs.com/ar/contact">تواصل معنا</a>
+      <a href="{t['contact']}">{t['contact_label']}</a>
     </nav>
-    <p class="foot__by">صُنع في <a href="https://bld-labs.com/ar">BLD Labs</a> · ٢٠٢٦</p>
+    <p class="foot__by">{t['made']} <a href="{t['bld']}">BLD Labs</a> · {t['year']}</p>
   </div>
 </footer>"""
 
-STORES = f"""<div class="stores">
-      <a class="store store--light" href="{APPSTORE}" target="_blank" rel="noopener"><svg class="store__i"><use href="#i-apple"/></svg><span><small>حمّله من</small><b>App Store</b></span></a>
-      <a class="store store--light" href="{PLAY}" target="_blank" rel="noopener"><svg class="store__i"><use href="#i-play"/></svg><span><small>حمّله من</small><b>Google Play</b></span></a>
+
+def stores(lang):
+    a, g = STR[lang]["store_small"]
+    return f"""<div class="stores">
+      <a class="store store--light" href="{APPSTORE}" target="_blank" rel="noopener"><svg class="store__i"><use href="#i-apple"/></svg><span><small>{a}</small><b>App Store</b></span></a>
+      <a class="store store--light" href="{PLAY}" target="_blank" rel="noopener"><svg class="store__i"><use href="#i-play"/></svg><span><small>{g}</small><b>Google Play</b></span></a>
     </div>"""
+
 
 DRAFT_BANNER = '<div class="draft" role="note">مسودة قيد المراجعة الشرعية، لم تُنشر بعد.</div>'
 
 AR_DIGITS = str.maketrans("0123456789", "٠١٢٣٤٥٦٧٨٩")
 
 
-def reading_minutes(body_html):
+def reading_minutes(body_html, lang):
     words = len(re.sub(r"<[^>]+>", " ", body_html).split())
-    return max(3, round(words / 170))
+    return max(3, round(words / (170 if lang == "ar" else 200)))
 
 
-def toc(body_html):
+def toc(body_html, lang):
     items = re.findall(r'<h2 id="([^"]+)">(.*?)</h2>', body_html)
     clean = lambda t: re.sub(r"^[٠-٩0-9]+\.\s*", "", re.sub("<[^>]+>", "", t))  # the list numbers itself
     lis = "".join(f'<li><a href="#{a}">{clean(t)}</a></li>' for a, t in items)
-    return f'<nav class="toc" aria-label="محتويات المقال"><p>في هذا المقال</p><ol>{lis}</ol></nav>'
+    label = STR[lang]["toc"]
+    return f'<nav class="toc" aria-label="{label}"><p>{label}</p><ol>{lis}</ol></nav>'
 
 
-def card(a):
-    return f"""<a class="post-card" href="/blog/{a['slug']}">
-        <span class="post-card__tag">{a['chapter']}</span>
-        <h3>{a['title']}</h3>
-        <p>{a['desc']}</p>
-        <span class="post-card__more">اقرأ الشرح <svg><use href="#i-arrow"/></svg></span>
+def card(a, lang):
+    d = view(a, lang)
+    href = ("/en" if lang == "en" else "") + f"/blog/{a['slug']}"
+    return f"""<a class="post-card" href="{href}">
+        <span class="post-card__tag">{d['chapter']}</span>
+        <h3>{d['title']}</h3>
+        <p>{d['desc']}</p>
+        <span class="post-card__more">{STR[lang]['read_more']} <svg><use href="#i-arrow"/></svg></span>
       </a>"""
 
 
@@ -813,12 +1420,13 @@ def related_for(a, n=3):
     return live[:n]
 
 
-def practice(a):
+def practice(d, lang):
     """The quiz at the end of an article; articles without `quiz` get none."""
-    if not a.get("quiz"):
+    if not d.get("quiz"):
         return ""
-    eyebrow, title = a.get("quiz_title", ("تدرّب الآن", "اختبر فهمك"))
-    quiz_json = json.dumps(a["quiz"], ensure_ascii=False)
+    t = STR[lang]
+    eyebrow, title = d.get("quiz_title", t["practice"])
+    quiz_json = json.dumps(d["quiz"], ensure_ascii=False)
     return f"""<section class="practice" aria-labelledby="practice-title">
       <p class="eyebrow">{eyebrow}</p>
       <h2 id="practice-title">{title}</h2>
@@ -826,107 +1434,113 @@ def practice(a):
         <div class="quiz__top"><span class="quiz__count"></span></div>
         <div class="quiz__card">
           <span class="quiz__ref"></span>
-          <p class="quran quiz__verse"></p>
+          <p class="quran quiz__verse" dir="rtl" lang="ar"></p>
           <p class="quiz__ask"></p>
         </div>
-        <div class="quiz__opts" role="group" aria-label="الإجابات"></div>
+        <div class="quiz__opts" role="group" aria-label="{t['answers']}"></div>
         <div class="quiz__fb" aria-live="polite" hidden>
           <p class="quiz__fb-title"></p>
           <p class="quiz__fb-why"></p>
-          <button class="quiz__next" type="button"><span>السؤال التالي</span> <svg><use href="#i-arrow"/></svg></button>
+          <button class="quiz__next" type="button"><span>{t['next_q']}</span> <svg><use href="#i-arrow"/></svg></button>
         </div>
         <script type="application/json">{quiz_json}</script>
       </div>
     </section>"""
 
 
-def article_page(a):
-    body = "\n".join(a["body"])
-    url = f"{SITE}/blog/{a['slug']}"
-    og = f"{SITE}/qalqalah/assets/og/{a['slug']}.jpg"
-    mins = reading_minutes(body)
+def article_page(a, lang):
+    t = STR[lang]
+    d = view(a, lang)
+    body = "\n".join(d["body"])
+    url = url_of(a["slug"], lang)
+    other = url_of(a["slug"], "en" if lang == "ar" else "ar")
+    og = f"{SITE}/qalqalah/assets/og/{a['slug']}{'-en' if lang == 'en' else ''}.jpg"
+    mins = reading_minutes(body, lang)
+    meta = (f"قراءة {str(mins).translate(AR_DIGITS)} دقائق · {t['team']}" if lang == "ar" else f"{mins} min read · {t['team']}")
     ld = {
         "@context": "https://schema.org",
         "@graph": [
-            {"@type": "Article", "headline": a["title"], "description": a["desc"], "image": og,
-             "inLanguage": "ar", "datePublished": TODAY, "dateModified": TODAY,
+            {"@type": "Article", "headline": d["title"], "description": d["desc"], "image": og,
+             "inLanguage": lang, "datePublished": TODAY, "dateModified": TODAY,
              "mainEntityOfPage": url,
-             "author": {"@type": "Organization", "name": "قلقلة", "url": SITE + "/"},
+             "author": {"@type": "Organization", "name": t["brand"], "url": SITE + t["home"]},
              "publisher": {"@type": "Organization", "name": "BLD Labs", "url": "https://bld-labs.com/"}},
             {"@type": "BreadcrumbList", "itemListElement": [
-                {"@type": "ListItem", "position": 1, "name": "قلقلة", "item": SITE + "/"},
-                {"@type": "ListItem", "position": 2, "name": "المدونة", "item": SITE + "/blog"},
-                {"@type": "ListItem", "position": 3, "name": a["short"], "item": url}]},
+                {"@type": "ListItem", "position": 1, "name": t["brand"], "item": SITE + t["home"]},
+                {"@type": "ListItem", "position": 2, "name": t["blog_name"], "item": url_of("", lang)},
+                {"@type": "ListItem", "position": 3, "name": d["short"], "item": url}]},
         ],
     }
-    related = "".join(card(r) for r in related_for(a))
-    return f"""{head(a['title'] + ' | قلقلة', a['desc'], url, og, a['draft'], ld)}
+    alternates = [("ar", url_of(a["slug"], "ar")), ("en", url_of(a["slug"], "en")), ("x-default", url_of(a["slug"], "ar"))]
+    related = "".join(card(r, lang) for r in related_for(a))
+    return f"""{head(d['title'] + ' | ' + t['brand'], d['desc'], url, og, a['draft'], ld, lang, alternates)}
 <body class="blog">
 {ICONS}
 {DRAFT_BANNER if a['draft'] else ''}
-{NAV}
+{nav(lang, other)}
 <main id="top">
   <article class="post">
     <header class="post__head">
-      <nav class="crumbs" aria-label="مسار التنقل"><a href="/">قلقلة</a><span>/</span><a href="/blog">المدونة</a><span>/</span><span aria-current="page">{a['short']}</span></nav>
-      <p class="post__tag">{a['chapter']}</p>
-      <h1>{a['title']}</h1>
-      <p class="post__lead">{a['lead']}</p>
-      <p class="post__meta">قراءة {str(mins).translate(AR_DIGITS)} دقائق · فريق قلقلة</p>
+      <nav class="crumbs" aria-label="{t['crumbs']}"><a href="{t['home']}">{t['brand']}</a><span>/</span><a href="{t['blog']}">{t['blog_name']}</a><span>/</span><span aria-current="page">{d['short']}</span></nav>
+      <p class="post__tag">{d['chapter']}</p>
+      <h1>{d['title']}</h1>
+      <p class="post__lead">{d['lead']}</p>
+      <p class="post__meta">{meta}</p>
     </header>
     <div class="post__body">
-      {toc(body)}
+      {toc(body, lang)}
       {body}
     </div>
 
-    {practice(a)}
+    {practice(d, lang)}
 
-    <aside class="post-cta dark" aria-label="حمّل قلقلة">
+    <aside class="post-cta dark" aria-label="{t['cta_aria']}">
       <div>
-        <h2>تعلّم التجويد درسًا بدرس.</h2>
-        <p>دروس قصيرة مبنية على «تحفة الأطفال»، وأسئلة من آيات المصحف، ومراجعة تعود إليك في وقتها. مجاني على iPhone وأندرويد.</p>
+        <h2>{t['cta_h']}</h2>
+        <p>{t['cta_p']}</p>
       </div>
-      {STORES}
+      {stores(lang)}
     </aside>
   </article>
 
   <section class="related" aria-labelledby="related-title">
     <div class="wrap">
-      <h2 id="related-title">أكمل التعلّم</h2>
+      <h2 id="related-title">{t['keep_learning']}</h2>
       <div class="post-grid">{related}</div>
     </div>
   </section>
 </main>
-{FOOT}
+{foot(lang, other)}
 <script src="/qalqalah/js/blog.js?v={CSS_V}"></script>
 </body>
 </html>
 """
 
 
-def index_page():
+def index_page(lang):
+    t = STR[lang]
     live = [a for a in ARTICLES if not a["draft"]]
     shown = live or ARTICLES          # while everything is a draft, list the drafts (page is noindex)
     draft = not live
-    url = f"{SITE}/blog"
-    og = f"{SITE}/qalqalah/assets/og/blog.jpg"
-    title = "مدونة قلقلة: أحكام التجويد بالأمثلة"
-    desc = "شروح مبسّطة لأحكام التجويد بأمثلة من القرآن الكريم: القلقلة، وأحكام النون الساكنة والتنوين، والميم الساكنة، مع أسئلة تختبر بها فهمك."
-    ld = {"@context": "https://schema.org", "@type": "Blog", "name": title, "description": desc, "url": url, "inLanguage": "ar",
+    url = url_of("", lang)
+    other = url_of("", "en" if lang == "ar" else "ar")
+    og = f"{SITE}/qalqalah/assets/og/blog{'-en' if lang == 'en' else ''}.jpg"
+    ld = {"@context": "https://schema.org", "@type": "Blog", "name": t["blog_title"], "description": t["blog_desc"], "url": url, "inLanguage": lang,
           "publisher": {"@type": "Organization", "name": "BLD Labs", "url": "https://bld-labs.com/"},
-          "blogPost": [{"@type": "BlogPosting", "headline": a["title"], "url": f"{SITE}/blog/{a['slug']}"} for a in live]}
-    cards = "".join(card(a) for a in shown)
-    return f"""{head(title, desc, url, og, draft, ld)}
+          "blogPost": [{"@type": "BlogPosting", "headline": view(a, lang)["title"], "url": url_of(a["slug"], lang)} for a in live]}
+    alternates = [("ar", url_of("", "ar")), ("en", url_of("", "en")), ("x-default", url_of("", "ar"))]
+    cards = "".join(card(a, lang) for a in shown)
+    return f"""{head(t['blog_title'], t['blog_desc'], url, og, draft, ld, lang, alternates)}
 <body class="blog">
 {ICONS}
 {DRAFT_BANNER if draft else ''}
-{NAV}
+{nav(lang, other)}
 <main id="top">
   <section class="blog-hero dark">
     <div class="wrap">
-      <p class="eyebrow">مدونة قلقلة</p>
-      <h1>أحكام التجويد،<br><span>بالأمثلة من المصحف.</span></h1>
-      <p>شروح قصيرة وواضحة، مع آيات تسمعها وتقرؤها، وأسئلة تختبر بها نفسك في آخر كل مقال.</p>
+      <p class="eyebrow">{t['blog_eyebrow']}</p>
+      <h1>{t['blog_h1']}</h1>
+      <p>{t['blog_lead']}</p>
     </div>
   </section>
   <section class="blog-list">
@@ -935,7 +1549,7 @@ def index_page():
     </div>
   </section>
 </main>
-{FOOT}
+{foot(lang, other)}
 <script src="/qalqalah/js/blog.js?v={CSS_V}"></script>
 </body>
 </html>
@@ -946,28 +1560,34 @@ def sitemap():
     urls = [(f"{SITE}/", "1.0"), (f"{SITE}/en", "0.9")]
     live = [a for a in ARTICLES if not a["draft"]]
     if live:
-        urls.append((f"{SITE}/blog", "0.8"))
-        urls += [(f"{SITE}/blog/{a['slug']}", "0.7") for a in live]
+        for lang in ("ar", "en"):
+            urls.append((url_of("", lang), "0.8"))
+            urls += [(url_of(a["slug"], lang), "0.7") for a in live]
     rows = "\n".join(f"  <url><loc>{u}</loc><lastmod>{TODAY}</lastmod><priority>{pr}</priority></url>" for u, pr in urls)
     return f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{rows}\n</urlset>\n'
 
 
 def main():
-    (OUT / "blog").mkdir(parents=True, exist_ok=True)
-    for a in ARTICLES:
-        (OUT / "blog" / f"{a['slug']}.html").write_text(article_page(a), encoding="utf-8")
-    (OUT / "blog" / "index.html").write_text(index_page(), encoding="utf-8")
+    for lang, folder in (("ar", OUT / "blog"), ("en", OUT / "en" / "blog")):
+        folder.mkdir(parents=True, exist_ok=True)
+        for a in ARTICLES:
+            (folder / f"{a['slug']}.html").write_text(article_page(a, lang), encoding="utf-8")
+        (folder / "index.html").write_text(index_page(lang), encoding="utf-8")
     (OUT / "sitemap.xml").write_text(sitemap(), encoding="utf-8")
     (OUT / "robots.txt").write_text(f"User-agent: *\nAllow: /\n\nSitemap: {SITE}/sitemap.xml\n", encoding="utf-8")
-    print(f"built {len(ARTICLES)} articles + index; drafts: {sum(a['draft'] for a in ARTICLES)}")
+    print(f"built {len(ARTICLES)} articles + index in ar and en; drafts: {sum(a['draft'] for a in ARTICLES)}")
 
 
 def og_items():
     """Titles for tools/render_qalqalah_og.js."""
     items = [dict(name="home", tag="تطبيق تجويد وحفظ القرآن الكريم", title="تعلّم التجويد واحفظ القرآن، بخطوات يومية صغيرة.", screen="screen-home.webp"),
              dict(name="home-en", lang="en", tag="Tajweed & Quran memorization app", title="Learn Tajweed and memorize the Quran, in small daily steps.", screen="screen-home.webp"),
-             dict(name="blog", tag="مدونة قلقلة", title="أحكام التجويد، بالأمثلة من المصحف.", screen="screen-tajweed.webp")]
-    items += [dict(name=a["slug"], tag=a["chapter"], title=a["title"], screen="screen-lesson.webp") for a in ARTICLES]
+             dict(name="blog", tag="مدونة قلقلة", title="أحكام التجويد، بالأمثلة من المصحف.", screen="screen-tajweed.webp"),
+             dict(name="blog-en", lang="en", tag="Qalqalah blog", title="The rules of Tajweed, with examples from the Mushaf.", screen="screen-tajweed.webp")]
+    for a in ARTICLES:
+        items.append(dict(name=a["slug"], tag=a["chapter"], title=a["title"], screen="screen-lesson.webp"))
+        e = a["en"]
+        items.append(dict(name=a["slug"] + "-en", lang="en", tag=e["chapter"], title=e["title"], screen="screen-lesson.webp"))
     return items
 
 

@@ -133,3 +133,11 @@ body.blog .nav__bar,body.blog .nav.is-scrolled .nav__bar{background:rgba(10,20,2
 /* a verse that opens an article */
 .ex--lead{margin-top:28px;text-align:center;align-items:center}
 .ex--lead .ex__v{color:var(--teal-d)}
+
+/* ---------- English (LTR) articles ---------- */
+.matn > div{display:grid;gap:8px}
+.matn__gloss{display:block;font-family:var(--font);font-size:15px;line-height:1.7;color:var(--on-ink-2);margin-top:6px}
+[lang="en"] .toc li::before{content:counter(t) ". "}
+[lang="en"] .steps-list li::before{content:counter(s)}
+[dir="ltr"] .post-card__more svg,[dir="ltr"] .quiz__next svg{transform:scaleX(-1)}
+[dir="ltr"] .chips ul{justify-content:flex-end}
