@@ -38,7 +38,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Amiri+Quran&display=swap" rel="stylesheet">
 <link rel="preload" href="/qalqalah/assets/fonts/thmanyahsans-Regular.otf" as="font" type="font/otf" crossorigin>
 <link rel="preload" href="/qalqalah/assets/fonts/thmanyahsans-Black.otf" as="font" type="font/otf" crossorigin>
-<link rel="stylesheet" href="/qalqalah/css/style.css?v=3">
+<link rel="stylesheet" href="/qalqalah/css/style.css?v=5">
 <!-- Meta Pixel Code -->
 <script>
 !function(f,b,e,v,n,t,s)
@@ -88,6 +88,8 @@ src="https://www.facebook.com/tr?id=1684474276310732&ev=PageView&noscript=1"
     <symbol id="i-repeat" viewBox="0 0 24 24"><path d="M17 2.5 20.5 6 17 9.5M3.5 11V9.5A3.5 3.5 0 0 1 7 6h13.5M7 21.5 3.5 18 7 14.5M20.5 13v1.5A3.5 3.5 0 0 1 17 18H3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
     <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 20v-1.5a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4V20M9 11a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm13 9v-1.5a4 4 0 0 0-3-3.9M15.5 4.1a3.5 3.5 0 0 1 0 6.8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
     <symbol id="i-chat" viewBox="0 0 24 24"><path d="M20.5 11.6a8.4 8.4 0 0 1-12.4 7.4L3.5 20.5l1.6-4.5a8.4 8.4 0 1 1 15.4-4.4Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+    <symbol id="i-seed" viewBox="0 0 24 24"><path d="M12 21v-8m0 0c0-4-3-7-8-7 0 4 3 7 8 7Zm0-2c0-4 3-7 8-7 0 4-3 7-8 7Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24"><path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Zm-9-9h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
     <symbol id="i-medal" viewBox="0 0 24 24"><path d="M8 2.5h8l-2.5 6h-3L8 2.5Zm4 6.5a6 6 0 1 0 0 12 6 6 0 0 0 0-12Zm0 3 1.2 2.4 2.6.4-1.9 1.8.5 2.6L12 18l-2.4 1.2.5-2.6-1.9-1.8 2.6-.4L12 12Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></symbol>
   </defs>
 </svg>
@@ -294,16 +296,16 @@ src="https://www.facebook.com/tr?id=1684474276310732&ev=PageView&noscript=1"
     </header>
     <div class="echo" data-r>
       <div class="echo__keys" role="tablist" aria-label="حروف القلقلة">
-        <button class="key is-on" role="tab" aria-selected="true" data-i="0">ق</button>
-        <button class="key" role="tab" aria-selected="false" data-i="1">ط</button>
-        <button class="key" role="tab" aria-selected="false" data-i="2">ب</button>
-        <button class="key" role="tab" aria-selected="false" data-i="3">ج</button>
-        <button class="key" role="tab" aria-selected="false" data-i="4">د</button>
+        <button type="button" class="key is-on" role="tab" aria-selected="true" data-i="0">ق</button>
+        <button type="button" class="key" role="tab" aria-selected="false" data-i="1">ط</button>
+        <button type="button" class="key" role="tab" aria-selected="false" data-i="2">ب</button>
+        <button type="button" class="key" role="tab" aria-selected="false" data-i="3">ج</button>
+        <button type="button" class="key" role="tab" aria-selected="false" data-i="4">د</button>
       </div>
       <div class="echo__stage" aria-live="polite">
         <span class="echo__ring" aria-hidden="true"></span><span class="echo__ring" aria-hidden="true"></span><span class="echo__ring" aria-hidden="true"></span>
         <p class="quran echo__word" id="eWord">ٱ<mark>قْ</mark>رَأْ</p>
-        <p class="echo__ref" id="eRef">سورة العلق · ١</p>
+        <p class="echo__ref" id="eRef">سورة العلق · آية ١</p>
         <p class="echo__note" id="eNote">القاف ساكنة في وسط الكلمة، فتُقلقَل قلقلةً صغرى.</p>
       </div>
     </div>
@@ -318,9 +320,46 @@ src="https://www.facebook.com/tr?id=1684474276310732&ev=PageView&noscript=1"
       <h2 id="who-title">لكل من يريد أن يقرأ القرآن<br><span>قراءةً صحيحة.</span></h2>
     </header>
     <div class="who__grid">
-      <article data-r><h3>تبدأ من الصفر</h3><p>لم تدرس التجويد من قبل؟ تبدأ معك الدروس من أول حكم، بلغة بسيطة وأمثلة واضحة.</p></article>
-      <article data-r><h3>لا تتحدث العربية</h3><p>التطبيق بالعربية والإنجليزية، ومصمَّم لغير الناطقين بها كما للناطقين.</p></article>
-      <article data-r><h3>تحفظ وتريد التثبيت</h3><p>مسار حفظ ومراجعة متباعدة يحفظان ما أتقنته من النسيان.</p></article>
+      <article class="who__card" data-r>
+        <div class="who__visual who__visual--start" aria-hidden="true">
+          <div class="path">
+            <span class="path__node is-now"><svg><use href="#i-play"/></svg></span>
+            <span class="path__line"></span>
+            <span class="path__node">٢</span>
+            <span class="path__line"></span>
+            <span class="path__node">٣</span>
+          </div>
+          <p class="path__label"><b>الدرس الأول</b><span>ابدأ من هنا</span></p>
+        </div>
+        <div class="who__body">
+          <span class="who__icon"><svg><use href="#i-seed"/></svg></span>
+          <h3>تبدأ من الصفر</h3>
+          <p>لم تدرس التجويد من قبل؟ تبدأ معك الدروس من أول حكم، بلغة بسيطة وأمثلة واضحة.</p>
+        </div>
+      </article>
+      <article class="who__card" data-r>
+        <div class="who__visual who__visual--lang" aria-hidden="true">
+          <div class="toggle"><span>العربية</span><span class="is-on">English</span></div>
+          <div class="term"><b class="term__ar">إدغام</b><span class="term__en" lang="en">Idgham · merging</span></div>
+        </div>
+        <div class="who__body">
+          <span class="who__icon"><svg><use href="#i-globe"/></svg></span>
+          <h3>لا تتحدث العربية</h3>
+          <p>التطبيق بالعربية والإنجليزية، ومصمَّم لغير الناطقين بها كما للناطقين.</p>
+        </div>
+      </article>
+      <article class="who__card" data-r>
+        <div class="who__visual who__visual--review" aria-hidden="true">
+          <div class="ring-wrap"><svg class="ring" viewBox="0 0 120 120"><circle cx="60" cy="60" r="50" class="ring__bg"/><circle cx="60" cy="60" r="50" class="ring__fg"/></svg><span class="ring__value">90%</span></div>
+          <img class="ring__badge" src="/qalqalah/assets/img/badge-crown.webp" alt="" loading="lazy" width="136" height="181">
+          <p class="ring__label">سورة طه · أتقنتها</p>
+        </div>
+        <div class="who__body">
+          <span class="who__icon"><svg><use href="#i-repeat"/></svg></span>
+          <h3>تحفظ وتريد التثبيت</h3>
+          <p>مسار حفظ ومراجعة متباعدة يحفظان ما أتقنته من النسيان.</p>
+        </div>
+      </article>
     </div>
   </div>
 </section>
@@ -376,6 +415,6 @@ src="https://www.facebook.com/tr?id=1684474276310732&ev=PageView&noscript=1"
   </div>
 </footer>
 
-<script src="/qalqalah/js/main.js?v=3"></script>
+<script src="/qalqalah/js/main.js?v=5"></script>
 </body>
 </html>
