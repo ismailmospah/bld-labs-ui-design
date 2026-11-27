@@ -115,3 +115,5 @@ body.blog{background:var(--paper)}
   .practice .opt{flex-basis:100%}
 }
 .practice .quiz__ask{margin-top:6px}
+/* the menu is translucent; over the white blog pages it turned grey, so keep it as dark as on the home page */
+body.blog .nav__bar,body.blog .nav.is-scrolled .nav__bar{background:rgba(10,20,20,.94)}
