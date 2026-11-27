@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://qalqalahapp.bld-labs.com/sitemap.xml

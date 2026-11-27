@@ -9,6 +9,7 @@ The site itself is plain HTML. Most pages are edited by hand. The pages below ar
 | `/work/<slug>` and `/ar/work/<slug>` (case studies) | `build_<project>.py` + shared template `case_lib.py` |
 | `/work`, `/ar/work` (all projects grid) | `build_work_index.py` |
 | `/about`, `/ar/about`, `/ismail-mosbah`, `/ar/ismail-mosbah` | `build_about.py` |
+| `qalqalahapp.bld-labs.com/blog` and `/blog/<slug>` (Qalqalah blog, files in `qalqalah/blog/`), plus that subdomain's `sitemap.xml` and `robots.txt` | `build_qalqalah_blog.py` |
 
 ## Rebuild everything
 
@@ -45,3 +46,10 @@ Run it from anywhere; it writes into this repo. Needs Python 3 and nothing else.
 5. **Rebuild and list it.** Run `python3 tools/build_all.py`, then add both URLs to `sitemap.xml`.
 
 Links inside pages are root-relative clean URLs (`/about`, `/ar/work/hom`). The canonical, hreflang, og:url, JSON-LD and sitemap use `https://bld-labs.com`, without `www`.
+
+## Qalqalah blog
+
+`build_qalqalah_blog.py` holds every article (text, Quran examples, quiz) and writes `qalqalah/blog/`, `qalqalah/sitemap.xml` and `qalqalah/robots.txt`. They are served on `qalqalahapp.bld-labs.com` (see the host rules in `vercel.json`).
+
+- **Drafts:** an article with `draft=True` is live at its URL for review, but has `noindex`, an "under review" banner, and is left out of the sitemap. Once it has been reviewed, set `draft=False` and rebuild. While every article is a draft, the blog index is a draft too.
+- **Share images:** `python3 tools/build_qalqalah_blog.py --og-json | node tools/render_qalqalah_og.js` renders `qalqalah/assets/og/*.jpg` (1200×630) and the apple-touch icon. It needs Playwright. Re-run it when you add an article or change a title.

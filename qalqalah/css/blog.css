@@ -1,0 +1,117 @@
+/* =================================================================
+   QALQALAH — blog (articles + index)
+   Builds on style.css tokens. Reading column ~68ch, Quran examples in
+   Amiri Quran on quiet cards, one accent (teal) for the rule in focus.
+================================================================= */
+
+body.blog{background:var(--paper)}
+.draft{position:relative;z-index:60;background:#FBF1DC;color:#7A5613;text-align:center;font-size:14px;font-weight:700;padding:8px 16px}
+.draft + .nav{top:48px}
+
+/* ---------- article head ---------- */
+.post{max-width:760px;margin-inline:auto;padding:clamp(120px,13vw,160px) var(--gutter) 0}
+.crumbs{display:flex;flex-wrap:wrap;gap:6px;font-size:14px;color:var(--text-2)}
+.crumbs a:hover{color:var(--teal-d)}
+.crumbs span[aria-current]{color:var(--text)}
+.post__tag{display:inline-block;margin-top:28px;font-size:14px;font-weight:700;color:var(--teal-d);background:var(--teal-soft);padding:4px 12px;border-radius:999px}
+.post h1{font-size:clamp(2rem,4.6vw,3.3rem);line-height:1.25;margin-top:14px}
+.post__lead{margin-top:18px;font-size:clamp(18px,1.7vw,21px);color:var(--text-2);line-height:1.8}
+.post__meta{margin-top:18px;font-size:14px;color:var(--text-2);padding-bottom:28px;border-bottom:1px solid var(--line)}
+
+/* ---------- body ---------- */
+.post__body{font-size:clamp(17px,1.4vw,19px);line-height:1.95}
+.post__body > p{margin-top:18px}
+.post__body h2{font-size:clamp(1.5rem,2.8vw,2rem);line-height:1.3;margin-top:56px;scroll-margin-top:100px}
+.post__body h3{font-size:clamp(1.15rem,2vw,1.35rem);margin-top:34px}
+.post__body a{color:var(--teal-d);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px}
+.post__body strong{font-weight:700;color:var(--text)}
+.q{font-family:var(--quran);font-size:1.15em;color:var(--teal-d);white-space:nowrap}
+
+.toc{margin-top:32px;background:var(--surface);border-radius:var(--r-md);padding:20px 24px}
+.toc p{font-weight:700;font-size:15px;margin:0}
+.toc ol{list-style:none;counter-reset:t;margin-top:10px;display:grid;gap:4px}
+.toc li{counter-increment:t;font-size:16px}
+.toc li::before{content:counter(t, arabic-indic) ". ";color:var(--teal-d);font-weight:700}
+.toc a{color:var(--text);text-decoration:none}
+.toc a:hover{color:var(--teal-d)}
+
+.list{margin-top:14px;display:grid;gap:10px;padding-inline-start:0}
+.list li{position:relative;padding-inline-start:22px}
+.list li::before{content:"";position:absolute;inset-inline-start:2px;top:.8em;width:7px;height:7px;border-radius:50%;background:var(--teal)}
+
+/* Quran examples */
+.exs{display:grid;gap:10px;margin-top:20px}
+.ex{background:#fff;border:1px solid var(--line);border-radius:var(--r-md);padding:14px 20px 12px;display:flex;flex-direction:column;gap:2px}
+.ex__v{font-size:clamp(24px,2.6vw,30px);line-height:2;color:var(--text)}
+.ex__v mark{background:var(--teal-soft);color:var(--teal-d);border-radius:6px;padding:0 2px}
+.ex figcaption{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 16px;font-size:13.5px;color:var(--text-2);line-height:1.6}
+.ex figcaption b{color:var(--teal-d);font-weight:700}
+
+/* matn (poem lines) */
+.matn{margin-top:24px;border-radius:var(--r-md);background:var(--ink);color:var(--on-ink);padding:22px 26px 18px;display:grid;gap:8px}
+.matn p{display:grid;grid-template-columns:1fr 1fr;gap:8px 28px;font-family:var(--quran);font-size:clamp(19px,2vw,23px);line-height:1.9}
+.matn p span:first-child{text-align:start}
+.matn p span:last-child{text-align:end}
+.matn cite{font-style:normal;font-size:13px;color:var(--gold);margin-top:4px}
+
+/* letter chips */
+.chips{margin-top:20px}
+.chips ul{display:flex;flex-wrap:wrap;gap:8px;list-style:none}
+.chips li{min-width:52px;height:52px;padding:0 14px;display:grid;place-items:center;border-radius:14px;background:var(--ink);color:var(--on-ink);font-weight:900;font-size:24px;line-height:1}
+.chips p{margin-top:10px;font-size:14px;color:var(--text-2)}
+
+/* notes */
+.note{margin-top:24px;border-radius:var(--r-md);padding:16px 20px;background:var(--teal-soft);border-inline-start:4px solid var(--teal)}
+.note b{display:block;font-size:14px;color:var(--teal-d)}
+.note p{margin-top:4px;font-size:16.5px;line-height:1.8}
+.note--warn{background:#FDF2E2;border-color:var(--gold)}
+.note--warn b{color:#A87925}
+.note--app{background:var(--surface);border-color:var(--ink)}
+.note--app b{color:var(--text)}
+
+/* table */
+.tbl{margin-top:20px;overflow-x:auto;border:1px solid var(--line);border-radius:var(--r-md);background:#fff}
+.tbl table{width:100%;border-collapse:collapse;font-size:16px;min-width:540px}
+.tbl th,.tbl td{padding:12px 16px;text-align:start;border-bottom:1px solid var(--line);vertical-align:middle}
+.tbl th{background:var(--surface);font-weight:700;font-size:14px;color:var(--text-2)}
+.tbl tr:last-child td{border-bottom:0}
+.tbl td:first-child{font-weight:700}
+
+/* ---------- practice (quiz) ---------- */
+.practice{margin-top:72px;padding:clamp(24px,4vw,40px);border-radius:var(--r-lg);background:var(--surface)}
+.practice h2{font-size:clamp(1.6rem,3vw,2.2rem)}
+.practice .quiz{margin-top:24px}
+.quiz__top{display:flex;justify-content:flex-end}
+.quiz__count{font-size:13.5px;color:var(--text-2);font-weight:700}
+.practice .quiz__opts{display:flex;flex-wrap:wrap;gap:8px}
+.practice .opt{flex:1 1 calc(50% - 8px);min-width:150px}
+
+/* ---------- CTA ---------- */
+.post-cta{margin-top:24px;border-radius:var(--r-lg);padding:clamp(26px,4vw,44px);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px}
+.post-cta h2{font-size:clamp(1.5rem,2.8vw,2rem)}
+.post-cta p{margin-top:8px;color:var(--on-ink-2);max-width:44ch;font-size:16.5px}
+
+/* ---------- related + index cards ---------- */
+.related{padding-block:clamp(80px,10vw,120px)}
+.related h2{font-size:clamp(1.6rem,3vw,2.2rem);margin-bottom:28px}
+.post-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.post-card{display:flex;flex-direction:column;gap:10px;border-radius:var(--r-lg);background:var(--surface);padding:28px;transition:transform .35s var(--ease),background .3s}
+.post-card:hover{transform:translateY(-3px);background:#EAF0EF}
+.post-card__tag{align-self:flex-start;font-size:13px;font-weight:700;color:var(--teal-d);background:var(--paper);padding:3px 10px;border-radius:999px}
+.post-card h3{font-size:21px;line-height:1.4}
+.post-card p{font-size:15.5px;color:var(--text-2);line-height:1.7;flex:1}
+.post-card__more{display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:15px;color:var(--teal-d)}
+.post-card__more svg{width:18px;height:18px}
+
+.blog-hero{padding:clamp(140px,15vw,190px) 0 clamp(70px,8vw,100px)}
+.blog-hero h1{font-size:clamp(2.4rem,5.6vw,4.4rem);line-height:1.2}
+.blog-hero p{margin-top:18px;max-width:52ch;color:var(--on-ink-2);font-size:clamp(17px,1.6vw,20px)}
+.blog-list{padding-block:clamp(60px,8vw,100px) clamp(90px,11vw,140px)}
+
+@media (max-width:680px){
+  .matn p{grid-template-columns:1fr;gap:0}
+  .matn p span:last-child{text-align:start;padding-inline-start:1.5em}
+  .post-cta .stores{max-width:none}
+  .practice .opt{flex-basis:100%}
+}
+.practice .quiz__ask{margin-top:6px}
