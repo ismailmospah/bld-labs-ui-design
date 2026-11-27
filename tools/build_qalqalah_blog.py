@@ -27,7 +27,7 @@ OUT = ROOT / "qalqalah"
 SITE = "https://qalqalahapp.bld-labs.com"
 APPSTORE = "https://apps.apple.com/eg/app/qalqalah-tajweed-quran-hifz/id6833678640"
 PLAY = "https://play.google.com/store/apps/details?id=com.tajweed.tajweedApp"
-CSS_V = "9"
+CSS_V = "10"
 TODAY = "2026-11-27"
 
 
@@ -753,6 +753,7 @@ NAV = """<header class="nav" id="nav">
       <a href="/#faq">الأسئلة</a>
       <a href="/blog">المدونة</a>
     </nav>
+    <a href="/en" class="nav__lang" hreflang="en" lang="en" aria-label="English">EN</a>
     <a href="/#download" class="btn btn--light btn--sm">حمّل التطبيق</a>
   </div>
 </header>"""
@@ -942,7 +943,7 @@ def index_page():
 
 
 def sitemap():
-    urls = [(f"{SITE}/", "1.0")]
+    urls = [(f"{SITE}/", "1.0"), (f"{SITE}/en", "0.9")]
     live = [a for a in ARTICLES if not a["draft"]]
     if live:
         urls.append((f"{SITE}/blog", "0.8"))
@@ -964,6 +965,7 @@ def main():
 def og_items():
     """Titles for tools/render_qalqalah_og.js."""
     items = [dict(name="home", tag="تطبيق تجويد وحفظ القرآن الكريم", title="تعلّم التجويد واحفظ القرآن، بخطوات يومية صغيرة.", screen="screen-home.webp"),
+             dict(name="home-en", lang="en", tag="Tajweed & Quran memorization app", title="Learn Tajweed and memorize the Quran, in small daily steps.", screen="screen-home.webp"),
              dict(name="blog", tag="مدونة قلقلة", title="أحكام التجويد، بالأمثلة من المصحف.", screen="screen-tajweed.webp")]
     items += [dict(name=a["slug"], tag=a["chapter"], title=a["title"], screen="screen-lesson.webp") for a in ARTICLES]
     return items

@@ -375,3 +375,15 @@ h3{font-size:22px;font-weight:700;line-height:1.35}
   .js .device--a{transform:rotate(7deg)}
   .js .device--b{transform:rotate(-7deg)}
 }
+
+/* ---------- language switch + English (LTR) page ---------- */
+.nav__lang{display:inline-flex;align-items:center;justify-content:center;height:40px;min-width:44px;padding:0 14px;margin-inline-end:-8px;border-radius:999px;border:1px solid var(--line-ink);font-size:14px;font-weight:700;color:var(--on-ink);transition:background .25s,border-color .25s}
+.nav__lang:hover{background:rgba(242,245,244,.08);border-color:rgba(242,245,244,.25)}
+.hero__ayah-en{display:block;font-size:13.5px;color:var(--on-ink-2);line-height:1.6;margin-top:2px}
+[dir="ltr"] .tile__mascot{left:auto;right:clamp(10px,3vw,40px)}
+@media (max-width:680px){
+  [dir="ltr"] .tile__mascot{right:auto}
+  .nav__lang{height:36px;padding:0 12px}
+}
+.btn{white-space:nowrap}
+.nav__brand svg{flex:none}
