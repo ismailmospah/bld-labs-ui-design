@@ -401,3 +401,9 @@ h3{font-size:22px;font-weight:700;line-height:1.35}
 @media (max-width:1000px){
   [lang="en"] .nav .nav__brand span{display:none}
 }
+/* language switch: globe icon + label; on phones it sits next to the download button */
+.nav__lang{gap:6px}
+.nav__lang-i{width:16px;height:16px;flex:none;opacity:.85}
+@media (max-width:1000px){
+  .nav__lang{margin-inline-start:auto}
+}
