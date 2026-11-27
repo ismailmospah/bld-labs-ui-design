@@ -488,7 +488,7 @@ GUIDES = []
 
 GUIDES.append(dict(
     slug="what-is-qalqalah-app",
-    draft=True,
+    draft=False,
     chapter="عن التطبيق",
     title="ما هو تطبيق قلقلة؟ تعلّم التجويد واحفظ القرآن في تطبيق واحد",
     short="ما هو تطبيق قلقلة؟",
@@ -532,7 +532,7 @@ GUIDES.append(dict(
 
 GUIDES.append(dict(
     slug="best-tajweed-app",
-    draft=True,
+    draft=False,
     chapter="دليل الاختيار",
     title="أفضل تطبيق لتعلم التجويد: ٧ أشياء تبحث عنها قبل أن تختار",
     short="أفضل تطبيق لتعلم التجويد",
@@ -572,7 +572,7 @@ GUIDES.append(dict(
 
 GUIDES.append(dict(
     slug="best-quran-memorization-app",
-    draft=True,
+    draft=False,
     chapter="الحفظ",
     title="أفضل تطبيق لحفظ القرآن: كيف تختار تطبيقًا يثبّت حفظك؟",
     short="أفضل تطبيق لحفظ القرآن",
@@ -617,7 +617,7 @@ GUIDES.append(dict(
 
 GUIDES.append(dict(
     slug="learn-tajweed-for-beginners",
-    draft=True,
+    draft=False,
     chapter="للمبتدئين",
     title="كيف تتعلّم التجويد من الصفر؟ خطة عملية للمبتدئين",
     short="تعلّم التجويد من الصفر",
@@ -801,6 +801,17 @@ def card(a):
       </a>"""
 
 
+def related_for(a, n=3):
+    """'Keep learning' cards. A published article suggests only published ones
+    (its own picks first, then other published articles); a draft keeps its picks."""
+    picks = [BY_SLUG[s] for s in a["related"]]
+    if a["draft"]:
+        return picks
+    live = [r for r in picks if not r["draft"]]
+    live += [r for r in ARTICLES if not r["draft"] and r is not a and r not in live]
+    return live[:n]
+
+
 def practice(a):
     """The quiz at the end of an article; articles without `quiz` get none."""
     if not a.get("quiz"):
@@ -847,7 +858,7 @@ def article_page(a):
                 {"@type": "ListItem", "position": 3, "name": a["short"], "item": url}]},
         ],
     }
-    related = "".join(card(BY_SLUG[s]) for s in a["related"])
+    related = "".join(card(r) for r in related_for(a))
     return f"""{head(a['title'] + ' | قلقلة', a['desc'], url, og, a['draft'], ld)}
 <body class="blog">
 {ICONS}
