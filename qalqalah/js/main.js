@@ -20,7 +20,8 @@
   const nav = $('#nav');
   const onScroll = () => nav.classList.toggle('is-scrolled', scrollY > 30);
   addEventListener('scroll', onScroll, { passive: true }); onScroll();
-  const links = $$('.nav__links a');
+  // in-page section links only: "/blog" is another page and isn't a valid selector
+  const links = $$('.nav__links a[href^="#"]');
   if ('IntersectionObserver' in window) {
     const so = new IntersectionObserver(es => es.forEach(e => {
       if (e.isIntersecting) links.forEach(a => a.classList.toggle('is-on', a.getAttribute('href') === '#' + e.target.id));
