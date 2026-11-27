@@ -4,6 +4,13 @@
    Reem Kufi (display) · IBM Plex Sans Arabic (text) · Amiri Quran (ayat)
 ================================================================= */
 
+/* Thmanyah Sans — free for websites under Thmanyah's licence (files unmodified) */
+@font-face{font-family:'Thmanyah Sans';src:url('/qalqalah/assets/fonts/thmanyahsans-Light.otf') format('opentype');font-weight:300;font-style:normal;font-display:swap}
+@font-face{font-family:'Thmanyah Sans';src:url('/qalqalah/assets/fonts/thmanyahsans-Regular.otf') format('opentype');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Thmanyah Sans';src:url('/qalqalah/assets/fonts/thmanyahsans-Medium.otf') format('opentype');font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:'Thmanyah Sans';src:url('/qalqalah/assets/fonts/thmanyahsans-Bold.otf') format('opentype');font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:'Thmanyah Sans';src:url('/qalqalah/assets/fonts/thmanyahsans-Black.otf') format('opentype');font-weight:900;font-style:normal;font-display:swap}
+
 :root{
   --night:#062E33;
   --night-2:#08383E;
@@ -26,7 +33,7 @@
   --bad:#E8655E;
 
   --kufi:'Reem Kufi', 'IBM Plex Sans Arabic', sans-serif;
-  --sans:'Thmanyah Sans', 'thmanyah sans', 'IBM Plex Sans Arabic', system-ui, sans-serif;
+  --sans:'Thmanyah Sans', 'IBM Plex Sans Arabic', system-ui, sans-serif;
   --quran:'Amiri Quran', 'Amiri', 'Scheherazade New', serif;
 
   --wrap:1240px;
