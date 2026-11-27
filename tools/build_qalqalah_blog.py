@@ -584,7 +584,8 @@ def reading_minutes(body_html):
 
 def toc(body_html):
     items = re.findall(r'<h2 id="([^"]+)">(.*?)</h2>', body_html)
-    lis = "".join(f'<li><a href="#{a}">{re.sub("<[^>]+>", "", t)}</a></li>' for a, t in items)
+    clean = lambda t: re.sub(r"^[٠-٩0-9]+\.\s*", "", re.sub("<[^>]+>", "", t))  # the list numbers itself
+    lis = "".join(f'<li><a href="#{a}">{clean(t)}</a></li>' for a, t in items)
     return f'<nav class="toc" aria-label="محتويات المقال"><p>في هذا المقال</p><ol>{lis}</ol></nav>'
 
 
