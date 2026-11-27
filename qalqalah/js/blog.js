@@ -7,7 +7,11 @@
     onScroll();
   }
 
+  const EN = document.documentElement.lang === 'en';
   const toArabic = n => String(n).replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
+  const T = EN
+    ? { count: (i, n) => `Question ${i} of ${n}`, ok: 'Well done!', answer: 'Answer: ', again: 'Start over', next: 'Next question' }
+    : { count: (i, n) => `سؤال ${toArabic(i)} من ${toArabic(n)}`, ok: 'أحسنت!', answer: 'الإجابة: ', again: 'من البداية', next: 'السؤال التالي' };
 
   document.querySelectorAll('[data-quiz]').forEach(root => {
     const data = JSON.parse(root.querySelector('script[type="application/json"]').textContent);
@@ -19,7 +23,7 @@
 
     const render = () => {
       const q = data[qi];
-      $('.quiz__count').textContent = `سؤال ${toArabic(qi + 1)} من ${toArabic(data.length)}`;
+      $('.quiz__count').textContent = T.count(qi + 1, data.length);
       $('.quiz__ref').textContent = q.ref;
       $('.quiz__verse').innerHTML = q.verse;
       $('.quiz__ask').textContent = q.ask;
@@ -44,9 +48,9 @@
         else if (j === i) b.classList.add('is-wrong');
       });
       fb.className = 'quiz__fb ' + (ok ? 'is-ok' : 'is-bad');
-      $('.quiz__fb-title').textContent = ok ? 'أحسنت!' : 'الإجابة: ' + q.options[q.answer];
+      $('.quiz__fb-title').textContent = ok ? T.ok : T.answer + q.options[q.answer];
       $('.quiz__fb-why').textContent = q.why;
-      nextBtn.querySelector('span').textContent = qi === data.length - 1 ? 'من البداية' : 'السؤال التالي';
+      nextBtn.querySelector('span').textContent = qi === data.length - 1 ? T.again : T.next;
       fb.hidden = false;
     };
 
